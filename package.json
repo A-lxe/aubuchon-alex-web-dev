@@ -1,7 +1,7 @@
 {
   "name": "web-dev",
   "version": "1.0.0",
-  "description": "Web Dev at Northeastern University",
+  "description": "CS4550 at Northeastern University",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.15.1",
