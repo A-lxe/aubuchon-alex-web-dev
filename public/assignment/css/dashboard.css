@@ -115,3 +115,8 @@ body {
 .navbar-inverse .navbar-toggle .icon-bar {
   background-color: #9dd0ff;
 }
+
+.control-label {
+  white-space:nowrap;
+  direction: rtl;
+}
