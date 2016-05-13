@@ -103,3 +103,15 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.navbar-inverse {
+  background-image: linear-gradient(to bottom, rgba(30, 32, 48, 1) 0, #393939 100%);
+}
+
+.navbar-inverse .navbar-brand {
+  color: #ff9600;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #9dd0ff;
+}
