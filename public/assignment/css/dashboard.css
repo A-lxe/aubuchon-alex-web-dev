@@ -120,3 +120,11 @@ body {
   white-space:nowrap;
   direction: rtl;
 }
+
+.navbar-right li:hover {
+  color: #ffffff;
+}
+
+.button-pair {
+  min-width:100px;
+}
