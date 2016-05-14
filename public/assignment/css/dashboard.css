@@ -126,5 +126,11 @@ body {
 }
 
 .button-pair {
-  min-width:100px;
+  width:100px;
+}
+
+.panel-tab-top {
+  border-top-left-radius:0px;
+  border-top-right-radius:0px;
+  border-top:none;
 }
