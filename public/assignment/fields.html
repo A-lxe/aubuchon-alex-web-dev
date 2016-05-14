@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Admin | Form Maker</title>
+    <title>Fields | Form Maker</title>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -68,91 +68,75 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Forms</h1>
+            <h1 class="page-header">Forms | Registration Form</h1>
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#">Forms
+                <li role="presentation"><a href="./forms.html">Forms</a></li>
+                <li role="presentation" class="active"><a href="#">Fields
                     <span class="sr-only">(current)</span></a></li>
-                <li role="presentation"><a href="./fields.html">Fields</a></li>
             </ul>
             <div class="panel panel-default panel-tab-top">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Form Name</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <form class="form-inline">
-                            <tr>
-                                <td class="form-group">
-                                    <label for="inputFormName" class="sr-only">Username</label>
-                                    <input type="text" class="form-control" id="inputFormName"
-                                           placeholder="username">
-                                </td>
-                                <td class="form-group button-pair">
-                                    <button type="button" class="btn btn-default"
-                                            aria-label="Add User">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <form class="form-horizontal">
+                            <td class="form-group">
+                                <label for="inputFirstName1">First Name</label>
+                                <input type="text" class="form-control" id="inputFirstName1"
+                                       placeholder="First Name">
+                            </td>
+                            <td class="button-4 form-group button-4">
+                                <button type="button" class="btn btn-default"
+                                        aria-label="Clone Field">
                                     <span class="glyphicon glyphicon-plus"
                                           aria-hidden="true"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-default"
-                                            aria-label="Check User">
-                                        <span class="glyphicon glyphicon-ok"
-                                              aria-hidden="true"></span>
-                                    </button>
-                                </td>
-                            </tr>
+                                </button>
+                                <button type="button" class="btn btn-default"
+                                        aria-label="Remove Field">
+                                    <span class="glyphicon glyphicon-remove"
+                                          aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="btn btn-default"
+                                        aria-label="Edit Field">
+                                    <span class="glyphicon glyphicon-pencil"
+                                          aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="btn btn-default"
+                                        aria-label="Reorder Field">
+                                    <span class="glyphicon glyphicon-menu-hamburger"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </td>
                         </form>
-                        <tr>
-                            <td>Registration Form</td>
-                            <td class="form-group button-pair">
+                    </tr>
+                    </tbody>
+                </table>
+                <hr class="hr-slim">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <form class="form-horizontal">
+                            <td class="form-group">
+                                <label for="selectField">Add New Field</label>
+                                <select class="form-control" id="selectField">
+                                    <option>Single Line Text</option>
+                                    <option>Date</option>
+                                    <option>Dropdown</option>
+                                    <option>Checkboxes</option>
+                                    <option>Radio Buttons</option>
+                                    <option>Paragraph Text Field</option>
+                                </select>
+                            </td>
+                            <td class="button-4 form-group button-4">
                                 <button type="button" class="btn btn-default"
-                                        aria-label="Remove User">
-                                    <span class="glyphicon glyphicon-remove"
-                                          aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="btn btn-default"
-                                        aria-label="Edit User">
-                                    <span class="glyphicon glyphicon-pencil"
+                                        aria-label="Add Field">
+                                    <span class="glyphicon glyphicon-plus"
                                           aria-hidden="true"></span>
                                 </button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>Contact List</td>
-                            <td class="form-group button-pair">
-                                <button type="button" class="btn btn-default"
-                                        aria-label="Remove User">
-                                    <span class="glyphicon glyphicon-remove"
-                                          aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="btn btn-default"
-                                        aria-label="Edit User">
-                                    <span class="glyphicon glyphicon-pencil"
-                                          aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>To Do List</td>
-                            <td class="form-group button-pair">
-                                <button type="button" class="btn btn-default"
-                                        aria-label="Remove User">
-                                    <span class="glyphicon glyphicon-remove"
-                                          aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="btn btn-default"
-                                        aria-label="Edit User">
-                                    <span class="glyphicon glyphicon-pencil"
-                                          aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
