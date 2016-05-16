@@ -1,5 +1,5 @@
 node_modules
 .idea
-start-mongodb.bat
+start-mongodb*
 MongoDBLogs
 push.bat
