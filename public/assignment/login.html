@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login | WebD</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
-</head>
-<body>
-
-<!-- Accent-colored raised button with ripple -->
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-    Button
-</button>
-
-<!-- Lastest minified jQuery -->
-<script src="https://code.jquery.com/jquery-2.2.3.min.js"
-        integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
-<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-</body>
-</html>
+<div layout="column" ng-cloak>
+    <md-content layout-padding>
+        <h1>Login</h1>
+        <form name="login">
+            <md-input-container class="md-block">
+                <label>Username</label>
+                <input type="text" required md-no-asterisk name="username" ng-model="$scope.temp">
+                <div ng-messages="login.username.$error">
+                    <div ng-message="required">Who are you?</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Password</label>
+                <input type="password" required md-no-asterisk name="password" ng-model="$scope.temp">
+                <div ng-messages="login.password.$error">
+                    <div ng-message="required">hunter2?</div>
+                </div>
+            </md-input-container>
+            <md-button class="md-primary md-raised">Login</md-button>
+            <md-button class="md-accent md-raised">Register</md-button>
+        </form>
+    </md-content>
+</div>
