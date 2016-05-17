@@ -1,0 +1,30 @@
+<div layout="column" ng-cloak>
+    <md-content layout-padding>
+        <h1 class="md-headline">Register</h1>
+        <form name="register">
+            <md-input-container class="md-block">
+                <label>Username</label>
+                <input type="text" required md-no-asterisk name="username" ng-model="$scope.tempUser">
+                <div ng-messages="register.username.$error">
+                    <div ng-message="required">Who are you?</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Password</label>
+                <input type="password" required md-no-asterisk name="password" ng-model="$scope.tempPwd">
+                <div ng-messages="register.password.$error">
+                    <div ng-message="required">hunter2?</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Confirm Password</label>
+                <input type="password" required md-no-asterisk name="password-confirm" ng-model="$scope.tempPwdC">
+                <div ng-messages="register.password-confirm.$error">
+                    <div ng-message="required">hunter2?</div>
+                </div>
+            </md-input-container>
+            <md-button class="md-primary md-raised alxe-button-wide">Register</md-button>
+            <md-button class="md-warn alxe-button-wide" href="#/login">Cancel</md-button>
+        </form>
+    </md-content>
+</div>
