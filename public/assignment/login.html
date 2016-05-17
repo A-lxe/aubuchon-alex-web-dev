@@ -4,14 +4,14 @@
         <form name="login">
             <md-input-container class="md-block">
                 <label>Username</label>
-                <input type="text" required md-no-asterisk name="username" ng-model="$scope.temp">
+                <input type="text" required md-no-asterisk name="username" ng-model="$scope.tempUser">
                 <div ng-messages="login.username.$error">
                     <div ng-message="required">Who are you?</div>
                 </div>
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Password</label>
-                <input type="password" required md-no-asterisk name="password" ng-model="$scope.temp">
+                <input type="password" required md-no-asterisk name="password" ng-model="$scope.tempPwd">
                 <div ng-messages="login.password.$error">
                     <div ng-message="required">hunter2?</div>
                 </div>
