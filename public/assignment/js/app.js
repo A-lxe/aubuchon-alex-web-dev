@@ -10,6 +10,9 @@ app.config(function ($routeProvider) {
         .when('/register', {
             templateUrl: 'register.html'
         })
+        .when('/profile', {
+            templateUrl: 'profile.html'
+        })
         .otherwise({
             redirectTo: '/login'
         })
