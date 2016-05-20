@@ -1,14 +1,38 @@
 <div layout="row" ng-cloak>
     <md-content layout="column" layout-fill>
         <md-toolbar>
-            <div class="md-toolbar-tools">
+            <div class="md-toolbar-tools alxe-toolbar-withlefticon">
+                <md-menu ng-controller="MenuCtrl as ctrl" md-offset="0 40">
+                    <md-button aria-label="Open menu" class="md-icon-button"
+                               ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+                        <md-icon md-menu-origin>menu</md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button href="#/profile">
+                                <md-icon>person</md-icon>
+                                Profile
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button href="#/sites">
+                                <md-icon>apps</md-icon>
+                                Websites
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-divider></md-menu-divider>
+                        <md-menu-item>
+                            <md-button class="md-warn" href="#/login">
+                                <md-icon>close</md-icon>
+                                Logout
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
                 <h1 class="md-headline">
                     <span>Profile</span>
                 </h1>
                 <span flex></span>
-                <md-button class="md-icon-button" aria-label="More">
-                    <md-icon class="material-icons">check</md-icon>
-                </md-button>
             </div>
         </md-toolbar>
         <md-content flex class="md-padding">
@@ -29,19 +53,14 @@
                     <label>Last Name</label>
                     <input type="text" name="lname" ng-model="$scope.tempLName">
                 </md-input-container>
-                <md-button class="md-primary md-raised alxe-button-wide" href="#/profile">
+                <md-button class="md-accent md-raised alxe-button-wide" href="#/profile">
+                    Save (Only show when there are changes)
+                </md-button>
+                <md-button class="md-primary md-raised alxe-button-wide" href="#/sites">
                     Websites
                 </md-button>
                 <md-button class="md-warn alxe-button-wide" href="#/login">Logout</md-button>
             </form>
         </md-content>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <span flex></span>
-                <md-button class="md-icon-button" aria-label="More" href="#/profile">
-                    <md-icon class="material-icons">person</md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
     </md-content>
 </div>

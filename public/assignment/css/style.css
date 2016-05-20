@@ -4,7 +4,6 @@
     margin-right:0px;
 }
 
-.alxe-toolbar-fixed {
-    position:fixed;
-    z-index: 10000000;
+.alxe-toolbar-withlefticon {
+    padding-left:0;
 }

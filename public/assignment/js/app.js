@@ -17,3 +17,12 @@ app.config(function ($routeProvider) {
             redirectTo: '/login'
         })
 });
+
+app.controller('MenuCtrl', function Ctrl() {
+    var originatorEv;
+    this.openMenu = function($mdOpenMenu, ev) {
+        console.log("asdlfj");
+        originatorEv = ev;
+        $mdOpenMenu(ev);
+    };
+});
