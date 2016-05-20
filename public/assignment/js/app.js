@@ -13,6 +13,9 @@ app.config(function ($routeProvider) {
         .when('/profile', {
             templateUrl: 'profile.html'
         })
+        .when('/sites', {
+            templateUrl: 'website/website-list.html'
+        })
         .otherwise({
             redirectTo: '/login'
         })
