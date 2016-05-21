@@ -30,24 +30,24 @@
                     </md-menu-content>
                 </md-menu>
                 <h1 class="md-headline">
-                    <span>New Website</span>
+                    <span>.{title}} > .{page}} > Edit</span>
                 </h1>
                 <span flex></span>
             </div>
         </md-toolbar>
         <md-content flex class="md-padding">
-            <form name="newsite">
+            <form name="newpage">
+                <md-input-container class="md-block">
+                    <label>Name</label>
+                    <input type="text" name="name" ng-model="$scope.tempName">
+                </md-input-container>
                 <md-input-container class="md-block">
                     <label>Title</label>
                     <input type="text" name="title" ng-model="$scope.tempTitle">
                 </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Description</label>
-                    <textarea ng-model="$scope.tempDesc" class="alxe-textarea-3row"></textarea>
-                </md-input-container>
                 <md-button class="md-primary md-raised alxe-button-wide"
-                           href="#/websites/web1">Save</md-button>
-                <md-button class="md-warn alxe-button-wide" href="#/sites">Cancel</md-button>
+                           href="#/websites/web1/page1">Save</md-button>
+                <md-button class="md-warn alxe-button-wide" href="#/websites/web1">Cancel</md-button>
             </form>
         </md-content>
     </md-content>
