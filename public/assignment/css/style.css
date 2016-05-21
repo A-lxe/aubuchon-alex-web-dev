@@ -7,3 +7,7 @@
 .alxe-toolbar-withlefticon {
     padding-left:0;
 }
+
+.alxe-card-img {
+    height:auto!important;
+}
