@@ -14,7 +14,16 @@ app.config(function ($routeProvider) {
             templateUrl: 'profile.html'
         })
         .when('/sites', {
-            templateUrl: 'website/website-list.html'
+            templateUrl: 'website/list.html'
+        })
+        .when('/new', {
+            templateUrl: 'website/new.html'
+        })
+        .when('/website/web1/edit', {
+            templateUrl: 'website/edit.html'
+        })
+        .when('/website/web1/pages', {
+            templateUrl: 'website/pages/list.html'
         })
         .otherwise({
             redirectTo: '/login'

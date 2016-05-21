@@ -11,3 +11,13 @@
 .alxe-card-img {
     height:auto!important;
 }
+
+.alxe-textarea-3row {
+    height:110px!important;
+}
+
+.alxe-button-image {
+    border-radius:0;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
