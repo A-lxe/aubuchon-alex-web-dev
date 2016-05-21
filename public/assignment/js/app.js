@@ -19,11 +19,17 @@ app.config(function ($routeProvider) {
         .when('/new', {
             templateUrl: 'website/new.html'
         })
-        .when('/website/web1/edit', {
+        .when('/websites/web1/edit', {
             templateUrl: 'website/edit.html'
         })
-        .when('/website/web1/pages', {
-            templateUrl: 'website/pages/list.html'
+        .when('/websites/web1', {
+            templateUrl: 'website/page/list.html'
+        })
+        .when('/websites/web1/new-page', {
+            templateUrl: 'website/page/new.html'
+        })
+        .when('/websites/web1/page1/edit', {
+            templateUrl: 'website/page/list.html'
         })
         .otherwise({
             redirectTo: '/login'
