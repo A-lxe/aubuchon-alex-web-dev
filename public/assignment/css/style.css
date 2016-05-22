@@ -1,39 +1,58 @@
 .alxe-button-wide {
-    width:100%;
-    margin-left:0px;
-    margin-right:0px;
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .alxe-toolbar-withlefticon {
-    padding-left:0;
+  padding-left: 0;
 }
 
 .alxe-card-img {
-    height:auto!important;
+  height: auto !important;
 }
 
 .alxe-textarea-3row {
-    height:110px!important;
+  height: 110px !important;
 }
 
 .alxe-button-image {
-    border-radius:0;
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
+  border-radius: 0;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
 }
 
 .alxe-widget {
 
 }
 
-.alxe-widget>img {
-    width:100%;
-    height:auto;
+.alxe-widget > img {
+  width: 100%;
+  height: auto;
 }
 
 .alxe-widget-menu {
-    position:absolute;
-    right:0px;
-    background:white;
-    border-bottom-left-radius: 5px;
+  position: absolute;
+  right: 0px;
+  background: white;
+  border-bottom-left-radius: 5px;
+  z-index: 10;
+}
+
+/* Clever iframe video aspect ratio trick found:
+https://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php*/
+.alxe-widget-video {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 0px;
+  height: 0;
+}
+
+.alxe-widget-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
