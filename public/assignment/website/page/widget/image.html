@@ -30,13 +30,13 @@
                     </md-menu-content>
                 </md-menu>
                 <h1 class="md-headline">
-                    <span>.{title}} > .{page}} > Header</span>
+                    <span>.{title}} > .{page}} > Image</span>
                 </h1>
                 <span flex></span>
             </div>
         </md-toolbar>
         <md-content flex class="md-padding">
-            <form name="header">
+            <form name="image">
                 <md-input-container class="md-block">
                     <label>Name</label>
                     <input type="text" name="name" ng-model="$scope.tempName">
@@ -46,8 +46,15 @@
                     <input type="text" name="text" ng-model="$scope.tempText">
                 </md-input-container>
                 <md-input-container class="md-block">
-                    <label>Size</label>
-                    <input type="text" name="size" ng-model="$scope.tempSize">
+                    <label>URL</label>
+                    <input type="url" name="url" ng-model="$scope.tempUrl">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Width</label>
+                    <input type="text" name="width" ng-model="$scope.tempWidth">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <input type="file" name="file" ng-model="$scope.tempFile">
                 </md-input-container>
                 <md-button class="md-primary md-raised alxe-button-wide"
                            href="#/websites/web1/page1">
