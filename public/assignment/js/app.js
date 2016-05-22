@@ -37,6 +37,15 @@ app.config(function ($routeProvider) {
         .when('/websites/web1/page1/new-widget', {
             templateUrl: 'website/page/widget/new.html'
         })
+        .when('/websites/web1/page1/header', {
+            templateUrl: 'website/page/widget/header.html'
+        })
+        .when('/websites/web1/page1/image', {
+            templateUrl: 'website/page/widget/image.html'
+        })
+        .when('/websites/web1/page1/video', {
+            templateUrl: 'website/page/widget/video.html'
+        })
         .otherwise({
             redirectTo: '/login'
         })
