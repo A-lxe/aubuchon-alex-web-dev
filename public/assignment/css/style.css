@@ -56,3 +56,11 @@ https://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php*/
   height: 100%;
   z-index: 0;
 }
+
+.alxe-list {
+
+}
+
+.alxe-list md-list-item {
+  height:50px;
+}

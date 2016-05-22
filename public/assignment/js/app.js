@@ -34,6 +34,9 @@ app.config(function ($routeProvider) {
         .when('/websites/web1/page1', {
             templateUrl: 'website/page/widget/list.html'
         })
+        .when('/websites/web1/page1/new-widget', {
+            templateUrl: 'website/page/widget/new.html'
+        })
         .otherwise({
             redirectTo: '/login'
         })

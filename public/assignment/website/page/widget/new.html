@@ -1,0 +1,82 @@
+<div layout="row" ng-cloak>
+    <md-content layout="column" layout-fill>
+        <md-toolbar>
+            <div class="md-toolbar-tools alxe-toolbar-withlefticon">
+                <md-menu ng-controller="MenuCtrl as ctrl" md-offset="0 40">
+                    <md-button aria-label="Open menu" class="md-icon-button"
+                               ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+                        <md-icon md-menu-origin>menu</md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button href="#/profile">
+                                <md-icon>person</md-icon>
+                                Profile
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button href="#/sites">
+                                <md-icon>apps</md-icon>
+                                Websites
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-divider></md-menu-divider>
+                        <md-menu-item>
+                            <md-button class="md-warn" href="#/login">
+                                <md-icon>close</md-icon>
+                                Logout
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+                <h1 class="md-headline">
+                    <span>.{title}} > .{pagename}} > New Widget</span>
+                </h1>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content flex class="md-padding" layout="column">
+            <md-list class="alxe-list">
+                <md-list-item href="#/websites/web1/page1/header">
+                    <p>Header</p>
+                    <md-icon>arrow_forward</md-icon>
+                </md-list-item>
+                <md-list-item href="#/websites/web1/page1/label">
+                    <p>Label</p>
+                    <md-icon>arrow_forward</md-icon>
+                </md-list-item>
+                <md-list-item href="#/websites/web1/page1/html">
+                    <p>HTML</p>
+                    <md-icon>arrow_forward</md-icon>
+                </md-list-item>
+                <md-list-item href="#/websites/web1/page1/text-input">
+                    <p>Text Input</p>
+                    <md-icon>arrow_forward</md-icon>
+                </md-list-item>
+                <md-list-item href="#/websites/web1/page1/link">
+                    <p>Link</p>
+                    <md-icon>arrow_forward</md-icon>
+                </md-list-item>
+                <md-list-item href="#/websites/web1/page1/button">
+                    <p>Button</p>
+                    <md-icon>arrow_forward</md-icon>
+                </md-list-item>
+                <md-list-item href="#/websites/web1/page1/image">
+                    <p>Image</p>
+                    <md-icon>arrow_forward</md-icon>
+                </md-list-item>
+                <md-list-item href="#/websites/web1/page1/video">
+                    <p>YouTube Video</p>
+                    <md-icon>arrow_forward</md-icon>
+                </md-list-item>
+                <md-list-item href="#/websites/web1/page1/table">
+                    <p>Data table</p>
+                    <md-icon>arrow_forward</md-icon>
+                </md-list-item>
+                <md-list-item href="#/websites/web1/page1/repeater">
+                    <p>Repeater</p>
+                    <md-icon>arrow_forward</md-icon>
+                </md-list-item>
+            </md-list>
+        </md-content>
+</div>
