@@ -5,46 +5,46 @@ var app = angular.module('App', [
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/login', {
-            templateUrl: 'login.html'
+            templateUrl: 'partials/user/login.html'
         })
         .when('/register', {
-            templateUrl: 'register.html'
+            templateUrl: 'partials/user/register.html'
         })
         .when('/profile', {
-            templateUrl: 'profile.html'
+            templateUrl: 'partials/user/profile.html'
         })
         .when('/sites', {
-            templateUrl: 'website/list.html'
+            templateUrl: 'partials/website/list.html'
         })
         .when('/new', {
-            templateUrl: 'website/new.html'
+            templateUrl: 'partials/website/new.html'
         })
         .when('/websites/web1/edit', {
-            templateUrl: 'website/edit.html'
+            templateUrl: 'partials/website/edit.html'
         })
         .when('/websites/web1', {
-            templateUrl: 'website/page/list.html'
+            templateUrl: 'partials/page/list.html'
         })
         .when('/websites/web1/new-page', {
-            templateUrl: 'website/page/new.html'
+            templateUrl: 'partials/page/new.html'
         })
         .when('/websites/web1/page1/edit', {
-            templateUrl: 'website/page/edit.html'
+            templateUrl: 'partials/page/edit.html'
         })
         .when('/websites/web1/page1', {
-            templateUrl: 'website/page/widget/list.html'
+            templateUrl: 'partials/widget/list.html'
         })
         .when('/websites/web1/page1/new-widget', {
-            templateUrl: 'website/page/widget/new.html'
+            templateUrl: 'partials/widget/new.html'
         })
         .when('/websites/web1/page1/header', {
-            templateUrl: 'website/page/widget/header.html'
+            templateUrl: 'partials/widget/header.html'
         })
         .when('/websites/web1/page1/image', {
-            templateUrl: 'website/page/widget/image.html'
+            templateUrl: 'partials/widget/image.html'
         })
         .when('/websites/web1/page1/video', {
-            templateUrl: 'website/page/widget/video.html'
+            templateUrl: 'partials/widget/video.html'
         })
         .otherwise({
             redirectTo: '/login'
