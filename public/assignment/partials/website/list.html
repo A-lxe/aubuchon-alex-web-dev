@@ -33,31 +33,31 @@
                     <span>Websites</span>
                 </h1>
                 <span flex></span>
-                <md-button class="md-icon-button" aria-label="Add Website" href="#/new">
+                <md-button class="md-icon-button" aria-label="Add Website"
+                           ng-href="#/user/{{ctrl.userId}}/website/new">
                     <md-icon>add</md-icon>
                 </md-button>
             </div>
         </md-toolbar>
         <md-content flex class="md-padding" layout-xs="column" layout="row">
-            <div flex-xs="noshrink" flex-gt-xs="50" layout="column">
-                <md-card flex="none">
-                    <md-button href="#/websites/web1" class="alxe-button-image"
+            <div flex-xs="noshrink" flex-gt-xs="{{100 / ctrl.columns}}" layout="column"
+                 ng-repeat="column in ctrl.sitesArray">
+                <md-card flex="none" ng-repeat="site in column">
+                    <md-button ng-href="#/user/{{ctrl.userId}}/website/{{site._id}}/page"
+                               class="alxe-button-image"
                                aria-label="Edit Pages">
                         <img ng-src="./img/temporary/website-ng.PNG"
                              class="md-card-image alxe-card-img"
-                             alt="Washed Out">
+                             alt="{{site.name}}">
                     </md-button>
                     <md-card-title>
                         <md-card-title-text>
-                            <span class="md-headline">Angular Material</span>
+                            <span class="md-headline">{{site.name}}</span>
                         </md-card-title-text>
                     </md-card-title>
-                    <md-card-content>
+                    <md-card-content ng-show="site.description">
                         <p>
-                            The titles of Washed Out's breakthrough song and the first single from
-                            Paracosm share the
-                            two most important words in Ernest Greene's musical language: feel it.
-                            It's a simple request, as well...
+                            {{site.description}}
                         </p>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="center">
@@ -66,78 +66,7 @@
                         </md-button>
                         <span flex></span>
                         <md-button class="md-icon-button" aria-label="Edit"
-                                   href="#/websites/web1/edit">
-                            <md-icon>settings</md-icon>
-                        </md-button>
-                    </md-card-actions>
-                </md-card>
-                <md-card flex="none">
-                    <md-button href="#/websites/web1" class="alxe-button-image"
-                               aria-label="Edit Pages">
-                        <img ng-src="./img/temporary/website-ng.PNG"
-                             class="md-card-image alxe-card-img"
-                             alt="Washed Out">
-                    </md-button>
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">Angular Material</span>
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-card-actions layout="row" layout-align="center">
-                        <md-button class="md-icon-button md-warn" aria-label="Delete">
-                            <md-icon>delete</md-icon>
-                        </md-button>
-                        <span flex></span>
-                        <md-button class="md-icon-button" aria-label="Edit"
-                                   href="#/websites/web1/edit">
-                            <md-icon>settings</md-icon>
-                        </md-button>
-                    </md-card-actions>
-                </md-card>
-            </div>
-            <div flex-xs="noshrink" flex-gt-xs="50" layout="column">
-                <md-card flex="none">
-                    <md-button href="#/websites/web1" class="alxe-button-image"
-                               aria-label="Edit Pages">
-                        <img ng-src="./img/temporary/website-ng.PNG"
-                             class="md-card-image alxe-card-img"
-                             alt="Washed Out">
-                    </md-button>
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">Angular Material</span>
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-card-actions layout="row" layout-align="center">
-                        <md-button class="md-icon-button md-warn" aria-label="Delete">
-                            <md-icon>delete</md-icon>
-                        </md-button>
-                        <span flex></span>
-                        <md-button class="md-icon-button" aria-label="Edit"
-                                   href="#/websites/web1/edit">
-                            <md-icon>settings</md-icon>
-                        </md-button>
-                    </md-card-actions>
-                </md-card>
-                <md-card flex="none">
-                    <md-button href="#/websites/web1" class="alxe-button-image"
-                               aria-label="Edit Pages">
-                        <img ng-src="./img/temporary/website-ng.PNG"
-                             class="md-card-image alxe-card-img"
-                             alt="Washed Out">
-                    </md-button>
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">Angular Material</span>
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-card-actions layout="row" layout-align="center">
-                        <md-button class="md-icon-button md-warn" aria-label="Delete">
-                            <md-icon>delete</md-icon>
-                        </md-button>
-                        <span flex></span>
-                        <md-button class="md-icon-button" aria-label="Edit"
-                                   href="#/websites/web1/edit">
+                                   ng-href="#/user/{{ctrl.userId}}/website/{{site._id}}">
                             <md-icon>settings</md-icon>
                         </md-button>
                     </md-card-actions>

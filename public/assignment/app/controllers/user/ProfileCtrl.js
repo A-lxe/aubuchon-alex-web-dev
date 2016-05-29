@@ -1,5 +1,5 @@
 (function () {
-    function ProfileCtrl(User, $location, $mdToast, $routeParams) {
+    function ProfileCtrl(User, $routeParams) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.user = User.findUserById(vm.userId);
@@ -17,6 +17,6 @@
     }
 
     angular.module('App')
-        .controller('ProfileCtrl', ['User', '$location', "$mdToast", '$routeParams', ProfileCtrl])
+        .controller('ProfileCtrl', ['User', '$routeParams', ProfileCtrl])
 })
 ();

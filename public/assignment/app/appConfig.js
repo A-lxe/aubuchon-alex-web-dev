@@ -18,7 +18,9 @@
                     controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website', {
-                    templateUrl: 'partials/website/list.html'
+                    templateUrl: 'partials/website/list.html',
+                    controller: 'WebsiteListCtrl',
+                    controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website/new', {
                     templateUrl: 'partials/website/new.html'
