@@ -3,37 +3,42 @@
         .config(function ($routeProvider) {
             $routeProvider
                 .when('/login', {
-                    templateUrl: 'partials/user/login.html'
+                    templateUrl: 'partials/user/login.html',
+                    controller: "LoginCtrl",
+                    controllerAs: "ctrl"
                 })
                 .when('/register', {
                     templateUrl: 'partials/user/register.html'
                 })
-                .when('/profile', {
+                .when('/user/:uid', {
                     templateUrl: 'partials/user/profile.html'
                 })
-                .when('/sites', {
+                .when('/user/:uid/website', {
                     templateUrl: 'partials/website/list.html'
                 })
-                .when('/new', {
+                .when('/user/:uid/website/new', {
                     templateUrl: 'partials/website/new.html'
                 })
-                .when('/websites/web1/edit', {
+                .when('/user/:uid/website/:wid', {
                     templateUrl: 'partials/website/edit.html'
                 })
-                .when('/websites/web1', {
+                .when('/user/:uid/website/:wid/page', {
                     templateUrl: 'partials/page/list.html'
                 })
-                .when('/websites/web1/new-page', {
+                .when('/user/:uid/website/:wid/page/new', {
                     templateUrl: 'partials/page/new.html'
                 })
-                .when('/websites/web1/page1/edit', {
+                .when('/user/:uid/website/:wid/page/:pid', {
                     templateUrl: 'partials/page/edit.html'
                 })
-                .when('/websites/web1/page1', {
+                .when('/user/:uid/website/:wid/page/:pid/widget', {
                     templateUrl: 'partials/widget/list.html'
                 })
-                .when('/websites/web1/page1/new-widget', {
+                .when('/user/:uid/website/:wid/page/:pid/widget/new', {
                     templateUrl: 'partials/widget/new.html'
+                })
+                .when('/user/:uid/website/:wid/page/:pid/widget/new', {
+                    templateUrl: 'partials/widget/edit.html'
                 })
                 .when('/websites/web1/page1/header', {
                     templateUrl: 'partials/widget/header.html'
