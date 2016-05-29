@@ -13,7 +13,9 @@
                     controllerAs: "ctrl"
                 })
                 .when('/user/:uid', {
-                    templateUrl: 'partials/user/profile.html'
+                    templateUrl: 'partials/user/profile.html',
+                    controller: 'ProfileCtrl',
+                    controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website', {
                     templateUrl: 'partials/website/list.html'

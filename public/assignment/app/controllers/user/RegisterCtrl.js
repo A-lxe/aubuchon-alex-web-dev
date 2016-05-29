@@ -34,7 +34,8 @@
                 username: vm.username,
                 password: vm.password,
                 firstName: "",
-                lastName: ""
+                lastName: "",
+                email: ""
             };
             temp = User.createUser(temp);
             if (!temp) {

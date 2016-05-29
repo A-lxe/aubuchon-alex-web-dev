@@ -39,24 +39,30 @@
             <form name="profile">
                 <md-input-container class="md-block">
                     <label>Username</label>
-                    <input type="text" name="username" ng-model="$scope.tempUser">
+                    <input type="text" name="username" disabled ng-change="ctrl.checkChanged()"
+                           ng-model="ctrl.user.username">
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Email</label>
-                    <input type="email" name="email" ng-model="$scope.tempEmail">
+                    <input type="email" name="email" ng-change="ctrl.checkChanged()"
+                           ng-model="ctrl.user.email">
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>First Name</label>
-                    <input type="text" name="fname" ng-model="$scope.tempFName">
+                    <input type="text" name="fname" ng-change="ctrl.checkChanged()"
+                           ng-model="ctrl.user.firstName">
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Last Name</label>
-                    <input type="text" name="lname" ng-model="$scope.tempLName">
+                    <input type="text" name="lname" ng-change="ctrl.checkChanged()"
+                           ng-model="ctrl.user.lastName">
                 </md-input-container>
-                <md-button class="md-accent md-raised alxe-button-wide" href="#/profile">
-                    Save (Only show when there are changes)
+                <md-button class="md-accent md-raised alxe-button-wide" ng-show="ctrl.changes"
+                           ng-click="ctrl.update()">
+                    Save
                 </md-button>
-                <md-button class="md-primary md-raised alxe-button-wide" href="#/sites">
+                <md-button class="md-primary md-raised alxe-button-wide"
+                           ng-href="#/user/{{ctrl.user._id}}/website">
                     Websites
                 </md-button>
                 <md-button class="md-warn alxe-button-wide" href="#/login">Logout</md-button>
