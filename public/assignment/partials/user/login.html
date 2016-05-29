@@ -1,7 +1,7 @@
 <div layout="column" ng-cloak>
     <md-content layout-padding>
         <h1 class="md-headline">Login</h1>
-        <form name="login">
+        <form name="login" ng-submit="ctrl.login()">
             <md-input-container class="md-block">
                 <label>Username</label>
                 <input type="text" required md-no-asterisk name="username" ng-model="ctrl.username">
@@ -10,7 +10,7 @@
                 <label>Password</label>
                 <input type="password" required md-no-asterisk name="password" ng-model="ctrl.password">
             </md-input-container>
-            <md-button class="md-primary md-raised alxe-button-wide" ng-click="ctrl.login()">Login</md-button>
+            <md-button type="submit" class="md-primary md-raised alxe-button-wide">Login</md-button>
             <md-button class="md-accent md-raised alxe-button-wide" ng-href="#/register">Register</md-button>
         </form>
     </md-content>

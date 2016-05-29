@@ -8,13 +8,32 @@
         ];
 
         function createUser(user) {
-            users.push(user);
+            if(userWithUsername(user.username)) {
+                return false;
+            }
+            var newUser = angular.copy({
+                _id: newId(),
+                username: user.username,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName
+            })
+            users.push(newUser);
+            return angular.copy(newUser);
+        }
+
+        function newId() {
+            var temp = 0;
+            for(var i in users) {
+                temp = Math.max(users[i]._id, temp);
+            }
+            return temp + 1;
         }
 
         function findUserById(userId) {
             for(var i in users) {
                 if(users[i]._id === userId) {
-                    return users[i];
+                    return angular.copy(users[i]);
                 }
             }
         }
@@ -22,7 +41,7 @@
         function findUserByCredentials(username, password) {
             for(var i in users) {
                 if(users[i].username === username && users[i].password === password) {
-                    return users[i];
+                    return angular.copy(users[i]);
                 }
             }
         }
@@ -44,12 +63,22 @@
             }
         }
 
+        function userWithUsername(username) {
+            for(var i in users) {
+                if(users[i].username === username) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         return {
             createUser: createUser,
             findUserById: findUserById,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            userWithUsername: userWithUsername
         }
     }
 

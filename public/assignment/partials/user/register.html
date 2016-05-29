@@ -1,21 +1,31 @@
 <div layout="column" ng-cloak>
     <md-content layout-padding>
         <h1 class="md-headline">Register</h1>
-        <form name="register">
+        <form name="register" ng-submit="ctrl.register()">
             <md-input-container class="md-block">
                 <label>Username</label>
-                <input type="text" required md-no-asterisk name="username" ng-model="$scope.tempUser">
+                <input type="text" required md-no-asterisk name="username" ng-model="ctrl.username"
+                       ng-blur="ctrl.validateUsername()">
+                <div ng-messages ng-show="ctrl.usernameWarning">
+                    <div ng-message>{{ctrl.usernameWarning}}</div>
+                </div>
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Password</label>
-                <input type="password" required md-no-asterisk name="password" ng-model="$scope.tempPwd">
+                <input type="password" required md-no-asterisk name="password"
+                       ng-model="ctrl.password">
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Confirm Password</label>
-                <input type="password" required md-no-asterisk name="password-confirm" ng-model="$scope.tempPwdC">
+                <input type="password" required md-no-asterisk name="password-confirm"
+                       ng-model="ctrl.passwordConfirm" ng-blur="ctrl.validatePassword()">
+                <div ng-messages ng-show="ctrl.passwordWarning">
+                    <div ng-message>{{ctrl.passwordWarning}}</div>
+                </div>
             </md-input-container>
-            <md-button class="md-primary md-raised alxe-button-wide" href="#/profile">Register</md-button>
-            <md-button class="md-warn alxe-button-wide" href="#/login">Cancel</md-button>
+            <md-button type="submit" class="md-primary md-raised alxe-button-wide">Register
+            </md-button>
+            <md-button class="md-warn alxe-button-wide" ng-href="#/login">Cancel</md-button>
         </form>
     </md-content>
 </div>

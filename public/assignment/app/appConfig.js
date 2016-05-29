@@ -8,7 +8,9 @@
                     controllerAs: "ctrl"
                 })
                 .when('/register', {
-                    templateUrl: 'partials/user/register.html'
+                    templateUrl: 'partials/user/register.html',
+                    controller: "RegisterCtrl",
+                    controllerAs: "ctrl"
                 })
                 .when('/user/:uid', {
                     templateUrl: 'partials/user/profile.html'
