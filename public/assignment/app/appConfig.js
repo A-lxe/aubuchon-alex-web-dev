@@ -43,7 +43,9 @@
                     controllerAs: "ctrl"
                 })
                 .when('/user/:uid/website/:wid/page/:pid', {
-                    templateUrl: 'partials/page/edit.html'
+                    templateUrl: 'partials/page/edit.html',
+                    controller: "PageEditCtrl",
+                    controllerAs: "ctrl"
                 })
                 .when('/user/:uid/website/:wid/page/:pid/widget', {
                     templateUrl: 'partials/widget/list.html'
