@@ -38,7 +38,9 @@
                     controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website/:wid/page/new', {
-                    templateUrl: 'partials/page/new.html'
+                    templateUrl: 'partials/page/new.html',
+                    controller: "PageNewCtrl",
+                    controllerAs: "ctrl"
                 })
                 .when('/user/:uid/website/:wid/page/:pid', {
                     templateUrl: 'partials/page/edit.html'

@@ -51,12 +51,13 @@
                              alt="{{page.name}}">
                     </md-button>
                     <md-card-title>
-                        <md-card-title-text>
+                        <md-card-title-text layout="row">
                             <span class="md-headline">{{page.name}}</span>
                         </md-card-title-text>
                     </md-card-title>
-                    <md-card-content ng-show="page.description">
-                        <p>
+                    <md-card-content ng-show="page.title || page.description">
+                        <span class="md-title" ng-show="page.title">{{page.title}}</span>
+                        <p ng-show="page.description">
                             {{page.description}}
                         </p>
                     </md-card-content>
