@@ -2,20 +2,20 @@
     <md-content layout="column" layout-fill>
         <md-toolbar>
             <div class="md-toolbar-tools alxe-toolbar-withlefticon">
-                <md-menu ng-controller="MenuCtrl as ctrl" md-offset="0 40">
+                <md-menu ng-controller="MenuCtrl as menu" md-offset="0 40">
                     <md-button aria-label="Open menu" class="md-icon-button"
-                               ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+                               ng-click="menu.openMenu($mdOpenMenu, $event)">
                         <md-icon md-menu-origin>menu</md-icon>
                     </md-button>
                     <md-menu-content width="4">
                         <md-menu-item>
-                            <md-button href="#/profile">
+                            <md-button ng-href="#/user/{{ctrl.userId}}">
                                 <md-icon>person</md-icon>
                                 Profile
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button href="#/sites">
+                            <md-button ng-href="#/user/{{ctrl.userId}}/website">
                                 <md-icon>apps</md-icon>
                                 Websites
                             </md-button>
@@ -36,18 +36,21 @@
             </div>
         </md-toolbar>
         <md-content flex class="md-padding">
-            <form name="newsite">
+            <form name="newsite" ng-submit="ctrl.save()">
                 <md-input-container class="md-block">
-                    <label>Title</label>
-                    <input type="text" name="title" ng-model="$scope.tempTitle">
+                    <label>Name</label>
+                    <input type="text" name="name" ng-blur="ctrl.validateName()" ng-model="ctrl.name">
+                    <div ng-messages ng-show="ctrl.nameWarning">
+                        <div ng-message>{{ctrl.nameWarning}}</div>
+                    </div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Description</label>
-                    <textarea ng-model="$scope.tempDesc" class="alxe-textarea-3row"></textarea>
+                    <textarea ng-model="ctrl.description" class="alxe-textarea-3row"></textarea>
                 </md-input-container>
-                <md-button class="md-primary md-raised alxe-button-wide"
-                           href="#/websites/web1">Save</md-button>
-                <md-button class="md-warn alxe-button-wide" href="#/sites">Cancel</md-button>
+                <md-button type="submit" class="md-primary md-raised alxe-button-wide">Save
+                </md-button>
+                <md-button class="md-warn alxe-button-wide" ng-href="#/user/{{ctrl.userId}}/website">Cancel</md-button>
             </form>
         </md-content>
     </md-content>

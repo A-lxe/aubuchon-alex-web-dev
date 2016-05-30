@@ -23,7 +23,9 @@
                     controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website/new', {
-                    templateUrl: 'partials/website/new.html'
+                    templateUrl: 'partials/website/new.html',
+                    controller: 'WebsiteNewCtrl',
+                    controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website/:wid', {
                     templateUrl: 'partials/website/edit.html'

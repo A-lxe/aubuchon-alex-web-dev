@@ -10,9 +10,14 @@
         ];
 
         function createWebsite(userId, website) {
+            if(websiteWithName(userId, website.name)) {
+                return false;
+            }
             var newSite = angular.copy(website);
             newSite.developerId = userId;
             newSite._id = newId();
+            websites.push(newSite);
+            return newSite;
         }
 
         function newId() {
@@ -58,9 +63,9 @@
             }
         }
 
-        function websiteWithName(name) {
+        function websiteWithName(userId, name) {
             for(var i in websites) {
-                if(websites[i].name == name) {
+                if(websites[i].developerId == userId && websites[i].name == name) {
                     return true;
                 }
             }

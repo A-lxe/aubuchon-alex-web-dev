@@ -2,20 +2,20 @@
     <md-content layout="column" layout-fill>
         <md-toolbar>
             <div class="md-toolbar-tools alxe-toolbar-withlefticon">
-                <md-menu ng-controller="MenuCtrl as ctrl" md-offset="0 40">
+                <md-menu ng-controller="MenuCtrl as menu" md-offset="0 40">
                     <md-button aria-label="Open menu" class="md-icon-button"
-                               ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+                               ng-click="menu.openMenu($mdOpenMenu, $event)">
                         <md-icon md-menu-origin>menu</md-icon>
                     </md-button>
                     <md-menu-content width="4">
                         <md-menu-item>
-                            <md-button href="#/profile">
+                            <md-button ng-href="#/user/{{ctrl.userId}}">
                                 <md-icon>person</md-icon>
                                 Profile
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button href="#/sites">
+                            <md-button ng-href="#/user/{{ctrl.userId}}/website">
                                 <md-icon>apps</md-icon>
                                 Websites
                             </md-button>
