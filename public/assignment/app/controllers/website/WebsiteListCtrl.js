@@ -25,7 +25,7 @@
                 .textContent('Are you sure you want to delete ' + websiteName + '?')
                 .ariaLabel('Delete ' + websiteName)
                 .ok('Please do it!')
-                .cancel('Sounds like a scam');
+                .cancel('Sounds like a scam...');
             $mdDialog.show(confirm).then(function () {
                 Website.deleteWebsite(websiteId);
                 removeSite(websiteId);

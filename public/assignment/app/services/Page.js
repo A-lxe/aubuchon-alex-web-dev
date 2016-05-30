@@ -72,7 +72,7 @@
 
         return {
             createPage: createPage,
-            findPageByWebsiteId: findPagesByWebsiteId,
+            findPagesByWebsiteId: findPagesByWebsiteId,
             findPageById: findPageById,
             updatePage: updatePage,
             deletePage: deletePage,
