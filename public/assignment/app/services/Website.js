@@ -51,6 +51,7 @@
                 if(websites[i]._id == websiteId) {
                     websites[i].name = website.name;
                     websites[i].description = website.description;
+                    return angular.copy(websites[i]);
                 }
             }
         }

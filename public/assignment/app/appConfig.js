@@ -28,7 +28,9 @@
                     controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website/:wid', {
-                    templateUrl: 'partials/website/edit.html'
+                    templateUrl: 'partials/website/edit.html',
+                    controller: 'WebsiteEditCtrl',
+                    controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website/:wid/page', {
                     templateUrl: 'partials/page/list.html'
