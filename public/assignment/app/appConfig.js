@@ -59,7 +59,9 @@
                     controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website/:wid/page/:pid/widget/new', {
-                    templateUrl: 'partials/widget/new.html'
+                    templateUrl: 'partials/widget/new.html',
+                    controller: 'WidgetNewCtrl',
+                    controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website/:wid/page/:pid/widget/:wgid', {
                     templateUrl: 'partials/widget/edit.html',
