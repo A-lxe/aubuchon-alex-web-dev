@@ -62,7 +62,9 @@
                     templateUrl: 'partials/widget/new.html'
                 })
                 .when('/user/:uid/website/:wid/page/:pid/widget/:wgid', {
-                    templateUrl: 'partials/widget/edit.html'
+                    templateUrl: 'partials/widget/edit.html',
+                    controller: "WidgetEditCtrl",
+                    controllerAs: 'ctrl'
                 })
                 .otherwise({
                     redirectTo: '/login'

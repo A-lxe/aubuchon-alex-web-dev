@@ -1,0 +1,54 @@
+<div layout="row" ng-cloak>
+    <md-content layout="column" layout-fill>
+        <md-toolbar>
+            <div class="md-toolbar-tools alxe-toolbar-withlefticon">
+                <md-menu ng-controller="MenuCtrl as menu" md-offset="0 40">
+                    <md-button aria-label="Open menu" class="md-icon-button"
+                               ng-click="menu.openMenu($mdOpenMenu, $event)">
+                        <md-icon md-menu-origin>menu</md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button ng-href="#/user/{{ctrl.userId}}">
+                                <md-icon>person</md-icon>
+                                Profile
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-href="#/user/{{ctrl.userId}}/website">
+                                <md-icon>apps</md-icon>
+                                Websites
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-divider></md-menu-divider>
+                        <md-menu-item>
+                            <md-button class="md-warn" href="#/login">
+                                <md-icon>close</md-icon>
+                                Logout
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+                <h1 class="md-headline">
+                    <span>{{ctrl.websiteName}} > {{ctrl.pageName}} > {{ctrl.widget.widgetType}}</span>
+                </h1>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content flex class="md-padding" ng-switch="ctrl.widget.widgetType">
+            <form name="header" ng-submit="ctrl.save()">
+                <md-button class="md-warn md-raised alxe-button-wide" ng-click="ctrl.delete()">
+                    Delete
+                </md-button>
+                <div ng-switch-when="HEADER">
+                    <div ng-include="'partials/widget/edit/header.html'"></div>
+                </div>
+                <md-button type="submit" class="md-primary md-raised alxe-button-wide">
+                    Save
+                </md-button>
+                <md-button class="md-warn alxe-button-wide" href="#/user/{{ctrl.userId}}/website/{{ctrl.websiteId}}/page/{{ctrl.pageId}}/widget">Cancel
+                </md-button>
+            </form>
+        </md-content>
+    </md-content>
+</div>

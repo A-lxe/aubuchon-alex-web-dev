@@ -40,9 +40,12 @@
             </div>
         </md-toolbar>
         <md-content flex class="md-padding" layout="column">
-            <div class="alxe-widget" ng-repeat="widget in ctrl.widgets" ng-switch="widget.widgetType">
+            <div class="alxe-widget" ng-repeat="widget in ctrl.widgets"
+                 ng-switch="widget.widgetType">
                 <div class="alxe-widget-menu" layout="row">
-                    <md-button href="#/websites/web1/page1/header" class="md-icon-button">
+                    <md-button
+                            ng-href="#/user/{{ctrl.userId}}/website/{{ctrl.websiteId}}/page/{{ctrl.pageId}}/widget/{{widget._id}}"
+                            class="md-icon-button">
                         <md-icon>settings</md-icon>
                     </md-button>
                     <md-button class="md-icon-button">
@@ -57,12 +60,12 @@
                     <h5 ng-switch-when="5">{{widget.text}}</h5>
                 </div>
                 <div ng-switch-when="IMAGE">
-                    <img src="{{widget.url}}"
+                    <img ng-src="{{widget.url}}"
                          width="{{widget.width}}"
                          class="md-card-image alxe-card-img">
                 </div>
                 <div ng-switch-when="YOUTUBE" class="alxe-widget-video">
-                    <iframe src="{{widget.url}}"
+                    <iframe ng-src="{{widget.url}}"
                             width="{{widget.width}}"
                             frameborder="0" allowfullscreen></iframe>
                 </div>
