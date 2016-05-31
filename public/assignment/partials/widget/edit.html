@@ -43,6 +43,12 @@
                 <div ng-switch-when="HEADER">
                     <div ng-include="'partials/widget/edit/header.html'"></div>
                 </div>
+                <div ng-switch-when="IMAGE">
+                    <div ng-include="'partials/widget/edit/image.html'"></div>
+                </div>
+                <div ng-switch-when="YOUTUBE">
+                    <div ng-include="'partials/widget/edit/video.html'"></div>
+                </div>
                 <md-button type="submit" class="md-primary md-raised alxe-button-wide">
                     Save
                 </md-button>

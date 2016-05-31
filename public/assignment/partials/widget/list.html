@@ -59,12 +59,13 @@
                     <h4 ng-switch-when="4">{{widget.text}}</h4>
                     <h5 ng-switch-when="5">{{widget.text}}</h5>
                 </div>
-                <div ng-switch-when="IMAGE">
+                <div ng-switch-when="IMAGE" layout="row" layout-align="center center">
                     <img ng-src="{{widget.url}}"
                          width="{{widget.width}}"
-                         class="md-card-image alxe-card-img">
+                         class="md-card-image">
                 </div>
-                <div ng-switch-when="YOUTUBE" class="alxe-widget-video">
+                <div ng-switch-when="YOUTUBE" layout="row"
+                     layout-align="center center">
                     <iframe ng-src="{{widget.url}}"
                             width="{{widget.width}}"
                             frameborder="0" allowfullscreen></iframe>

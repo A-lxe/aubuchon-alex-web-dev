@@ -26,9 +26,10 @@
 
 }
 
-.alxe-widget > img {
-  width: 100%;
+.alxe-widget img {
   height: auto;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .alxe-widget-menu {

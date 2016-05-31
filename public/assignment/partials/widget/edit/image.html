@@ -1,68 +1,11 @@
-<div layout="row" ng-cloak>
-    <md-content layout="column" layout-fill>
-        <md-toolbar>
-            <div class="md-toolbar-tools alxe-toolbar-withlefticon">
-                <md-menu ng-controller="MenuCtrl as ctrl" md-offset="0 40">
-                    <md-button aria-label="Open menu" class="md-icon-button"
-                               ng-click="ctrl.openMenu($mdOpenMenu, $event)">
-                        <md-icon md-menu-origin>menu</md-icon>
-                    </md-button>
-                    <md-menu-content width="4">
-                        <md-menu-item>
-                            <md-button href="#/profile">
-                                <md-icon>person</md-icon>
-                                Profile
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item>
-                            <md-button href="#/sites">
-                                <md-icon>apps</md-icon>
-                                Websites
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-divider></md-menu-divider>
-                        <md-menu-item>
-                            <md-button class="md-warn" href="#/login">
-                                <md-icon>close</md-icon>
-                                Logout
-                            </md-button>
-                        </md-menu-item>
-                    </md-menu-content>
-                </md-menu>
-                <h1 class="md-headline">
-                    <span>.{title}} > .{page}} > Image</span>
-                </h1>
-                <span flex></span>
-            </div>
-        </md-toolbar>
-        <md-content flex class="md-padding">
-            <form name="image">
-                <md-input-container class="md-block">
-                    <label>Name</label>
-                    <input type="text" name="name" ng-model="$scope.tempName">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Text</label>
-                    <input type="text" name="text" ng-model="$scope.tempText">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>URL</label>
-                    <input type="url" name="url" ng-model="$scope.tempUrl">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Width</label>
-                    <input type="text" name="width" ng-model="$scope.tempWidth">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <input type="file" name="file" ng-model="$scope.tempFile">
-                </md-input-container>
-                <md-button class="md-primary md-raised alxe-button-wide"
-                           href="#/websites/web1/page1">
-                    Save
-                </md-button>
-                <md-button class="md-warn alxe-button-wide" href="#/websites/web1/page1">Cancel
-                </md-button>
-            </form>
-        </md-content>
-    </md-content>
-</div>
+<md-input-container class="md-block">
+    <label>URL</label>
+    <input type="url" name="url" ng-model="ctrl.widget.url">
+</md-input-container>
+<md-input-container class="md-block">
+    <label>Width</label>
+    <input type="text" name="width" ng-model="ctrl.widget.width">
+</md-input-container>
+<md-input-container class="md-block">
+    <input type="file" name="file" ng-model="ctrl.widget.file">
+</md-input-container>
