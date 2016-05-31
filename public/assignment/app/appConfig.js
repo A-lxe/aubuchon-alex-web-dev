@@ -1,5 +1,11 @@
-(function() {
+(function () {
     angular.module('App')
+        .config(function ($sceDelegateProvider) {
+            $sceDelegateProvider.resourceUrlWhitelist([
+                'self',
+                'https://www.youtube.com/**'
+            ]);
+        })
         .config(function ($routeProvider) {
             $routeProvider
                 .when('/login', {
@@ -48,25 +54,18 @@
                     controllerAs: "ctrl"
                 })
                 .when('/user/:uid/website/:wid/page/:pid/widget', {
-                    templateUrl: 'partials/widget/list.html'
+                    templateUrl: 'partials/widget/list.html',
+                    controller: "WidgetListCtrl",
+                    controllerAs: 'ctrl'
                 })
                 .when('/user/:uid/website/:wid/page/:pid/widget/new', {
                     templateUrl: 'partials/widget/new.html'
                 })
-                .when('/user/:uid/website/:wid/page/:pid/widget/new', {
+                .when('/user/:uid/website/:wid/page/:pid/widget/:wgid', {
                     templateUrl: 'partials/widget/edit.html'
-                })
-                .when('/websites/web1/page1/header', {
-                    templateUrl: 'partials/widget/header.html'
-                })
-                .when('/websites/web1/page1/image', {
-                    templateUrl: 'partials/widget/image.html'
-                })
-                .when('/websites/web1/page1/video', {
-                    templateUrl: 'partials/widget/video.html'
                 })
                 .otherwise({
                     redirectTo: '/login'
-                })
+                });
         });
 })();
