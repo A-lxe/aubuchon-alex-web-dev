@@ -1,22 +1,30 @@
 (function () {
-    function WebsiteListCtrl(Website, $routeParams, $mdDialog) {
+    function WebsiteListCtrl(Website, $routeParams, $mdDialog, $location) {
         var vm = this;
         vm.userId = $routeParams["uid"];
-        vm.websites = Website.findWebsitesByUser(vm.userId);
         vm.columns = 2;
-
         vm.sitesArray = [];
-        var j = 0;
-        while (j < vm.columns) {
-            vm.sitesArray.push([]);
-            j++;
-        }
-        for (i in vm.websites) {
-            vm.sitesArray[(i % vm.columns)].push(vm.websites[i]);
-        }
 
-        vm.delete = function (websiteId) {
-            showDeleteConfirm(websiteId, Website.findWebsiteById(websiteId).name);
+        Website.findWebsitesByUser(vm.userId).then(
+            function(response) {
+                vm.websites = response.data;
+                var j = 0;
+                while (j < vm.columns) {
+                    vm.sitesArray.push([]);
+                    j++;
+                }
+                for (i in vm.websites) {
+                    vm.sitesArray[(i % vm.columns)].push(vm.websites[i]);
+                }
+            },
+            function(error) {
+                console.log("Couldn't load websites. Error: " + error.data.error);
+                $location.url("/user/" + vm.userId);
+            }
+        );
+
+        vm.delete = function (websiteId, name) {
+            showDeleteConfirm(websiteId, name);
         }
 
         function showDeleteConfirm(websiteId, websiteName) {
@@ -27,8 +35,14 @@
                 .ok('Please do it!')
                 .cancel('Sounds like a scam...');
             $mdDialog.show(confirm).then(function () {
-                Website.deleteWebsite(websiteId);
-                removeSite(websiteId);
+                Website.deleteWebsite(websiteId).then(
+                    function(response) {
+                        removeSite(websiteId);
+                    },
+                    function(error) {
+                        console.log("Couldn't delete website. Error: " + error.data.error);
+                    }
+                );
             }, function () {
                 return false;
             });
@@ -49,5 +63,5 @@
     }
 
     angular.module('App')
-        .controller('WebsiteListCtrl', ['Website', '$routeParams', '$mdDialog', WebsiteListCtrl])
+        .controller('WebsiteListCtrl', ['Website', '$routeParams', '$mdDialog', '$location', WebsiteListCtrl])
 })();

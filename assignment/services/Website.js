@@ -23,7 +23,7 @@ module.exports = function(app) {
         }
         newWebsite._id = newId();
         newWebsite.developerId = userId;
-        newWebsite.description = "";
+        newWebsite.description = newWebsite.description || "";
         websites.push(newWebsite);
         res.json(newWebsite);
     }
@@ -73,7 +73,7 @@ module.exports = function(app) {
         var id = req.params.websiteId;
         for(i in websites) {
             if(websites[i]._id == id) {
-                websites[i].splice(i, 1);
+                websites.splice(i, 1);
                 res.end()
                 return;
             }

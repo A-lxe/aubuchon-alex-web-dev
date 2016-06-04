@@ -1,5 +1,5 @@
 (function() {
-    function Website() {
+    function Website($http) {
         function createWebsite(userId, website) {
             var url = "/api/user/" + userId + "/website";
             return $http.post(url, website);
@@ -35,5 +35,5 @@
     }
 
     angular.module('App')
-        .factory('Website', Website)
+        .factory('Website', ['$http', Website])
 })();

@@ -3,30 +3,28 @@
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
-        vm.website = Website.findWebsiteById(vm.websiteId);
-        vm.initialName = vm.website.name
+        Website.findWebsiteById(vm.websiteId).then(
+            function (response) {
+                vm.website = response.data;
+                vm.initialName = vm.website.name;
+            }
+        );
         vm.nameWarning = false;
 
         vm.save = function () {
             var newSite = vm.website;
-            newSite = Website.updateWebsite(vm.websiteId, newSite);
-            if(newSite && !vm.nameWarning) {
-                $location.url("/user/" + vm.userId + "/website/" + newSite._id + "/page");
-            } else {
-                $mdToast.show(
-                    $mdToast.simple()
-                        .textContent('Website could not be created!')
-                        .hideDelay(3000)
-                );
-            }
-        }
-
-        vm.validateName = function() {
-            if(vm.initialName !== vm.website.name && Website.websiteWithName(vm.userId, vm.website.name)) {
-                vm.nameWarning = "A website with this name already exists!";
-            } else {
-                vm.nameWarning = false;
-            }
+            Website.updateWebsite(vm.websiteId, newSite).then(
+                function (response) {
+                    $location.url("/user/" + vm.userId + "/website/" + response.data._id + "/page");
+                },
+                function (error) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Website could not be created. Error: ' + error.data.error)
+                            .hideDelay(3000)
+                    );
+                }
+            );
         }
     }
 

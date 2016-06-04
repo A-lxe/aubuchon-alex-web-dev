@@ -39,7 +39,7 @@
             <form name="newsite" ng-submit="ctrl.save()">
                 <md-input-container class="md-block">
                     <label>Name</label>
-                    <input type="text" name="Name" ng-blur="ctrl.validateName()" ng-model="ctrl.website.name">
+                    <input type="text" name="Name" ng-model="ctrl.website.name">
                     <div ng-messages ng-show="ctrl.nameWarning">
                         <div ng-message>{{ctrl.nameWarning}}</div>
                     </div>
