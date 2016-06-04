@@ -5,16 +5,18 @@
         vm.password = "";
 
         vm.login = function () {
-            var temp = User.findUserByCredentials(vm.username, vm.password);
-            if (temp == null) {
-                $mdToast.show(
-                    $mdToast.simple()
-                        .textContent('Incorrect username or password.')
-                        .hideDelay(3000)
-                );
-            } else {
-                $location.url("/user/" + temp._id);
-            }
+            User.findUserByCredentials(vm.username, vm.password).then(
+                function (response) {
+                    $location.url("/user/" + response.data._id);
+                },
+                function (error) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Could not log in. Error: ' + error.data.error)
+                            .hideDelay(3000)
+                    );
+                }
+            );
         }
     }
 

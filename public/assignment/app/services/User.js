@@ -10,7 +10,7 @@
         }
 
         function findUserById(userId) {
-            var url = "/api/user/:" + userId;
+            var url = "/api/user/" + userId;
             return $http.get(url);
         }
 
@@ -20,12 +20,12 @@
         }
 
         function updateUser(userId, user) {
-            var url = "/api/user/:" + userId;
+            var url = "/api/user/" + userId;
             return $http.put(url, user);
         }
 
         function deleteUser(userId) {
-            var url = "/api/user/:" + userId;
+            var url = "/api/user/" + userId;
             return $http.delete(url);
         }
 

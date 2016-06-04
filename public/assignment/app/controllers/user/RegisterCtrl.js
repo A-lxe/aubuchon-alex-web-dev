@@ -8,11 +8,14 @@
         vm.passwordWarning = false;
 
         vm.validateUsername = function () {
-            if (User.userWithUsername(vm.username)) {
-                vm.usernameWarning = "That username is taken, sorry!";
-            } else {
-                vm.usernameWarning = false;
-            }
+            User.userWithUsername(vm.username).then(
+                function (response) {
+                    vm.usernameWarning = "That username is taken, sorry!";
+                },
+                function (error) {
+                    vm.usernameWarning = false;
+                }
+            )
         }
 
         vm.validatePassword = function () {
@@ -39,16 +42,16 @@
             };
             User.createUser(temp).then(
                 function (response) {
-                    console.log(JSON.stringify(response.data));
                     $location.url('/user/' + response.data._id);
                 },
                 function (error) {
                     $mdToast.show(
                         $mdToast.simple()
-                            .textContent('User creation failed.')
+                            .textContent('User creation failed. Error:' + error.data.error)
                             .hideDelay(3000)
                     );
-                });
+                }
+            );
         }
     }
 

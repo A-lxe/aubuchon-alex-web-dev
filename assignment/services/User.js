@@ -1,7 +1,6 @@
 module.exports = function(app) {
     app.post('/api/user', createUser);
-    app.get('/api/user?username=username', findUserByUsername);
-    app.get('/api/user?username=username&password=password', findUserByCredentials);
+    app.get('/api/user', findUserByCredentials, findUserByUsername);
     app.get('/api/user/:userId', findUserById);
     app.put('/api/user/:userId', updateUser);
     app.delete('/api/user/:userId', deleteUser);
@@ -22,11 +21,16 @@ module.exports = function(app) {
         newUser._id = newId();
         newUser.firstName = "";
         newUser.lastName = "";
+        newUser.email = "";
         users.push(newUser);
         res.json(newUser);
     }
 
     function findUserByUsername(req, res) {
+        if(!req.query.username) {
+            res.status(400).json({error : "Invalid Request!"});
+            return;
+        }
         var username = req.query.username;
         for(i in users) {
             if(users[i].username === username) {
@@ -37,7 +41,11 @@ module.exports = function(app) {
         res.status(404).json({error: "User " + username + " was not found."});
     }
 
-    function findUserByCredentials(req, res) {
+    function findUserByCredentials(req, res, next) {
+        if(!req.query.password) {
+            next();
+            return;
+        }
         var username = req.query.username;
         var password = req.query.password;
         for(i in users) {
@@ -71,7 +79,8 @@ module.exports = function(app) {
                     username : user.username || old.username,
                     password : user.password || old.password,
                     firstName : user.firstName || old.firstName,
-                    lastName : user.lastName || old.lastName
+                    lastName : user.lastName || old.lastName,
+                    email : user.email || old.email
                 }
                 res.json(users[i]);
                 return;
