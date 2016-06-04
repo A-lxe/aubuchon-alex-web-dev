@@ -73,7 +73,7 @@ module.exports = function(app) {
         var user = req.body;
         for(i in users) {
             if(users[i]._id == id) {
-                old = users[i];
+                var old = users[i];
                 users[i] = {
                     _id : id,
                     username : user.username || old.username,
