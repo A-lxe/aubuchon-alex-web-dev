@@ -1,5 +1,5 @@
 (function() {
-    function User() {
+    function User($http) {
         var users = [
             {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
             {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
@@ -8,25 +8,18 @@
         ];
 
         function createUser(user) {
-            if(userWithUsername(user.username)) {
-                return false;
-            }
-            var newUser = angular.copy({
-                _id: newId(),
+            var url = "/api/user";
+            var user = {
                 username: user.username,
-                password: user.password,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email
-            })
-            users.push(newUser);
-            return angular.copy(newUser);
+                password: user.password
+            };
+            return $http.post(url, user);
         }
 
         function newId() {
             var temp = 0;
             for(var i in users) {
-                temp = Math.max(users[i]._id, temp);
+                temp = Math.max(users[i].id, temp);
             }
             return temp + 1;
         }
@@ -85,5 +78,5 @@
     }
 
     angular.module('App')
-        .factory('User', User)
+        .factory('User', ['$http', User])
 })();

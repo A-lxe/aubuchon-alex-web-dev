@@ -26,7 +26,7 @@
         vm.register = function () {
             vm.validateUsername();
             vm.validatePassword();
-            if(vm.usernameWarning || vm.passwordWarning) {
+            if (vm.usernameWarning || vm.passwordWarning) {
                 return;
             }
             var temp = {
@@ -37,16 +37,18 @@
                 lastName: "",
                 email: ""
             };
-            temp = User.createUser(temp);
-            if (!temp) {
-                $mdToast.show(
-                    $mdToast.simple()
-                        .textContent('User creation failed.')
-                        .hideDelay(3000)
-                );
-            } else {
-                $location.url("/user/" + temp._id);
-            }
+            User.createUser(temp).then(
+                function (response) {
+                    console.log(JSON.stringify(response.data));
+                    $location.url('/user/' + response.data._id);
+                },
+                function (error) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('User creation failed.')
+                            .hideDelay(3000)
+                    );
+                });
         }
     }
 
