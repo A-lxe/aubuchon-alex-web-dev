@@ -3,13 +3,29 @@
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
-        vm.websiteName = Website.findWebsiteById(vm.websiteId).name;
+        Website.findWebsiteById(vm.websiteId).then(
+            function (response) {
+                vm.websiteName = response.data.name;
+            },
+            function (error) {
+                console.log("Could not load website. Error: " + error.data.error);
+                $location("/user/" + vm.userId + "/website");
+            }
+        );
         vm.pageId = $routeParams["pid"];
-        vm.pageName = Page.findPageById(vm.pageId).name;
+        Page.findPageById(vm.pageId).then(
+            function (response) {
+                vm.pageName = response.data.name;
+            },
+            function (error) {
+                console.log("Could not load page. Error: " + error.data.error);
+                $location("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            }
+        );
 
-        vm.new = function(type) {
+        vm.new = function (type) {
             var newWidget = {}
-            switch(type) {
+            switch (type) {
                 case "HEADER":
                     newWidget.widgetType = "HEADER";
                     newWidget.text = "Header";
@@ -29,19 +45,17 @@
                     throwError();
                     return;
             }
-            if((newWidget = Widget.createWidget(vm.pageId, newWidget))) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidget._id);
-            } else {
-                throwError();
-            }
-        }
-        
-        function throwError() {
-            $mdToast.show(
-                $mdToast.simple()
-                    .textContent('Widget could not be created!')
-                    .hideDelay(3000)
-            );
+            Widget.createWidget(vm.pageId, newWidget).then(
+                function (response) {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + response.data._id);
+                },
+                function (error) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Widget could not be created. Error: ' + error.data.error)
+                            .hideDelay(3000)
+                    );
+                });
         }
     }
 

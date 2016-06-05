@@ -20,7 +20,7 @@
                 function (error) {
                     $mdToast.show(
                         $mdToast.simple()
-                            .textContent('Website could not be created. Error: ' + error.data.error)
+                            .textContent('Website could not be edited. Error: ' + error.data.error)
                             .hideDelay(3000)
                     );
                 }
