@@ -3,7 +3,15 @@
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
-        vm.websiteName = Website.findWebsiteById(vm.websiteId).name;
+        Website.findWebsiteById(vm.websiteId).then(
+            function (response) {
+                vm.websiteName = response.data.name;
+            },
+            function (error) {
+                console.log("Could not load website. Error: " + error.data.error);
+                $location("/user/" + vm.userId + "/website");
+            }
+        );
 
         vm.name = "";
         vm.title = "";
@@ -16,25 +24,20 @@
                 name: vm.name,
                 title: vm.title,
                 description: vm.description,
-                websiteId: vm.websiteId};
-            newPage = Page.createPage(vm.websiteId, newPage);
-            if(newPage) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + newPage._id + "/widget");
-            } else {
-                $mdToast.show(
-                    $mdToast.simple()
-                        .textContent('Page could not be created!')
-                        .hideDelay(3000)
-                );
-            }
-        }
-
-        vm.validateName = function() {
-            if(Page.pageWithName(vm.websiteId, vm.name)) {
-                vm.nameWarning = "A Page with this name already exists!";
-            } else {
-                vm.nameWarning = false;
-            }
+                websiteId: vm.websiteId
+            };
+            Page.createPage(vm.websiteId, newPage).then(
+                function (response) {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + response._id + "/widget");
+                },
+                function (error) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Page could not be created. Error: ' + error.data.error)
+                            .hideDelay(3000)
+                    );
+                }
+            );
         }
     }
 

@@ -1,24 +1,39 @@
 (function () {
-    function PageListCtrl(Page, Website, $routeParams, $mdDialog) {
+    function PageListCtrl(Page, Website, $routeParams, $mdDialog, $location) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
-        vm.websiteName = Website.findWebsiteById(vm.websiteId).name;
-        vm.pages = Page.findPagesByWebsiteId(vm.websiteId);
         vm.columns = 2;
-
         vm.pagesArray = [];
-        var j = 0;
-        while (j < vm.columns) {
-            vm.pagesArray.push([]);
-            j++;
-        }
-        for (i in vm.pages) {
-            vm.pagesArray[(i % vm.columns)].push(vm.pages[i]);
-        }
+        Website.findWebsiteById(vm.websiteId).then(
+            function (response) {
+                vm.websiteName = response.data.name;
+            },
+            function (error) {
+                console.log("Could not load website. Error: " + error.data.error);
+                $location("/user/" + vm.userId + "/website");
+            }
+        );
+        Page.findPagesByWebsiteId(vm.websiteId).then(
+            function (response) {
+                vm.pages = response.data;
+                var j = 0;
+                while (j < vm.columns) {
+                    vm.pagesArray.push([]);
+                    j++;
+                }
+                for (i in vm.pages) {
+                    vm.pagesArray[(i % vm.columns)].push(vm.pages[i]);
+                }
+            },
+            function (error) {
+                console.log("Could not load page. Error: " + error.data.error);
+                $location.url("/user/" + vm.userId + "/website");
+            }
+        );
 
-        vm.delete = function (pageId) {
-            showDeleteConfirm(pageId, Page.findPageById(pageId).name);
+        vm.delete = function (pageId, name) {
+            showDeleteConfirm(pageId, name);
         }
 
         function showDeleteConfirm(pageId, pageName) {
@@ -29,8 +44,14 @@
                 .ok('Please do it!')
                 .cancel('Sounds like a scam...');
             $mdDialog.show(confirm).then(function () {
-                Page.deletePage(pageId);
-                removePage(pageId);
+                Page.deletePage(pageId).then(
+                    function(response) {
+                        removePage(pageId);
+                    },
+                    function(error) {
+                        console.log("Could not delete page. Error: " + error.data.error);
+                    }
+                );
             }, function () {
                 return false;
             });
@@ -51,5 +72,5 @@
     }
 
     angular.module('App')
-        .controller('PageListCtrl', ['Page', 'Website', '$routeParams', '$mdDialog', PageListCtrl])
+        .controller('PageListCtrl', ['Page', 'Website', '$routeParams', '$mdDialog', '$location', PageListCtrl])
 })();

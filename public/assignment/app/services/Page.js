@@ -1,5 +1,5 @@
 (function() {
-    function Page() {
+    function Page($http) {
 
         function createPage(websiteId, page) {
             var url = "/api/website/" + websiteId + "/page";
@@ -36,5 +36,5 @@
     }
 
     angular.module('App')
-        .factory('Page', Page)
+        .factory('Page', ['$http', Page])
 })();

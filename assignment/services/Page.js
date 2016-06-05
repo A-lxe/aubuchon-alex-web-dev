@@ -17,6 +17,7 @@ module.exports = function (app) {
         newPage._id = newId();
         newPage.websiteId = websiteId;
         newPage.name = newPage.name || "";
+        newPage.title = newPage.title || "";
         newPage.description = newPage.description || "";
         pages.push(newPage);
         res.json(newPage);
@@ -53,6 +54,7 @@ module.exports = function (app) {
                 pages[i] = {
                     _id: id,
                     name: page.name || old.name,
+                    title: page.title || old.title,
                     description: page.description || old.description,
                     websiteId: page.websiteId || old.websiteId
                 }
