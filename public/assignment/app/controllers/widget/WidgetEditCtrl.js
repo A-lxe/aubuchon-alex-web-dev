@@ -1,5 +1,5 @@
 (function () {
-    function WidgetEditCtrl(Widget, Page, Website, $routeParams, $mdDialog, $location) {
+    function WidgetEditCtrl(Widget, Page, Website, $routeParams, $mdDialog, $location, Upload) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
@@ -24,20 +24,20 @@
         );
         vm.widgetId = $routeParams["wgid"];
         Widget.findWidgetById(vm.widgetId).then(
-            function(response) {
+            function (response) {
                 vm.widget = response.data;
             },
-            function(error) {
+            function (error) {
                 console.log("Could not load widget. Error: " + error.data.error);
             }
         );
-        
+
         vm.save = function () {
             Widget.updateWidget(vm.widgetId, vm.widget).then(
-                function(response) {
+                function (response) {
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
                 },
-                function(error) {
+                function (error) {
                     $mdToast.show(
                         $mdToast.simple()
                             .textContent('Widget could not be edited. Error: ' + error.data.error)
@@ -46,7 +46,7 @@
                 }
             );
         };
-        
+
         vm.delete = function () {
             showDeleteConfirm(vm.widgetId, vm.widget.widgetType);
         };
@@ -60,23 +60,51 @@
                 .cancel('Sounds like a scam...');
             $mdDialog.show(confirm).then(function () {
                 Widget.deleteWidget(widgetId).then(
-                    function(response) {
+                    function (response) {
                         $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
                     },
-                    function(error) {
+                    function (error) {
                         $mdToast.show(
                             $mdToast.simple()
                                 .textContent('Widget could not be deleted. Error: ' + error.data.error)
                                 .hideDelay(3000)
-                        );                    
+                        );
                     }
                 );
             }, function () {
                 return false;
             });
         }
+
+        vm.uploadImage = function (file, errFiles) {
+            if (file) {
+                file.upload = Upload.upload({
+                    url: '/api/upload',
+                    data: {image: file, name: "hello"}
+                }).then(
+                    function (response) {
+                        vm.widget.url = response.data.path;
+                        vm.widget.upload = true;
+                    },
+                    function (response) {
+                        if (response.status > 0)
+                            console.log(response.status + ': ' + response.data);
+                    },
+                    function (evt) {
+                        file.progress = Math.min(100, parseInt(100.0 *
+                            evt.loaded / evt.total));
+                    });
+            }
+        }
+
+        vm.removeUpload = function() {
+            if(vm.widget.upload) {
+                vm.widget.url = "http://lorempixel.com/400/200/";
+                vm.widget.upload = false;
+            }
+        }
     }
 
     angular.module('App')
-        .controller('WidgetEditCtrl', ['Widget', 'Page', 'Website', '$routeParams', '$mdDialog', '$location', WidgetEditCtrl])
+        .controller('WidgetEditCtrl', ['Widget', 'Page', 'Website', '$routeParams', '$mdDialog', '$location', 'Upload', WidgetEditCtrl])
 })();

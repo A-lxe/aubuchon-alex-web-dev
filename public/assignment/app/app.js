@@ -1,6 +1,7 @@
 (function() {
     angular.module('App', [
         'ngMaterial',
-        'ngRoute']);
+        'ngRoute',
+        'ngFileUpload']);
 })();
 

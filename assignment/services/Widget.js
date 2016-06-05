@@ -1,9 +1,14 @@
 module.exports = function (app) {
+    var multer = require('multer');
+    var upload = multer({ dest: __dirname+'/../../public/assignment/uploads' });
+
     app.post('/api/page/:pageId/widget', createWidget);
     app.get('/api/page/:pageId/widget', findAllWidgetsForPage);
     app.get('/api/widget/:widgetId', findWidgetById);
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
+    app.post('/api/upload', upload.single('image'), uploadImage);
+
 
     var widgets = [
         { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -74,6 +79,26 @@ module.exports = function (app) {
             }
         }
         res.status(404).json({error: "Widget with ID: " + id + " not found."});
+    }
+
+    function uploadImage(req, res) {
+        var image        = req.file;
+
+        var originalname  = image.originalname; // file name on user's computer
+        var filename      = image.filename;     // new file name in upload folder
+        var path          = image.path;         // full path of uploaded file
+        var destination   = image.destination;  // folder where file is saved to
+        var size          = image.size;
+        var mimetype      = image.mimetype;
+
+        res.json({
+            path: './uploads/' + filename
+        })
+    }
+    
+    function removeImage(req, res) {
+        var fileName = req.body.fileName;
+        
     }
 
     function newId() {

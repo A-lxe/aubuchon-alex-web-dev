@@ -1,4 +1,4 @@
-<md-input-container class="md-block">
+<md-input-container class="md-block" ng-if="!ctrl.widget.upload">
     <label>URL</label>
     <input type="url" name="url" ng-model="ctrl.widget.url">
 </md-input-container>
@@ -6,6 +6,16 @@
     <label>Width</label>
     <input type="text" name="width" ng-model="ctrl.widget.width">
 </md-input-container>
-<md-input-container class="md-block">
-    <input type="file" name="file" ng-model="ctrl.widget.file">
-</md-input-container>
+<div layout="row" layout-align="center center">
+    <img ng-src="{{ctrl.widget.url}}"
+         width="{{ctrl.widget.width}}"
+         class="md-card-image">
+</div>
+<md-button class="md-accent md-raised alxe-button-wide" ng-click="ctrl.removeUpload()"
+           ng-show="ctrl.widget.upload">
+    Remove Upload
+</md-button>
+<md-button accept="image/*" class="md-accent md-raised alxe-button-wide"
+           ngf-select="ctrl.uploadImage($file, $invalidFiles)">
+    Upload Image
+</md-button>
