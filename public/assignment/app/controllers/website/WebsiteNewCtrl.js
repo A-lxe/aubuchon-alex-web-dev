@@ -16,7 +16,7 @@
             };
             Website.createWebsite(vm.userId, newSite).then(
                 function (response) {
-                    $location.url("/user/" + vm.userId + "/website/" + newSite._id + "/page");
+                    $location.url("/user/" + vm.userId + "/website/" + response._id + "/page");
                 },
                 function (error) {
                     $mdToast.show(
