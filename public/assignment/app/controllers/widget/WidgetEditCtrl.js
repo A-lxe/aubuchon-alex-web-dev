@@ -1,5 +1,5 @@
 (function () {
-    function WidgetEditCtrl(Widget, Page, Website, $routeParams, $mdDialog, $location, Upload) {
+    function WidgetEditCtrl(Widget, Page, Website, $routeParams, $mdDialog, $location, Upload, Flickr) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
@@ -103,8 +103,24 @@
                 vm.widget.upload = false;
             }
         }
+
+        vm.searchPhotos = function(searchTerm) {
+            Flickr
+                .searchPhotos(searchTerm)
+                .then(function(response) {
+                    var data = response.data.replace("jsonFlickrApi(","");
+                    data = data.substring(0,data.length - 1);
+                    data = JSON.parse(data);
+                    vm.photos = data.photos;
+                });
+        }
+
+        vm.selectPhoto = function(photo) {
+            vm.widget.url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_b.jpg";
+            vm.widget.upload = false;
+        }
     }
 
     angular.module('App')
-        .controller('WidgetEditCtrl', ['Widget', 'Page', 'Website', '$routeParams', '$mdDialog', '$location', 'Upload', WidgetEditCtrl])
+        .controller('WidgetEditCtrl', ['Widget', 'Page', 'Website', '$routeParams', '$mdDialog', '$location', 'Upload', 'Flickr', WidgetEditCtrl])
 })();

@@ -19,3 +19,21 @@
            ngf-select="ctrl.uploadImage($file, $invalidFiles)">
     Upload Image
 </md-button>
+<br/>
+<div layout="row">
+    <md-input-container flex>
+        <label>Flickr Image Search</label>
+        <input type="text" name="flickrSearch" ng-model="ctrl.searchTerm">
+    </md-input-container>
+    <md-button class="md-raised" ng-click="ctrl.searchPhotos(ctrl.searchTerm)">
+        Search Flickr
+    </md-button>
+</div>
+<md-grid-list md-cols-xs="5" md-cols-sm="10" md-cols-md="14" md-cols-gt-md="20"
+              md-row-height-gt-md="1:1" md-row-height="2:2"
+              md-gutter="12px" md-gutter-gt-sm="8px" >
+    <md-grid-tile ng-repeat="photo in ctrl.photos.photo">
+        <img ng-click="ctrl.selectPhoto(photo)"
+             ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
+    </md-grid-tile>
+</md-grid-list>
