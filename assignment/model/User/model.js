@@ -37,7 +37,7 @@ module.exports = (function () {
                 $set: {
                     firstName: newUser.firstName,
                     lastName: newUser.lastName,
-                    email: newUser.email
+                    email: newUser.email,
                 }
             }
         );

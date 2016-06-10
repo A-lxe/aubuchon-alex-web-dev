@@ -9,14 +9,13 @@
 
         vm.save = function () {
             var newSite = {
-                _id: -1,
                 name: vm.name,
                 description: vm.description,
                 developerId: vm.userId
             };
             Website.createWebsite(vm.userId, newSite).then(
                 function (response) {
-                    $location.url("/user/" + vm.userId + "/website/" + response._id + "/page");
+                    $location.url("/user/" + vm.userId + "/website/" + response.data._id + "/page");
                 },
                 function (error) {
                     $mdToast.show(

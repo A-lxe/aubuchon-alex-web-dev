@@ -11,7 +11,7 @@
             },
             function (error) {
                 console.log("Could not load website. Error: " + error.data.error);
-                $location("/user/" + vm.userId + "/website");
+                $location.url("/user/" + vm.userId + "/website");
             }
         );
         Page.findPagesByWebsiteId(vm.websiteId).then(

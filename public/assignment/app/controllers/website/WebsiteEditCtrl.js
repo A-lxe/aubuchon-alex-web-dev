@@ -15,7 +15,8 @@
             var newSite = vm.website;
             Website.updateWebsite(vm.websiteId, newSite).then(
                 function (response) {
-                    $location.url("/user/" + vm.userId + "/website/" + response.data._id + "/page");
+                    console.log(JSON.stringify(response));
+                    $location.url("/user/" + vm.userId + "/website/");
                 },
                 function (error) {
                     $mdToast.show(

@@ -7,8 +7,9 @@ module.exports = (function() {
         firstName: String,
         lastName: String,
         email: String,
+        phone: String,
+        websites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Website' }],
         dateCreated: {type: Date, default: Date.now},
-        dateUpdated: Date
     }, {collection: "assignment.user"});
 
     return UserSchema;

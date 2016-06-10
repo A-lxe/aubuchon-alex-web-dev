@@ -1,100 +1,85 @@
-module.exports = function(app) {
+module.exports = function(app, models) {
     app.post('/api/user/:userId/website', createWebsite);
     app.get('/api/user/:userId/website', findAllWebsitesForUser);
     app.get('/api/website/:websiteId', findWebsiteById);
     app.put('/api/website/:websiteId', updateWebsite);
     app.delete('/api/website/:websiteId', deleteWebsite);
 
-    var websites = [
-        { "_id": "123", "name": "Facebook",    "developerId": "456" },
-        { "_id": "234", "name": "Tweeter",     "developerId": "456" },
-        { "_id": "456", "name": "Gizmodo",     "developerId": "456" },
-        { "_id": "567", "name": "Tic Tac Toe", "developerId": "123" },
-        { "_id": "678", "name": "Checkers",    "developerId": "123" },
-        { "_id": "789", "name": "Chess",       "developerId": "234" }
-    ];
+    var Website = models.websiteModel;
 
     function createWebsite(req, res) {
-        var newWebsite = req.body
-        var userId = req.params.userId;
-        if(websiteWithName(userId, newWebsite.name)) {
-            res.status(400).json({error: "Website " + newWebsite.name + " already exists."});
-            return;
-        }
-        newWebsite._id = newId();
-        newWebsite.developerId = userId;
-        newWebsite.description = newWebsite.description || "";
-        websites.push(newWebsite);
-        res.json(newWebsite);
+        var newWebsite = req.body;
+        var user = req.params.userId;
+        Website.createWebsiteForUser(user, newWebsite).then(
+            function(response) {
+                console.log(JSON.stringify(response));
+                res.json(response);
+            },
+            function(error) {
+                res.status(400).json({error: error});
+            }
+        )
     }
 
+
     function findAllWebsitesForUser(req, res) {
-        var userId = req.params.userId;
-        var out = [];
-        for(i in websites) {
-            if(websites[i].developerId == userId) {
-                out.push(websites[i]);
+        var id = req.params.userId;
+
+        Website.findAllWebsitesForUser(id).then(
+            function(response) {
+                if(response) {
+                    res.json(response);
+                } else {
+                    res.status(404).json({error: error});
+                }
+            },
+            function(error) {
+                res.status(404).json({error: error});
             }
-        }
-        res.json(out);
+        )
     }
 
     function findWebsiteById(req, res) {
         var id = req.params.websiteId;
-        for(i in websites) {
-            if(websites[i]._id == id) {
-                res.json(websites[i]);
-                return;
+
+        Website.findWebsiteById(id).then(
+            function(response) {
+                if(response) {
+                    res.json(response);
+                } else {
+                    res.status(404).json({error: "Website with ID: " + id + " not found."});
+                }
+            },
+            function(error) {
+                res.status(404).json({error: error});
             }
-        }
-        res.status(404).json({error: "Website with ID: " + id + " not found."});
+        )
     }
 
     function updateWebsite(req, res) {
         var id = req.params.websiteId;
         var website = req.body;
-        for(i in websites) {
-            if(websites[i]._id == id) {
-                var old = websites[i];
-                websites[i] = {
-                    _id : id,
-                    name : website.name || old.name,
-                    description : website.description || old.description,
-                    developerId : website.developerId || old.developerId
-                }
-                res.json(websites[i]);
-                return;
+
+        Website.updateWebsite(id, website).then(
+            function(response) {
+                res.json(response);
+            },
+            function(error) {
+                res.status(404).json({error: "Website with ID: " + id + " not found."});
             }
-        }
-        res.status(404).json({error: "Website with ID: " + id + " not found."});
+        )
     }
 
     function deleteWebsite(req, res) {
         var id = req.params.websiteId;
-        for(i in websites) {
-            if(websites[i]._id == id) {
-                websites.splice(i, 1);
-                res.end()
-                return;
-            }
-        }
-        res.status(404).json({error: "Website with ID: " + id + " not found."});
-    }
 
-    function newId() {
-        var temp = 0;
-        for(i in websites) {
-            temp = Math.max(websites[i]._id, temp);
-        }
-        return temp + 1;
-    }
-
-    function websiteWithName(name) {
-        for(i in websites) {
-            if(websites[i].name === name) {
-                return true;
+        Website.deleteWebsite(id).then(
+            function(response) {
+                res.json(response);
+            },
+            function(error) {
+                res.status(404).json({error: "Website with ID: " + id + " not found."});
             }
-        }
-        return false;
+        )
     }
 }
