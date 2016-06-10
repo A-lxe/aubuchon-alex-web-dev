@@ -30,7 +30,7 @@
             var newPage = vm.page;
             Page.updatePage(vm.pageId, newPage).then(
                 function (response) {
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + response.data._id + "/widget");
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/");
                 },
                 function (error) {
                     $mdToast.show(

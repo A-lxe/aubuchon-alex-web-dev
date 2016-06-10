@@ -15,7 +15,6 @@
             var newSite = vm.website;
             Website.updateWebsite(vm.websiteId, newSite).then(
                 function (response) {
-                    console.log(JSON.stringify(response));
                     $location.url("/user/" + vm.userId + "/website/");
                 },
                 function (error) {

@@ -12,7 +12,6 @@ module.exports = function(app, models) {
         var user = req.params.userId;
         Website.createWebsiteForUser(user, newWebsite).then(
             function(response) {
-                console.log(JSON.stringify(response));
                 res.json(response);
             },
             function(error) {

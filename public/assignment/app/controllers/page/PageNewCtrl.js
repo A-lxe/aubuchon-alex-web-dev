@@ -20,7 +20,6 @@
 
         vm.save = function () {
             var newPage = {
-                _id: -1,
                 name: vm.name,
                 title: vm.title,
                 description: vm.description,
@@ -28,7 +27,7 @@
             };
             Page.createPage(vm.websiteId, newPage).then(
                 function (response) {
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + response._id + "/widget");
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/");
                 },
                 function (error) {
                     $mdToast.show(

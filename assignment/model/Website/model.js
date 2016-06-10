@@ -14,7 +14,6 @@ module.exports = (function () {
     return api;
 
     function createWebsiteForUser(userId, website) {
-        console.log("yaddo");
         website._user = userId;
         return Website.create(website);
     }
