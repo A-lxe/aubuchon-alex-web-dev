@@ -41,7 +41,7 @@
         </md-toolbar>
         <md-content flex class="md-padding" layout="column">
             <div class="alxe-widget" ng-repeat="widget in ctrl.widgets"
-                 ng-switch="widget.widgetType">
+                 ng-switch="widget.type">
                 <div class="alxe-widget-menu" layout="row">
                     <md-button
                             ng-href="#/user/{{ctrl.userId}}/website/{{ctrl.websiteId}}/page/{{ctrl.pageId}}/widget/{{widget._id}}"
@@ -64,7 +64,7 @@
                          width="{{widget.width}}"
                          class="md-card-image">
                 </div>
-                <div ng-switch-when="YOUTUBE" layout="row"
+                <div class="alxe-widget-video" ng-switch-when="YOUTUBE" layout="row"
                      layout-align="center center">
                     <iframe ng-src="{{widget.url}}"
                             width="{{widget.width}}"

@@ -27,17 +27,17 @@
             var newWidget = {}
             switch (type) {
                 case "HEADER":
-                    newWidget.widgetType = "HEADER";
+                    newWidget.type = "HEADER";
                     newWidget.text = "Header";
                     newWidget.size = 1;
                     break;
                 case "IMAGE":
-                    newWidget.widgetType = "IMAGE";
+                    newWidget.type = "IMAGE";
                     newWidget.url = "";
                     newWidget.width = "100%";
                     break;
                 case "YOUTUBE":
-                    newWidget.widgetType = "YOUTUBE";
+                    newWidget.type = "YOUTUBE";
                     newWidget.url = "";
                     newWidget.width = "100%";
                     break;

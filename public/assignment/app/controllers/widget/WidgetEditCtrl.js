@@ -48,14 +48,14 @@
         };
 
         vm.delete = function () {
-            showDeleteConfirm(vm.widgetId, vm.widget.widgetType);
+            showDeleteConfirm(vm.widgetId, vm.widget.type);
         };
 
-        function showDeleteConfirm(widgetId, widgetType) {
+        function showDeleteConfirm(widgetId, type) {
             var confirm = $mdDialog.confirm()
-                .title('Delete ' + widgetType)
-                .textContent('Are you sure you want to delete this ' + widgetType + ' widget?')
-                .ariaLabel('Delete ' + widgetType)
+                .title('Delete ' + type)
+                .textContent('Are you sure you want to delete this ' + type + ' widget?')
+                .ariaLabel('Delete ' + type)
                 .ok('Please do it!')
                 .cancel('Sounds like a scam...');
             $mdDialog.show(confirm).then(function () {

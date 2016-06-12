@@ -9,6 +9,7 @@ module.exports = function (app, models) {
     app.delete('/api/widget/:widgetId', deleteWidget);
     app.post('/api/upload', upload.single('image'), uploadImage);
     
+    
     var Widget = models.widgetModel;
 
     function createWidget(req, res) {
@@ -30,12 +31,15 @@ module.exports = function (app, models) {
         Widget.findAllWidgetsForPage(id).then(
             function (response) {
                 if (response) {
+                    console.log("Output: " + JSON.stringify(response));
                     res.json(response);
                 } else {
+                    console.log("Output: " + JSON.stringify(response));
                     res.status(404).json({error: error});
                 }
             },
             function (error) {
+                console.log(JSON.stringify(error));
                 res.status(404).json({error: error});
             }
         )
