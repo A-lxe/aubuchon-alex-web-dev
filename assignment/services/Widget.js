@@ -8,7 +8,7 @@ module.exports = function (app, models) {
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
     app.post('/api/upload', upload.single('image'), uploadImage);
-    app.put('/page/:pageId/widget', reorderWidget);
+    app.put('/api/page/:pageId/widget', reorderWidget);
     
     
     var Widget = models.widgetModel;
