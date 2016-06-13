@@ -3,3 +3,5 @@ node_modules
 start-mongodb*
 MongoDBLogs
 push.bat
+
+public/assignment/uploads/*
