@@ -70,8 +70,8 @@
                             width="{{widget.width}}"
                             frameborder="0" allowfullscreen></iframe>
                 </div>
-                <div ng-switch-when="HTML" ng-bind-html="$sce.trustAsHtml(widget.text)">
-
+                <div ng-switch-when="HTML">
+                    <div ng-bind-html="ctrl.renderHtml(widget.text)"></div>
                 </div>
                 <div ng-switch-when="TEXT" class="alxe-widget-text">
                     <md-input-container>

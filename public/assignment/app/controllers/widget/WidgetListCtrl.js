@@ -1,5 +1,5 @@
 (function () {
-    function WidgetListCtrl(Widget, Page, Website, $routeParams, $mdDialog, $location) {
+    function WidgetListCtrl(Widget, Page, Website, $routeParams, $mdDialog, $location, $sce) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
@@ -34,6 +34,12 @@
 
         vm.delete = function (widgetId, type) {
             showDeleteConfirm(widgetId, type);
+        };
+
+        vm.renderHtml = function(html)
+        {
+            var tmp = $sce.trustAsHtml(html);
+            return tmp;
         };
 
         function showDeleteConfirm(widgetId, type) {
@@ -71,5 +77,5 @@
     }
 
     angular.module('App')
-        .controller('WidgetListCtrl', ['Widget', 'Page', 'Website', '$routeParams', '$mdDialog', '$location', WidgetListCtrl])
+        .controller('WidgetListCtrl', ['Widget', 'Page', 'Website', '$routeParams', '$mdDialog', '$location', '$sce', WidgetListCtrl])
 })();
