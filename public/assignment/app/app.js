@@ -3,6 +3,7 @@
         'ngMaterial',
         'ngRoute',
         'ngFileUpload',
-        'textAngular']);
+        'textAngular',
+        'ui.sortable']);
 })();
 

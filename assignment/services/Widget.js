@@ -8,6 +8,7 @@ module.exports = function (app, models) {
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
     app.post('/api/upload', upload.single('image'), uploadImage);
+    app.put('/page/:pageId/widget', reorderWidget);
     
     
     var Widget = models.widgetModel;
@@ -102,5 +103,20 @@ module.exports = function (app, models) {
         res.json({
             path: './uploads/' + filename
         })
+    }
+    
+    function reorderWidget(req, res) {
+        var pageId = req.params.pageId;
+        var start = req.query.start;
+        var end = req.query.end;
+        
+        Widget.reorderWidget(pageId, start, end).then(
+            function (response) {
+                res.json(response);
+            },
+            function (error) {
+                res.status(404).json({error: "Widget with ID: " + id + " not found."});
+            }
+        );
     }
 }

@@ -10,7 +10,8 @@ module.exports = (function () {
         findWidgetById: findWidgetById,
         findAllWidgetsForPage: findAllWidgetsForPage,
         updateWidget: updateWidget,
-        deleteWidget: deleteWidget
+        deleteWidget: deleteWidget,
+        reorderWidget: reorderWidget
     };
     return api;
 
@@ -164,6 +165,30 @@ module.exports = (function () {
     }
 
     function reorderWidget(pageId, start, end) {
+        return Page.findById(pageId).then(
+            function (response) {
+                var widget = response.widgets[start];
+                response.widgets.splice(start,1);
+                response.widgets.splice(end,0,widget);
+                Page.update(
+                    {_id: pageId},
+                    {
+                        $set: {
+                            widgets: response.widgets
+                        }
+                    }).then(
+                    function (response) {
+                        resolve(response);
+                    },
+                    function (error) {
+                        reject(response);
 
+                    }
+                );
+            },
+            function (error) {
+                reject(error);
+            }
+        );
     }
 })();

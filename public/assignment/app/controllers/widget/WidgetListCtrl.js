@@ -36,10 +36,17 @@
             showDeleteConfirm(widgetId, type);
         };
 
-        vm.renderHtml = function(html)
-        {
+        vm.renderHtml = function (html) {
             var tmp = $sce.trustAsHtml(html);
             return tmp;
+        };
+
+        vm.sortableOptions = {
+            handle: '> .alxe-widget-menu',
+            axis: 'y',
+            stop: function(e, ui) {
+                Widget.reorderWidget(vm.pageId, ui.item.sortable.index, ui.item.sortable.dropindex);
+            }
         };
 
         function showDeleteConfirm(widgetId, type) {
