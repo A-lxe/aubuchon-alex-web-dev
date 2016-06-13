@@ -28,7 +28,7 @@
 
         function reorderWidget(pageId, start, end) {
             var url = "/api/page/" + pageId + "/widget?start=" + start + "&end=" + end;
-            return $http.put(url);
+            return $http.put(url, {});
         }
         
         return {

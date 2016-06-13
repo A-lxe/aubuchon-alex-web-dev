@@ -110,12 +110,17 @@ module.exports = function (app, models) {
         var start = req.query.start;
         var end = req.query.end;
         
+        if(start == 'undefined' || end == 'undefined') {
+            res.status(404).json({error: "Error moving widget."});
+            return;
+        }
+        
         Widget.reorderWidget(pageId, start, end).then(
             function (response) {
                 res.json(response);
             },
             function (error) {
-                res.status(404).json({error: "Widget with ID: " + id + " not found."});
+                res.status(404).json({error: "Error moving widget."});
             }
         );
     }
