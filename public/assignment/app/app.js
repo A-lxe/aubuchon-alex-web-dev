@@ -1,7 +1,8 @@
-(function() {
+(function () {
     angular.module('App', [
         'ngMaterial',
         'ngRoute',
-        'ngFileUpload']);
+        'ngFileUpload',
+        'textAngular']);
 })();
 

@@ -65,3 +65,7 @@ https://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php*/
 .alxe-list md-list-item {
   height:50px;
 }
+
+.alxe-widget-text md-input-container {
+  width:100%;
+}

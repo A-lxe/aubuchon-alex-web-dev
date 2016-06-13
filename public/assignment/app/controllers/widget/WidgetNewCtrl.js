@@ -41,6 +41,15 @@
                     newWidget.url = "";
                     newWidget.width = "100%";
                     break;
+                case "HTML":
+                    newWidget.type = "HTML";
+                    break;
+                case "TEXT":
+                    newWidget.type = "TEXT";
+                    newWidget.rows = 1;
+                    newWidget.formatted = false;
+                    newWidget.placeholder = "";
+                    break;
                 default:
                     throwError();
                     return;

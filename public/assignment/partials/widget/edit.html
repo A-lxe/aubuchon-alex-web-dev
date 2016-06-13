@@ -49,6 +49,12 @@
                 <div ng-switch-when="YOUTUBE">
                     <div ng-include="'partials/widget/edit/video.html'"></div>
                 </div>
+                <div ng-switch-when="HTML">
+                    <div ng-include="'partials/widget/edit/html.html'"></div>
+                </div>
+                <div ng-switch-when="TEXT">
+                    <div ng-include="'partials/widget/edit/text.html'"></div>
+                </div>
                 <md-button type="submit" class="md-primary md-raised alxe-button-wide">
                     Save
                 </md-button>
