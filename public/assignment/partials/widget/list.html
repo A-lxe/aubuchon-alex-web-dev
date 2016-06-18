@@ -40,36 +40,53 @@
             </div>
         </md-toolbar>
         <md-content flex class="md-padding" layout="column">
-            <div class="alxe-widget" ng-repeat="widget in ctrl.widgets"
-                 ng-switch="widget.widgetType">
-                <div class="alxe-widget-menu" layout="row">
-                    <md-button
-                            ng-href="#/user/{{ctrl.userId}}/website/{{ctrl.websiteId}}/page/{{ctrl.pageId}}/widget/{{widget._id}}"
-                            class="md-icon-button">
-                        <md-icon>settings</md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button">
-                        <md-icon>drag_handle</md-icon>
-                    </md-button>
-                </div>
-                <div ng-switch-when="HEADER" ng-switch="widget.size">
-                    <h1 ng-switch-default>{{widget.text}}</h1>
-                    <h2 ng-switch-when="2">{{widget.text}}</h2>
-                    <h3 ng-switch-when="3">{{widget.text}}</h3>
-                    <h4 ng-switch-when="4">{{widget.text}}</h4>
-                    <h5 ng-switch-when="5">{{widget.text}}</h5>
-                </div>
-                <div ng-switch-when="IMAGE" layout="row" layout-align="center center">
-                    <img ng-src="{{widget.url}}"
-                         width="{{widget.width}}"
-                         class="md-card-image">
-                </div>
-                <div ng-switch-when="YOUTUBE" layout="row"
-                     layout-align="center center">
-                    <iframe ng-src="{{widget.url}}"
-                            width="{{widget.width}}"
-                            frameborder="0" allowfullscreen></iframe>
-                </div>
+            <div>
+                <ul class="alxe-widget-list" ui-sortable="ctrl.sortableOptions" ng-model="ctrl.widgets">
+                    <li class="alxe-widget" ng-repeat="widget in ctrl.widgets"
+                        ng-switch="widget.type">
+                        <div class="alxe-widget-menu" layout="row">
+                            <md-button
+                                    ng-href="#/user/{{ctrl.userId}}/website/{{ctrl.websiteId}}/page/{{ctrl.pageId}}/widget/{{widget._id}}"
+                                    class="md-icon-button">
+                                <md-icon>settings</md-icon>
+                            </md-button>
+                            <md-icon>drag_handle</md-icon>
+                        </div>
+                        <div ng-switch-when="HEADER" ng-switch="widget.size">
+                            <h1 ng-switch-default>{{widget.text}}</h1>
+                            <h2 ng-switch-when="2">{{widget.text}}</h2>
+                            <h3 ng-switch-when="3">{{widget.text}}</h3>
+                            <h4 ng-switch-when="4">{{widget.text}}</h4>
+                            <h5 ng-switch-when="5">{{widget.text}}</h5>
+                        </div>
+                        <div ng-switch-when="IMAGE" layout="row" layout-align="center center">
+                            <img ng-src="{{widget.url}}"
+                                 width="{{widget.width}}"
+                                 class="md-card-image">
+                        </div>
+                        <div class="alxe-widget-video" ng-switch-when="YOUTUBE" layout="row"
+                             layout-align="center center">
+                            <iframe ng-src="{{widget.url}}"
+                                    width="{{widget.width}}"
+                                    frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div ng-switch-when="HTML">
+                            <div ng-bind-html="ctrl.renderHtml(widget.text)"></div>
+                        </div>
+                        <div ng-switch-when="TEXT" class="alxe-widget-text">
+                            <md-input-container>
+                                <label></label>
+                                <div ng-if="widget.formatted" text-angular
+                                     ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],['indent','outdent'],['html']]"
+                                     ng-model="widget.text"></div>
+                                <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+                                       placeholder="{{widget.placeholder}}"/>
+                        <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                                  rows="{{widget.rows}}" placeholder="{{widget.placeholder}}">{{widget.text}}</textarea>
+                            </md-input-container>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </md-content>
 </div>

@@ -30,12 +30,12 @@
                     </md-menu-content>
                 </md-menu>
                 <h1 class="md-headline">
-                    <span>{{ctrl.websiteName}} > {{ctrl.pageName}} > {{ctrl.widget.widgetType}}</span>
+                    <span>{{ctrl.websiteName}} > {{ctrl.pageName}} > {{ctrl.widget.type}}</span>
                 </h1>
                 <span flex></span>
             </div>
         </md-toolbar>
-        <md-content flex class="md-padding" ng-switch="ctrl.widget.widgetType">
+        <md-content flex class="md-padding" ng-switch="ctrl.widget.type">
             <form name="header" ng-submit="ctrl.save()">
                 <md-button class="md-warn md-raised alxe-button-wide" ng-click="ctrl.delete()">
                     Delete
@@ -48,6 +48,12 @@
                 </div>
                 <div ng-switch-when="YOUTUBE">
                     <div ng-include="'partials/widget/edit/video.html'"></div>
+                </div>
+                <div ng-switch-when="HTML">
+                    <div ng-include="'partials/widget/edit/html.html'"></div>
+                </div>
+                <div ng-switch-when="TEXT">
+                    <div ng-include="'partials/widget/edit/text.html'"></div>
                 </div>
                 <md-button type="submit" class="md-primary md-raised alxe-button-wide">
                     Save

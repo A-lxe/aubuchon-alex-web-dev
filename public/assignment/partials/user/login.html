@@ -4,11 +4,17 @@
         <form name="login" ng-submit="ctrl.login()">
             <md-input-container class="md-block">
                 <label>Username</label>
-                <input type="text" required md-no-asterisk name="username" ng-model="ctrl.username">
+                <input required type="text" required md-no-asterisk name="username" ng-model="ctrl.username">
+                <div ng-messages="login.username.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Password</label>
-                <input type="password" required md-no-asterisk name="password" ng-model="ctrl.password">
+                <input required type="password" required md-no-asterisk name="password" ng-model="ctrl.password">
+                <div ng-messages="login.password.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
             </md-input-container>
             <md-button type="submit" class="md-primary md-raised alxe-button-wide">Login</md-button>
             <md-button class="md-accent md-raised alxe-button-wide" ng-href="#/register">Register</md-button>

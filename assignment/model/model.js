@@ -17,13 +17,13 @@ module.exports = (function() {
     var userModel = require("./User/model.js");
     var websiteModel = require("./Website/model.js");
     var pageModel = require("./Page/model.js");
-    //var widgetModel = require("./Widget/model.js");
+    var widgetModel = require("./Widget/model.js");
 
     var models = {
         userModel: userModel,
         websiteModel: websiteModel,
         pageModel: pageModel,
- //       widgetModel: widgetModel
+        widgetModel: widgetModel
     };
 
     return models;

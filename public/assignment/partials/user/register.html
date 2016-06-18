@@ -6,18 +6,21 @@
                 <label>Username</label>
                 <input type="text" required md-no-asterisk name="username" ng-model="ctrl.username"
                        ng-blur="ctrl.validateUsername()">
-                <div ng-messages ng-show="ctrl.usernameWarning">
-                    <div ng-message>{{ctrl.usernameWarning}}</div>
+                <div ng-messages="register.username.$error">
+                    <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Password</label>
-                <input type="password" required md-no-asterisk name="password"
+                <input required type="password" required md-no-asterisk name="password"
                        ng-model="ctrl.password">
+                <div ng-messages="register.password.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Confirm Password</label>
-                <input type="password" required md-no-asterisk name="password-confirm"
+                <input required type="password" required md-no-asterisk name="password-confirm"
                        ng-model="ctrl.passwordConfirm" ng-blur="ctrl.validatePassword()">
                 <div ng-messages ng-show="ctrl.passwordWarning">
                     <div ng-message>{{ctrl.passwordWarning}}</div>

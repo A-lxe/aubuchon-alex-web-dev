@@ -1,5 +1,5 @@
 (function () {
-    function WidgetListCtrl(Widget, Page, Website, $routeParams, $mdDialog, $location) {
+    function WidgetListCtrl(Widget, Page, Website, $routeParams, $mdDialog, $location, $sce) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
@@ -9,7 +9,7 @@
             },
             function (error) {
                 console.log("Could not load website. Error: " + error.data.error);
-                $location("/user/" + vm.userId + "/website");
+                $location.url("/user/" + vm.userId + "/website");
             }
         );
         vm.pageId = $routeParams["pid"];
@@ -19,7 +19,7 @@
             },
             function (error) {
                 console.log("Could not load page. Error: " + error.data.error);
-                $location("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
             }
         );
         Widget.findWidgetsByPageId(vm.pageId).then(
@@ -28,7 +28,7 @@
             },
             function (error) {
                 console.log("Could not load widgets. Error: " + error.data.error);
-                $location("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
             }
         );
 
@@ -36,11 +36,24 @@
             showDeleteConfirm(widgetId, type);
         };
 
-        function showDeleteConfirm(widgetId, widgetType) {
+        vm.renderHtml = function (html) {
+            var tmp = $sce.trustAsHtml(html);
+            return tmp;
+        };
+
+        vm.sortableOptions = {
+            handle: '> .alxe-widget-menu',
+            axis: 'y',
+            stop: function(e, ui) {
+                Widget.reorderWidget(vm.pageId, ui.item.sortable.index, ui.item.sortable.dropindex);
+            }
+        };
+
+        function showDeleteConfirm(widgetId, type) {
             var confirm = $mdDialog.confirm()
-                .title('Delete ' + widgetType)
-                .textContent('Are you sure you want to delete this ' + widgetType + ' widget?')
-                .ariaLabel('Delete ' + widgetType)
+                .title('Delete ' + type)
+                .textContent('Are you sure you want to delete this ' + type + ' widget?')
+                .ariaLabel('Delete ' + type)
                 .ok('Please do it!')
                 .cancel('Sounds like a scam...');
             $mdDialog.show(confirm).then(function () {
@@ -71,5 +84,5 @@
     }
 
     angular.module('App')
-        .controller('WidgetListCtrl', ['Widget', 'Page', 'Website', '$routeParams', '$mdDialog', '$location', WidgetListCtrl])
+        .controller('WidgetListCtrl', ['Widget', 'Page', 'Website', '$routeParams', '$mdDialog', '$location', '$sce', WidgetListCtrl])
 })();

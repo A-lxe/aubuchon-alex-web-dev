@@ -3,5 +3,5 @@ module.exports = function(app) {
     require("./services/User.js")(app, models);
     require("./services/Website.js")(app, models);
     require("./services/Page.js")(app, models);
-    require("./services/Widget.js")(app);
+    require("./services/Widget.js")(app, models);
 };
