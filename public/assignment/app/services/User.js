@@ -1,5 +1,26 @@
 (function() {
     function User($http) {
+
+        function login(user) {
+            var user = {
+                username: user.username,
+                password: user.password
+            };
+            return $http.post("/api/login", user);
+        }
+
+        function logout() {
+            return $http.post("/api/logout");
+        }
+
+        function register(user) {
+            var user = {
+                username: user.username,
+                password: user.password
+            };
+            return $http.post("/api/register", user);
+        }
+
         function createUser(user) {
             var url = "/api/user";
             var user = {
@@ -35,6 +56,9 @@
         }
 
         return {
+            login: login,
+            logout: logout,
+            register: register,
             createUser: createUser,
             findUserById: findUserById,
             findUserByCredentials: findUserByCredentials,

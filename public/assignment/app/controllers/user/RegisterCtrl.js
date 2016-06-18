@@ -1,5 +1,5 @@
 (function () {
-    function RegisterCtrl(User, $location, $mdToast) {
+    function RegisterCtrl(User, $location, $mdToast, $rootScope) {
         var vm = this;
         vm.username = "";
         vm.password = "";
@@ -40,22 +40,26 @@
                 lastName: "",
                 email: ""
             };
-            User.createUser(temp).then(
-                function (response) {
-                    $location.url('/user/' + response.data._id);
-                },
-                function (error) {
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .textContent('User creation failed. Error:' + error.data.error)
-                            .hideDelay(3000)
-                    );
-                }
-            );
+            User
+                .register(temp)
+                .then(
+                    function (response) {
+                        var user = response.data;
+                        $rootScope.currentUser = user;
+                        $location.url("/user/" + user._id);
+                    },
+                    function (error) {
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('User creation failed. Error:' + error.data.error)
+                                .hideDelay(3000)
+                        );
+                    }
+                );
         }
     }
 
     angular.module('App')
-        .controller('RegisterCtrl', ['User', '$location', "$mdToast", RegisterCtrl])
+        .controller('RegisterCtrl', ['User', '$location', "$mdToast", "$rootScope", RegisterCtrl])
 })
 ();

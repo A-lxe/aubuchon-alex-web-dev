@@ -21,7 +21,8 @@
                 .when('/user/:uid', {
                     templateUrl: 'partials/user/profile.html',
                     controller: 'ProfileCtrl',
-                    controllerAs: 'ctrl'
+                    controllerAs: 'ctrl',
+                    resolve: {loggedin: checkLoggedin}
                 })
                 .when('/user/:uid/website', {
                     templateUrl: 'partials/website/list.html',
@@ -72,4 +73,19 @@
                     redirectTo: '/login'
                 });
         });
+    
+    var checkLoggedin = function ($q, $timeout, $http, $location, $rootScope) {
+        var deferred = $q.defer();
+        $http.get('/api/loggedin').success(function (user) {
+            $rootScope.errorMessage = null;
+            if (user !== '0') {
+                $rootScope.currentUser = user;
+                deferred.resolve();
+            } else {
+                deferred.reject();
+                $location.url('/');
+            }
+        });
+        return deferred.promise;
+    };
 })();
