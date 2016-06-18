@@ -13,7 +13,6 @@
                     function (response) {
                         var user = response.data;
                         $rootScope.currentUser = user;
-                        $rootScope.logout = logout;
                         $location.url("/user/" + user._id);
                     },
                     function (error) {
@@ -25,16 +24,7 @@
                     }
                 );
         }
-
-        function logout() {
-            User
-                .logout()
-                .then(
-                    function(response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/");
-                    });
-        }
+        
     }
 
     angular.module('App')

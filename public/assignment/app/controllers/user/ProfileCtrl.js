@@ -1,12 +1,12 @@
 (function () {
-    function ProfileCtrl(User, $routeParams, $location, $mdToast) {
+    function ProfileCtrl(User, $routeParams, $location, $mdToast, $rootScope) {
         var vm = this;
-        vm.userId = $routeParams["uid"];
+        vm.userId = $routeParams["uid"]
         User.findUserById(vm.userId).then(
-            function(response) {
+            function (response) {
                 vm.user = response.data;
             },
-            function(error) {
+            function (error) {
                 console.log("User could not be loaded. Error: " + error.data.error);
                 $location.url("/login");
             }
@@ -14,20 +14,20 @@
 
         vm.changes = false;
 
-        vm.checkChanged = function() {
+        vm.checkChanged = function () {
             vm.changes = true;
         }
 
         vm.update = function () {
             User.updateUser(vm.userId, angular.copy(vm.user)).then(
-                function(response) {
+                function (response) {
                     $mdToast.show(
                         $mdToast.simple()
                             .textContent('Save successful!')
                             .hideDelay(3000)
                     );
                 },
-                function(error) {
+                function (error) {
                     $mdToast.show(
                         $mdToast.simple()
                             .textContent('Save failed. Error: ' + error.data.error)
@@ -40,6 +40,6 @@
     }
 
     angular.module('App')
-        .controller('ProfileCtrl', ['User', '$routeParams', '$location', '$mdToast', ProfileCtrl])
+        .controller('ProfileCtrl', ['User', '$routeParams', '$location', '$mdToast', "$rootScope", ProfileCtrl])
 })
 ();
