@@ -22,7 +22,7 @@
                         </md-menu-item>
                         <md-menu-divider></md-menu-divider>
                         <md-menu-item>
-                            <md-button class="md-warn" href="#/login">
+                            <md-button class="md-warn" ng-click="$root.logout()">
                                 <md-icon>close</md-icon>
                                 Logout
                             </md-button>
@@ -65,7 +65,8 @@
                            ng-href="#/user/{{ctrl.user._id}}/website">
                     Websites
                 </md-button>
-                <md-button class="md-warn alxe-button-wide" href="#/login">Logout</md-button>
+                <md-button class="md-warn alxe-button-wide" ng-click="$root.logout()">Logout
+                </md-button>
             </form>
         </md-content>
     </md-content>
