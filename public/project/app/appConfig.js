@@ -9,7 +9,9 @@
         .config(function ($routeProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: 'partials/home/arcus.html'
+                    templateUrl: 'partials/home/arcus.html',
+                    controller: 'ArcusCtrl',
+                    controllerAs: 'ctrl'
                 })
                 .otherwise({
                     redirectTo: '/'

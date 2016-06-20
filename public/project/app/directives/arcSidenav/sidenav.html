@@ -15,6 +15,14 @@
                     <md-icon>{{link.icon}}</md-icon>
                 </md-list-item>
             </md-list>
+            <hr/>
+            <md-list class="arc-list">
+                <md-list-item ng-repeat="link in profileEntries" ng-href="{{link.url}}">
+                    {{link.name}}
+                    <span flex></span>
+                    <md-icon>{{link.icon}}</md-icon>
+                </md-list-item>
+            </md-list>
         </md-content>
     </div>
 </md-sidenav>

@@ -11,10 +11,23 @@
     <link rel="stylesheet" href="css/arc-style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700,500' rel='stylesheet' type='text/css'>
 </head>
 <body class="arc-body" ng-app="Arcus" ng-cloak>
 
-<div class="arc-body" ng-view></div>
+<div class="arc-body" layout="row">
+    <arc-sidenav></arc-sidenav>
+    <div layout="column" flex>
+        <arc-menu title="'Home'"></arc-menu>
+        <md-content layout="column" flex>
+            <div ng-view></div>
+            <arc-footing flex="noshrink" layout="column" layout-align="end center"></arc-footing>
+        </md-content>
+    </div>
+</div>
+
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
@@ -35,10 +48,11 @@
 <!-- Services -->
 
 <!-- Controllers -->
-
+<script src="app/controllers/home/ArcusCtrl.js"></script>
 <!-- Directives -->
 <script src="app/directives/arcMenu/arcMenu.js"></script>
 <script src="app/directives/arcSidenav/arcSidenav.js"></script>
+<script src="app/directives/arcFooting/arcFooting.js"></script>
 
 
 </body>

@@ -1,10 +1,30 @@
-<div class="arc-body" layout="row">
-    <arc-sidenav></arc-sidenav>
-    <div layout="column" flex>
-        <arc-menu title="'Home'"></arc-menu>
-        <md-content layout="column" layout-padding flex>
-            <h1 class="md-display-4">Arcus</h1>
-            <h2 class="md-headline">Linking discord bots to humanity.</h2>
-        </md-content>
+<div layout-padding>
+    <h1 class="md-display-4">Arcus</h1>
+    <h2 class="md-headline">Linking discord bots to humanity.</h2>
+    <div layout-lt-md="column" layout="row">
+        <div flex="50">
+            <p>Welcome! To the finest gathering of Discord bots you've ever seen (at least I <a
+                    ng-href="#/feedback">hope...</a>)!</p>
+            <p>Don't know what discord is? Well that's a right shame because Discord is
+                revolutionizing the way gamers communicate in and outside of the game. But don't
+                take that just from me, check out their
+                <a ng-href="https://discordapp.com/">site</a>!</p>
+            <p>Don't know what bots are? Well then it's your lucky day because you're in the perfect
+                place to find out! Basically, bots are discord users (you can see them online and
+                everything), but run by a computer. They listen in on your Discord server and wait
+                to be called upon by a human. Once that happens, they jump into action, doing
+                anything from bringing you the latest weather, to posting the dankest meme, to
+                playing a playlist of music for you in your voice channel.</p>
+        </div>
+        <div layout="column" flex="20">
+            <md-button class="md-raised arc-home-button arc-discord"
+                       ng-href="https://discordapp.com/">
+                <img height="40px" src="img/discord-logo.png"/>
+            </md-button>
+            <md-button class="md-raised arc-home-button"
+                       ng-href="#/bots">
+                Go to bots!
+            </md-button>
+        </div>
     </div>
 </div>

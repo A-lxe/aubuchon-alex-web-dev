@@ -13,6 +13,11 @@ arc-menu {
   position:relative;
 }
 
+arc-footing div{
+  border-top: 1px solid #dddddd;
+  width: 100%;
+}
+
 .arc-sidenav {
   max-width: 250px;
 }
@@ -23,4 +28,22 @@ arc-menu {
 
 .arc-list md-list-item {
   height:22px;
+}
+
+.arc-home-button {
+  width: 100%;
+}
+
+.arc-discord {
+  background-color: #7289DA !important;
+}
+
+.arc-discord:not([disabled]):hover {
+  background-color: #7289DA !important;
+  color: white;
+}
+
+.arc-discord[disabled] {
+  color : rgb(187, 187, 187);
+  background-color: rgba(230, 230, 229, 0.96);
 }
