@@ -1,0 +1,14 @@
+.arc-body {
+  width: 100%;
+  height: 100%;
+}
+
+arc-sidenav {
+  overflow:visible !important;
+  position:static;
+  z-index:10;
+}
+
+arc-menu {
+  position:relative;
+}
