@@ -12,3 +12,15 @@ arc-sidenav {
 arc-menu {
   position:relative;
 }
+
+.arc-sidenav {
+  max-width: 250px;
+}
+
+.arc-list {
+
+}
+
+.arc-list md-list-item {
+  height:22px;
+}

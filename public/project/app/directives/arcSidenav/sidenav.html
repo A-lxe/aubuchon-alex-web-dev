@@ -1,16 +1,20 @@
 <md-sidenav
-        class="md-sidenav-left"
+        class="md-sidenav-left arc-sidenav"
         md-component-id="main-sidenav"
         md-is-locked-open="$mdMedia('gt-sm')"
-        md-whiteframe="4"
-        flex>
-    <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Sidenav Left</h1>
-    </md-toolbar>
-    <md-content layout-padding>
-        <p>
-            This sidenav is locked open on your device. To go back to the default behavior,
-            narrow your display.
-        </p>
-    </md-content>
+        md-whiteframe="4">
+    <div flex="100">
+        <md-content role="navigation" flex>
+            <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">Arcus</h1>
+            </md-toolbar>
+            <md-list class="arc-list">
+                <md-list-item ng-repeat="link in entries" ng-href="{{link.url}}">
+                    {{link.name}}
+                    <span flex></span>
+                    <md-icon>{{link.icon}}</md-icon>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
 </md-sidenav>
