@@ -13,6 +13,9 @@
                     controller: 'ArcusCtrl',
                     controllerAs: 'ctrl'
                 })
+                .when('/feedback', {
+                    templateUrl: 'partials/home/feedback.html'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
