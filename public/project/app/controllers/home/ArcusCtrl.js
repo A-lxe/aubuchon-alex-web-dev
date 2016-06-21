@@ -3,7 +3,6 @@
         var vm = this;
 
         $rootScope.currentPageTitle = 'Home';
-        console.log("done");
     }
 
     angular.module('Arcus')

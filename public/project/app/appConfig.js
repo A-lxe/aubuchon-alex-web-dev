@@ -16,6 +16,11 @@
                 .when('/feedback', {
                     templateUrl: 'partials/home/feedback.html'
                 })
+                .when('/login', {
+                    templateUrl: 'partials/user/login.html',
+                    controller: 'LoginCtrl',
+                    controllerAs: 'ctrl'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
