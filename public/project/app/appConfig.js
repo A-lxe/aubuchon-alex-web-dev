@@ -21,6 +21,11 @@
                     controller: 'LoginCtrl',
                     controllerAs: 'ctrl'
                 })
+                .when('/profile', {
+                    templateUrl: 'partials/user/profile.html',
+                    controller: 'ProfileCtrl',
+                    controllerAs: 'ctrl'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
