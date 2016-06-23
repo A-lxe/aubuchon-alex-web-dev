@@ -13,6 +13,7 @@
         vm.login = login;
 
         function login() {
+            console.log('attempting log in');
             User
                 .login(vm.user)
                 .then(
@@ -22,7 +23,7 @@
                     function (error) {
                         $mdToast.show(
                             $mdToast.simple()
-                                .textContent('Could not log in. Error: ' + error.data.message)
+                                .textContent('Wrong username/password')
                                 .hideDelay(3000)
                         );
                     }

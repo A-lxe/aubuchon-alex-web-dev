@@ -20,6 +20,7 @@
                     } else {
                         $rootScope.currentUser = null;
                     }
+                    $rootScope.initializeSidenav();
                     return response;
                 }
             );
@@ -29,19 +30,19 @@
             return $http.post("/arcus/api/logout").then(
                 function (response) {
                     $rootScope.currentUser = null;
+                    $rootScope.initializeSidenav();
                     return response;
                 }
             );
         }
 
         function register(user) {
-            return create(user).then(
-                function (response) {
-                    user._id = response.data._id;
-                    login(user);
+            return $http.post("/arcus/api/register", user).then(
+                function(response) {
+                    response.data.password = user.password;
                     return response;
                 }
-            );
+            )
         }
 
         function checkSession() {

@@ -21,6 +21,9 @@
                     controller: 'LoginCtrl',
                     controllerAs: 'ctrl'
                 })
+                .when('/logout', {
+                    resolve: {logout: logoutNow}
+                })
                 .when('/profile', {
                     templateUrl: 'partials/user/profile.html',
                     controller: 'ProfileCtrl',
@@ -37,13 +40,11 @@
         })
         .run(checkLoggedin);
 
-    function checkLoggedin($http, $rootScope) {
-        console.log("Checking logged in...");
+    function checkLoggedin($http, $rootScope, $location) {
+        $rootScope.logout = logout($http, $rootScope, $location);
         return $http.get('/arcus/api/session').then(
             function (response) {
-                console.log("Logged in with " + JSON.stringify(response.data));
                 $rootScope.currentUser = response.data;
-                $rootScope.logout = logout;
             },
             function (error) {
                 console.log("Error checking session: " + JSON.stringify(error));
@@ -53,11 +54,25 @@
 
     function logout($http, $rootScope, $location) {
         return function () {
+            console.log("jankd");
+
             $http.post("/arcus/api/logout").then(
                 function (response) {
+                    console.log("jank");
                     $rootScope.currentUser = null;
+                    $rootScope.initializeSidenav();
                     $location.url("/");
                 });
         }
+    }
+
+    function logoutNow($http, $rootScope, $location) {
+        $http.post("/arcus/api/logout").then(
+            function (response) {
+                console.log("jank");
+                $rootScope.currentUser = null;
+                $rootScope.initializeSidenav();
+                $location.url("/");
+            });
     }
 })();

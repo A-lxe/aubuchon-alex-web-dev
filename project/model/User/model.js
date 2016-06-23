@@ -19,6 +19,9 @@ module.exports = (function () {
     }
 
     function create(user) {
+        if(!user.username) {
+            user.username = "`" + user.discord.username + "#" + user.discord.discriminator + Date.now();
+        }
         return User.create(user);
     }
 
@@ -31,9 +34,6 @@ module.exports = (function () {
     }
 
     function update(userId, newUser) {
-        console.log(JSON.stringify(newUser));
-        console.log(newUser.firstName);
-        console.log(userId);
         return User.update(
             {_id: userId},
             {

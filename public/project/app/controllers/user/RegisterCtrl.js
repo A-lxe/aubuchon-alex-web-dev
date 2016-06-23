@@ -23,7 +23,18 @@
                 .register(vm.user)
                 .then(
                     function (response) {
-                        $location.url('/profile');
+                        User.login(vm.user).then(
+                            function(response) {
+                                $location.url('/profile');
+                            },
+                            function(error) {
+                                $mdToast.show(
+                                    $mdToast.simple()
+                                        .textContent('Could not log in. Error: ' + error.data.message)
+                                        .hideDelay(3000)
+                                );
+                            }
+                        );
                     },
                     function (error) {
                         $mdToast.show(

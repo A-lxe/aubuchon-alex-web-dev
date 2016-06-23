@@ -14,17 +14,21 @@ angular.module('Arcus')
 
             $scope.entries.concat($rootScope.sidenavLinks);
 
-            if ($rootScope.currentUser) {
-                $scope.profileEntries = [
-                    {name: 'Profile', url: '#/profile', icon: 'person'}
-                ]
-            }
-            else {
-                $scope.profileEntries = [
-                    {name: 'Login', url: '#/login', icon: ''},
-                    {name: 'Register', url: '#/register', icon: ''}
-                ]
-            }
+            $rootScope.initializeSidenav =  function() {
+                if ($rootScope.currentUser) {
+                    $scope.profileEntries = [
+                        {name: 'Profile', url: '#/profile', icon: 'person'},
+                        {name: 'Logout', url: '#/logout'}
+                    ]
+                }
+                else {
+                    $scope.profileEntries = [
+                        {name: 'Login', url: '#/login', icon: ''},
+                        {name: 'Register', url: '#/register', icon: ''}
+                    ]
+                }
+            };
+            $rootScope.initializeSidenav();
 
             $scope.closeNav = function () {
                 $mdSidenav('main-sidenav').close();

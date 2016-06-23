@@ -2,7 +2,7 @@
     <div layout="column" flex-gt-sm="30">
         <form name="profile" ng-submit="ctrl.update()">
             <h2 class="md-headline">User Info</h2>
-            <div layout="row" ng-if="ctrl.user.username">
+            <div layout="row" ng-if="!ctrl.user.discord.user">
                 <span>Username: </span>
                 <span>{{ctrl.user.username}}</span>
             </div>
@@ -27,7 +27,7 @@
                 <md-button flex="50" type="submit" class="md-accent md-raised">
                     Update
                 </md-button>
-                <md-button flex="50" class="md-warn" ng-click="$rootScope.logout()">
+                <md-button flex="50" class="md-warn" ng-click="logout()">
                     Logout
                 </md-button>
             </div>

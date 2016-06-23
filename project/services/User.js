@@ -56,15 +56,15 @@ module.exports = function (app, models) {
             .findByUsername(username)
             .then(
                 function (user) {
-                    if (user && bcrypt.compareSync(password, user.password)) {
+                    if (user && user.password && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     } else {
-                        return done(null, false);
+                        return done("Wrong username/password", null);
                     }
                 },
                 function (err) {
                     if (err) {
-                        return done(err);
+                        return done(err, null);
                     }
                 }
             );
@@ -119,13 +119,12 @@ module.exports = function (app, models) {
 
     function logout(req, res) {
         req.logOut();
-        res.send(200);
+        res.sendStatus(200);
     }
 
     function register(req, res) {
         var user = req.body;
         user.password = bcrypt.hashSync(user.password);
-        console.log(JSON.stringify(user));
         User
             .create(user)
             .then(
@@ -141,8 +140,9 @@ module.exports = function (app, models) {
                     }
                 },
                 function (error) {
-                    res.status(402);
-                    res.json({error: "Couldn't create user: " + error});
+                    res.status(400);
+                    console.log(error);
+                    res.json({message: "Username taken."});
                 }
             );
     }
