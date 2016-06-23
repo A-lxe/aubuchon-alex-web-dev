@@ -9,7 +9,7 @@
                 <h1 class="md-toolbar-tools">Arcus</h1>
             </md-toolbar>
             <md-list class="arc-list">
-                <md-list-item ng-repeat="link in entries" ng-href="{{link.url}}">
+                <md-list-item ng-repeat="link in entries" ng-click="closeNav()" ng-href="{{link.url}}">
                     {{link.name}}
                     <span flex></span>
                     <md-icon>{{link.icon}}</md-icon>
@@ -17,7 +17,7 @@
             </md-list>
             <hr/>
             <md-list class="arc-list">
-                <md-list-item ng-repeat="link in profileEntries" ng-href="{{link.url}}">
+                <md-list-item ng-repeat="link in profileEntries" ng-click="closeNav()" ng-href="{{link.url}}">
                     {{link.name}}
                     <span flex></span>
                     <md-icon>{{link.icon}}</md-icon>

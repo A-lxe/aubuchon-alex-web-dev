@@ -1,12 +1,12 @@
 angular.module('Arcus')
-    .directive('arcSidenav', function() {
+    .directive('arcSidenav', function () {
         return {
             restrict: 'E',
             templateUrl: 'app/directives/arcSidenav/sidenav.html',
             controller: ['$scope', '$rootScope', '$mdSidenav', ctrl]
         };
 
-        function ctrl($scope, $rootScope) {
+        function ctrl($scope, $rootScope, $mdSidenav) {
             $scope.entries = [
                 {name: 'Home', url: '#/', icon: 'home'},
                 {name: 'Discord Bots', url: '#/bots', icon: 'power'}
@@ -14,7 +14,7 @@ angular.module('Arcus')
 
             $scope.entries.concat($rootScope.sidenavLinks);
 
-            if($rootScope.loggedIn) {
+            if ($rootScope.currentUser) {
                 $scope.profileEntries = [
                     {name: 'Profile', url: '#/profile', icon: 'person'}
                 ]
@@ -24,6 +24,10 @@ angular.module('Arcus')
                     {name: 'Login', url: '#/login', icon: ''},
                     {name: 'Register', url: '#/register', icon: ''}
                 ]
+            }
+
+            $scope.closeNav = function () {
+                $mdSidenav('main-sidenav').close();
             }
 
             $scope.profileEntries.concat($rootScope.sidenavProfileLinks);

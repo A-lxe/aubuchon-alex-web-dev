@@ -6,10 +6,12 @@ module.exports = function (app, models) {
     var User = models.userModel;
     var bcrypt = require('bcrypt-nodejs');
 
+    var scopes = ['identify', 'email'];
     var discordConfig = {
         clientID: process.env.DISCORD_CLIENT_ID || "194693171354140672",
         clientSecret: process.env.DISCORD_CLIENT_SECRET || "7iBOp_4jCHnfJGq5iOaNzfMjFGoaug5N",
-        callbackURL: process.env.DISCORD_CALLBACK_URL || "http://127.0.0.1:3000/arcus/auth/discord/callback"
+        callbackURL: process.env.DISCORD_CALLBACK_URL || "http://127.0.0.1:3000/arcus/auth/discord/callback",
+        scope: scopes
     };
 
     app.post('/arcus/api/user', createUser);
@@ -20,9 +22,12 @@ module.exports = function (app, models) {
     app.post('/arcus/api/logout', logout);
     app.post('/arcus/api/register', register);
     app.get('/arcus/api/session', loggedin);
-    app.get('/arcus/auth/discord', passport.authenticate('discord', {scope: 'email'}));
+    app.get('/arcus/auth/discord', passport.authenticate('discord', {scope: scopes}));
     app.get('/arcus/auth/discord/callback',
-        passport.authenticate('discord'), discordLogin);
+        passport.authenticate('discord', {
+            successRedirect: '/project/index.html#/profile',
+            failureRedirect: '/project/index.html#/login'
+        }));
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
@@ -35,7 +40,7 @@ module.exports = function (app, models) {
 
     function deserializeUser(user, done) {
         User
-            .findUserById(user._id)
+            .findById(user._id)
             .then(
                 function (user) {
                     done(null, user);
@@ -66,40 +71,45 @@ module.exports = function (app, models) {
     }
 
     function discordStrategy(accessToken, refreshToken, profile, cb) {
-        User
-            .findByDiscordId(profile.id)
-            .then(
-                function (user) {
-                    if (user) {
-                        return cb(null, user);
-                    } else {
-                        return User.createUser(
-                            {
-                                discord: {
-                                    id: profile.id,
-                                    username: profile.username,
-                                    discriminator: profile.discriminator,
-                                    email: profile.email,
-                                    avatar: profile.avatar
+        new Promise(function (resolve, reject) {
+            User
+                .findByDiscordId(profile.id)
+                .then(
+                    function (user) {
+                        if (user) {
+                            resolve(user);
+                        } else {
+                            User.create(
+                                {
+                                    discord: {
+                                        id: profile.id,
+                                        username: profile.username,
+                                        discriminator: profile.discriminator,
+                                        email: profile.email,
+                                        avatar: profile.avatar
+                                    }
+                                }).then(
+                                function(user) {
+                                    resolve(user);
+                                },
+                                function(error) {
+                                    reject(error);
                                 }
-                            });
+                            );
+                        }
+                    },
+                    function(error) {
+                        reject(error);
                     }
-                },
-                function (err) {
-                    if (err) {
-                        return cb(err);
-                    }
-                }
-            ).then(
-            function (user) {
-                return cb(null, user);
+                )
+        }).then(
+            function (fulfilled) {
+                return cb(null, fulfilled);
+            },
+            function (error) {
+                return cb(error, null);
             }
-        );
-    }
-
-    function discordLogin(req, res) {
-        var user = req.user;
-        res.json(user);
+        )
     }
 
     function login(req, res) {

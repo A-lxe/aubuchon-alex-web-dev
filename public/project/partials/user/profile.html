@@ -3,9 +3,9 @@
         <h1 class="md-display-3">Profile</h1>
         <form name="profile" ng-submit="ctrl.update()">
             <h2 class="md-headline">User Info</h2>
-            <div layout="row">
+            <div layout="row" ng-if="ctrl.user.username">
                 <span>Username: </span>
-                <span ng-model="ctrl.user.username"></span>
+                <span>{{ctrl.user.username}}</span>
             </div>
             <div layout="row">
                 <md-input-container class="md-block">
@@ -20,17 +20,15 @@
                 </md-input-container>
             </div>
             <h2 class="md-headline">Discord Info</h2>
-            <div layout="row">
-                <span>Username: </span>
-                <span ng-model="ctrl.user.discord.username"></span>
-                <span>Discriminator: </span>
-                <span ng-model="ctrl.user.discord.discriminator"></span>
+            <div layout="row" layout-align="center center">
+                    <span>{{ctrl.user.discord.username}} #{{ctrl.user.discord.discriminator}}</span>
             </div>
+            <br/>
             <div layout="row">
                 <md-button flex="50" type="submit" class="md-accent md-raised">
                     Update
                 </md-button>
-                <md-button flex="50" class="md-warn" ng-click="ctrl.logout()">
+                <md-button flex="50" class="md-warn" ng-click="$rootScope.logout()">
                     Logout
                 </md-button>
             </div>

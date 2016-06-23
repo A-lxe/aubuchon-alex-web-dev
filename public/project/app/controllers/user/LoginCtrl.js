@@ -1,6 +1,9 @@
 (function () {
-    function LoginCtrl(User, $scope, $rootScope, $mdToast) {
+    function LoginCtrl(User, $scope, $rootScope, $location, $mdToast) {
         var vm = this;
+        if($rootScope.currentUser) {
+            $location.url('/profile');
+        }
         vm.user = {
             username: '',
             password: ''
@@ -27,6 +30,6 @@
     }
 
     angular.module('Arcus')
-        .controller('LoginCtrl', ['User', '$scope', '$rootScope', '$mdToast', LoginCtrl])
+        .controller('LoginCtrl', ['User', '$scope', '$rootScope', '$location', '$mdToast', LoginCtrl])
 })
 ();

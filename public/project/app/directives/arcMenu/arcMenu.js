@@ -8,9 +8,7 @@ angular.module('Arcus')
 
         function ctrl($scope, $mdSidenav) {
             $scope.toggleSidenav = function() {
-                return $mdSidenav('main-sidenav')
-                    .toggle().then(function() {
-                });
+                $mdSidenav('main-sidenav').toggle();
             }
         }
     });

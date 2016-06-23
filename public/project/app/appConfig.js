@@ -29,32 +29,26 @@
                 .otherwise({
                     redirectTo: '/'
                 });
-        });
+        })
+        .run(checkLoggedin);
 
-    var checkLoggedin = function ($q, $timeout, $http, $location, $rootScope) {
-        var deferred = $q.defer();
-        $http.get('/api/loggedin').success(function (user) {
-            $rootScope.errorMessage = null;
-            if (!$rootScope.logout) {
-                $rootScope.logout = logout($http, $rootScope, $location);
+    function checkLoggedin($http, $rootScope) {
+        console.log("Checking logged in...");
+        return $http.get('/arcus/api/session').then(
+            function (response) {
+                console.log("Logged in with " + JSON.stringify(response.data));
+                $rootScope.currentUser = response.data;
+                $rootScope.logout = logout;
+            },
+            function (error) {
+                console.log("Error checking session: " + JSON.stringify(error));
             }
-            if (user) {
-                if (!$rootScope.currentUser || !($rootScope.currentUser._id == user._id)) {
-                    $rootScope.currentUser = user;
-                    $location.url($location.url() + "/" + user._id);
-                }
-                deferred.resolve();
-            } else {
-                $location.url('/');
-                deferred.reject();
-            }
-        });
-        return deferred.promise;
-    };
+        )
+    }
 
     function logout($http, $rootScope, $location) {
-        return function() {
-            $http.post("/api/logout").then(
+        return function () {
+            $http.post("/arcus/api/logout").then(
                 function (response) {
                     $rootScope.currentUser = null;
                     $location.url("/");
