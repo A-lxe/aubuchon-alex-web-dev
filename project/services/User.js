@@ -167,7 +167,7 @@ module.exports = function (app, models) {
     function findUserById(req, res) {
         var id = req.params.userId;
 
-        User.findUserById(id).then(
+        User.findById(id).then(
             function (response) {
                 if (response) {
                     res.json(response);
@@ -182,10 +182,10 @@ module.exports = function (app, models) {
     }
 
     function updateUser(req, res) {
-        var id = req.params.userId;
         var user = req.body;
+        var id = user._id;
 
-        User.updateUser(id, user).then(
+        User.update(id, user).then(
             function (response) {
                 res.json(response);
             },

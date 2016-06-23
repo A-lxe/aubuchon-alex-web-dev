@@ -9,9 +9,13 @@
         
         vm.update = function() {
             if(vm.user != $rootScope.currentUser) {
-                User.update(vm.user).then(
+                User.updateSingle(vm.user).then(
                     function(response) {
-                        vm.user = response.data;
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Saved!')
+                                .hideDelay(3000)
+                        );
                     },
                     function(error) {
                         $mdToast.show(
@@ -21,6 +25,18 @@
                         );
                     }
                 );
+                User.retrieveSingle($rootScope.currentUser._id).then(
+                    function(response) {
+                        $rootScope.currentUser = response.data;
+                    },
+                    function(error) {
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Could not retrieve. Error: ' + error.data.message)
+                                .hideDelay(3000)
+                        );
+                    }
+                )
             }
         }
     }

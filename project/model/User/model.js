@@ -26,13 +26,16 @@ module.exports = (function () {
     }
 
     function update(userId, newUser) {
+        console.log(JSON.stringify(newUser));
+        console.log(newUser.firstName);
+        console.log(userId);
         return User.update(
             {_id: userId},
             {
                 $set: {
-                    firstName: newUser.firstName,
-                    lastName: newUser.lastName,
-                    email: newUser.email,
+                    firstName: newUser.firstName || '',
+                    lastName: newUser.lastName || '',
+                    email: newUser.email || ''
                 }
             }
         );
