@@ -26,6 +26,11 @@
                     controller: 'ProfileCtrl',
                     controllerAs: 'ctrl'
                 })
+                .when('/register', {
+                    templateUrl: 'partials/user/register.html',
+                    controller: 'RegisterCtrl',
+                    controllerAs: 'ctrl'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
