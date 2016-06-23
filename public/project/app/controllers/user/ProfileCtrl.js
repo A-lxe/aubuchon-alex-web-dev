@@ -1,7 +1,9 @@
 (function () {
     function ProfileCtrl(User, $scope, $rootScope, $location, $mdToast) {
+        $rootScope.currentPageTitle = "Profile";
         var vm = this;
         vm.user = angular.copy($rootScope.currentUser);
+        
         
         if(!vm.user) {
             $location.url('/login');

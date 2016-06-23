@@ -2,7 +2,7 @@
     function ArcusCtrl($scope, $rootScope) {
         var vm = this;
 
-        $rootScope.currentPageTitle = 'Home';
+        $rootScope.currentPageTitle = 'Arcus';
     }
 
     angular.module('Arcus')

@@ -1,5 +1,6 @@
 (function () {
     function LoginCtrl(User, $scope, $rootScope, $location, $mdToast) {
+        $rootScope.currentPageTitle = "Login";
         var vm = this;
         if($rootScope.currentUser) {
             $location.url('/profile');
