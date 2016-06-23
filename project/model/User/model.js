@@ -8,6 +8,7 @@ module.exports = (function () {
         findByDiscordId: findByDiscordId,
         create: create,
         findById: findById,
+        findByUsername: findByUsername,
         update: update,
         deleteUser: deleteUser
     };
@@ -23,6 +24,10 @@ module.exports = (function () {
 
     function findById(userId) {
         return User.findById(userId);
+    }
+
+    function findByUsername(username) {
+        return User.findOne({username: username});
     }
 
     function update(userId, newUser) {

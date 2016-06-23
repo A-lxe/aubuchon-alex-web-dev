@@ -53,7 +53,7 @@ module.exports = function (app, models) {
 
     function localStrategy(username, password, done) {
         User
-            .findUserByUsername(username)
+            .findByUsername(username)
             .then(
                 function (user) {
                     if (user && bcrypt.compareSync(password, user.password)) {
@@ -127,7 +127,7 @@ module.exports = function (app, models) {
         user.password = bcrypt.hashSync(user.password);
         console.log(JSON.stringify(user));
         User
-            .createUser(user)
+            .create(user)
             .then(
                 function (user) {
                     if (user) {
@@ -154,7 +154,7 @@ module.exports = function (app, models) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        User.createUser(newUser).then(
+        User.create(newUser).then(
             function (response) {
                 res.json(response);
             },
