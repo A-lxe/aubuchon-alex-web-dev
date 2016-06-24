@@ -1,53 +1,63 @@
 module.exports = (function () {
 
     var mongoose = require("mongoose");
-    var UserSchema = require("./schema.js");
-    var User = mongoose.model("User", UserSchema);
+    var BotSchema = require("./schema.js");
+    var Bot = mongoose.model("Bot", BotSchema);
 
     var api = {
         create: create,
         findById: findById,
         findByUserId: findByUserId,
+        findByDiscordId: findByDiscordId,
         findBest: findBest,
-        search: search,
+        searchBot: searchBot,
         update: update,
         deleteBot: deleteBot
     };
     return api;
 
     function findByDiscordId(discordId) {
-        return User.findOne({'discord.id': discordId});
+        return Bot.findOne({'discord.id': discordId});
     }
 
-    function create(user) {
-        if(!user.username) {
-            user.username = "`" + user.discord.username + "#" + user.discord.discriminator + Date.now();
-        }
-        return User.create(user);
+    function create(bot) {
+        return Bot.create(bot);
     }
 
-    function findById(userId) {
-        return User.findById(userId);
+    function findById(botId) {
+        return Bot.findById(botId);
     }
 
-    function findByUsername(username) {
-        return User.findOne({username: username});
+    function findByUserId(botId) {
+        return Bot.find({owner: botId});
     }
 
-    function update(userId, newUser) {
-        return User.update(
-            {_id: userId},
+    function findBest(sortBy, startIndex, number) {
+        return Bot.find({}).sort({sort: sortBy}).skip(startIndex).limit(number);
+    }
+
+    function searchBot(searchString) {
+        return Bot.find(
+            {$text: {$search: searchString}},
+            {score: {$meta: "textScore"}}
+        )
+            .sort({score: {$meta: 'textScore'}});
+    }
+
+    function update(botId, newBot) {
+        return Bot.update(
+            {_id: botId},
             {
                 $set: {
-                    firstName: newUser.firstName || '',
-                    lastName: newUser.lastName || '',
-                    email: newUser.email || ''
+                    firstName: newBot.firstName || '',
+                    lastName: newBot.lastName || '',
+                    email: newBot.email || ''
                 }
             }
         );
     }
 
-    function deleteUser(userId) {
-        return User.remove({_id: userId});
+    function deleteBot(botId) {
+        return Bot.remove({_id: botId});
     }
 })();
