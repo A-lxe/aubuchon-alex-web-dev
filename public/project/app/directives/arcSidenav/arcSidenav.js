@@ -18,13 +18,13 @@ angular.module('Arcus')
                 if ($rootScope.currentUser) {
                     $scope.profileEntries = [
                         {name: 'Profile', url: '#/profile', icon: 'person'},
-                        {name: 'Logout', url: '#/logout'}
+                        {name: 'Logout', url: '#/logout', icon: 'close'}
                     ]
                 }
                 else {
                     $scope.profileEntries = [
-                        {name: 'Login', url: '#/login', icon: ''},
-                        {name: 'Register', url: '#/register', icon: ''}
+                        {name: 'Login', url: '#/login', icon: 'person'},
+                        {name: 'Register', url: '#/register', icon: 'add'}
                     ]
                 }
             };

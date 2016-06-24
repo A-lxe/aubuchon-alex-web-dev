@@ -4,20 +4,28 @@
         md-is-locked-open="$mdMedia('gt-sm')"
         md-whiteframe="4">
     <div flex="100">
-        <md-content role="navigation" flex>
-            <md-list class="arc-list">
-                <md-list-item ng-repeat="link in entries" ng-click="closeNav()" ng-href="{{link.url}}">
-                    {{link.name}}
-                    <span flex></span>
-                    <md-icon>{{link.icon}}</md-icon>
+        <md-content role="navigation">
+            <md-list>
+                <md-list-item class="md-2-line arc-discord-profile" ng-show="currentUser">
+                    <img class="md-avatar"
+                         src="https://cdn.discordapp.com/avatars/{{currentUser.discord.id}}/{{currentUser.discord.avatar}}.jpg">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{currentUser.discord.username}}</h3>
+                        <p>#{{currentUser.discord.discriminator}}</p>
+                    </div>
                 </md-list-item>
-            </md-list>
-            <hr/>
-            <md-list class="arc-list">
-                <md-list-item ng-repeat="link in profileEntries" ng-click="closeNav()" ng-href="{{link.url}}">
-                    {{link.name}}
-                    <span flex></span>
+                <md-list-item class="arc-md-list-item" ng-repeat="link in entries"
+                              ng-click="closeNav()"
+                              ng-href="{{link.url}}">
                     <md-icon>{{link.icon}}</md-icon>
+                    <p>{{link.name}}</p>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item class="arc-md-list-item" ng-repeat="link in profileEntries"
+                              ng-click="closeNav()"
+                              ng-href="{{link.url}}">
+                    <md-icon>{{link.icon}}</md-icon>
+                    <p>{{link.name}}</p>
                 </md-list-item>
             </md-list>
         </md-content>

@@ -24,6 +24,18 @@
                        ng-href="#/bots">
                 Go to bots!
             </md-button>
+            <md-button class="md-raised arc-home-button"
+                       ng-href="#/login" ng-if="!currentUser">
+                Login
+            </md-button>
+            <md-button class="md-raised arc-home-button"
+                       ng-href="#/register" ng-if="!currentUser">
+                Register
+            </md-button>
+            <md-button class="md-raised arc-home-button"
+                       ng-href="#/profile" ng-if="currentUser">
+                Profile
+            </md-button>
         </div>
     </div>
 </div>

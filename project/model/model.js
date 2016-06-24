@@ -15,9 +15,11 @@ module.exports = (function() {
     mongoose.connect(connectionString);
 
     var userModel = require("./User/model.js");
+    //var botModel = require("./Bot/model.js");
     
     var models = {
-        userModel: userModel
+        userModel: userModel,
+        //botModel: botModel
     };
 
     return models;
