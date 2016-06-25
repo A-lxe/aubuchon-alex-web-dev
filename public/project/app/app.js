@@ -1,6 +1,7 @@
 (function () {
     angular.module('Arcus', [
         'ngMaterial',
-        'ngRoute']);
+        'ngRoute',
+        'angularTrix']);
 })();
 

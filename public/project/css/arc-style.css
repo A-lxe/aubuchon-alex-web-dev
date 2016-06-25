@@ -69,3 +69,14 @@ md-list-item {
   color: #777777 !important;
 }
 
+.arc-trix {
+  padding: 3px;
+}
+
+.arc-trix trix-editor {
+  min-height: 150px;
+}
+
+.arc-circle-img {
+  border-radius: 50%;
+}

@@ -1,5 +1,5 @@
 (function () {
-    function ProfileCtrl(User, $scope, $rootScope, $location, $mdToast) {
+    function ProfileCtrl(User, Bot, $scope, $rootScope, $location, $mdToast) {
         $rootScope.currentPageTitle = "Profile";
         var vm = this;
         vm.user = angular.copy($rootScope.currentUser);
@@ -41,9 +41,24 @@
                 )
             }
         }
+
+        vm.newBot = function() {
+            Bot.create({name: "My New Bot"}).then(
+                function(response) {
+                    $location.url("/bot/edit/" + response.data._id);
+                },
+                function(error) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Could not create. Error: ' + error.data.message)
+                            .hideDelay(3000)
+                    );
+                }
+            )
+        }
     }
 
     angular.module('Arcus')
-        .controller('ProfileCtrl', ['User', '$scope', '$rootScope', '$location', '$mdToast', ProfileCtrl])
+        .controller('ProfileCtrl', ['User', 'Bot', '$scope', '$rootScope', '$location', '$mdToast', ProfileCtrl])
 })
 ();

@@ -1,0 +1,60 @@
+<div layout-padding layout-gt-sm="row">
+    <section class="md-whiteframe-2dp" layout="column" flex>
+        <form style="margin-bottom:0" name="editBot" ng-submit="ctrl.update()">
+            <h2 class="md-headline">Bot Info</h2>
+            <div layout="row" layout-sm="column">
+                <md-input-container flex-gt-sm="30">
+                    <label>Name</label>
+                    <input type="text" name="name" required md-no-asterisk
+                           ng-model="ctrl.bot.name">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Subtitle</label>
+                    <input type="text" name="subtitle"
+                           ng-model="ctrl.bot.subtitle">
+                </md-input-container>
+            </div>
+            <h2 class="md-headline">Description</h2>
+            <div class="md-whiteframe-1dp arc-trix">
+                <trix-editor angular-trix ng-model="ctrl.bot.description"></trix-editor>
+            </div>
+            <h2 class="md-headline">Technical Info</h2>
+            <div layout="row" layout-sm="column">
+                <md-input-container flex>
+                    <label>Client ID</label>
+                    <input type="text" name="clientId"
+                           ng-model="ctrl.bot.discord.id">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Permissions</label>
+                    <input type="text" name="permissions"
+                           ng-model="ctrl.bot.discord.permissions">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="center center">
+                <md-input-container style="width: 250px">
+                    <label>Avatar</label>
+                    <input type="text" name="avatar"
+                           ng-model="ctrl.bot.discord.avatar">
+                </md-input-container>
+                <span flex="5"></span>
+                <img class="md-avatar arc-circle-img"
+                     src="https://cdn.discordapp.com/avatars/{{ctrl.bot.discord.id}}/{{ctrl.bot.discord.avatar}}.jpg">
+            </div>
+            <br/>
+            <div layout="row">
+                <md-button flex="50" type="submit" class="md-accent md-raised">
+                    Update
+                </md-button>
+                <md-button flex="50" class="md-warn md-raised" ng-click="ctrl.delete()">
+                    Delete
+                </md-button>
+            </div>
+        </form>
+    </section>
+    <div layout="column" flex>
+        <div layout="row">
+            <h2 class="md-headline">Comments</h2>
+        </div>
+    </div>
+</div>

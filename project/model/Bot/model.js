@@ -21,7 +21,9 @@ module.exports = (function () {
     }
 
     function create(bot) {
-        return Bot.create(bot);
+        var theBot = new Bot(bot);
+        console.log(JSON.stringify(theBot));
+        return theBot.save();
     }
 
     function findById(botId) {
@@ -49,9 +51,10 @@ module.exports = (function () {
             {_id: botId},
             {
                 $set: {
-                    firstName: newBot.firstName || '',
-                    lastName: newBot.lastName || '',
-                    email: newBot.email || ''
+                    name: newBot.name,
+                    subtitle: newBot.subtitle,
+                    description: newBot.description,
+                    discord: newBot.discord
                 }
             }
         );

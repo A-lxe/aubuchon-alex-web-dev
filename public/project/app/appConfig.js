@@ -34,6 +34,11 @@
                     controller: 'RegisterCtrl',
                     controllerAs: 'ctrl'
                 })
+                .when('/bot/edit/:bid', {
+                    templateUrl: 'partials/bot/edit.html',
+                    controller: 'EditCtrl',
+                    controllerAs: 'ctrl'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });

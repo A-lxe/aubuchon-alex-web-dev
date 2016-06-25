@@ -4,6 +4,7 @@
   "description": "CS4550 at Northeastern University",
   "main": "server.js",
   "dependencies": {
+    "angular-trix": "^1.0.2",
     "angular-ui-sortable": "^0.14.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.1",

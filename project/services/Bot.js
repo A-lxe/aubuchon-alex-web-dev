@@ -33,6 +33,7 @@ module.exports = function (app, models) {
         newBot.owner = req.user._id;
         Bot.create(newBot).then(
             function (response) {
+                console.log(response);
                 res.json(response);
             },
             function (error) {

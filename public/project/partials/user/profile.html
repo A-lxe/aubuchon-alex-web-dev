@@ -1,5 +1,5 @@
-<div layout-padding>
-    <md-list layout="column" flex-gt-sm="30">
+<div layout-padding layout-gt-sm="row">
+    <section class="md-whiteframe-2dp" layout="column" flex-gt-sm="30">
         <form name="profile" ng-submit="ctrl.update()">
             <h2 class="md-headline">User Info</h2>
             <div layout="row" ng-if="!ctrl.user.discord.username">
@@ -39,5 +39,12 @@
                 </md-button>
             </div>
         </form>
-</div>
+    </section>
+    <div layout="column" flex>
+        <div layout="row">
+            <h2 class="md-headline">Your Amazing Bots</h2>
+            <span flex></span>
+            <md-button ng-click="ctrl.newBot()" class="md-raised md-primary">Make a New One</md-button>
+        </div>
+    </div>
 </div>
