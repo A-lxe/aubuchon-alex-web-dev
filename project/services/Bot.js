@@ -11,17 +11,26 @@ module.exports = function (app, models) {
         scope: scopes
     };
 
-    app.post('/arcus/api/bot', create);
+    app.post('/arcus/api/bot', checkAuthenticated, create);
     app.get('/arcus/api/bot/:botId', findById);
     app.get('/arcus/api/bot/discord/:botId', findByDiscordId);
     app.get('/arcus/api/bot/user/:userId', findByUserId);
     app.get('/arcus/api/bot/list', findBest);
     app.get('/arcus/api/bot/search', searchBot);
-    app.patch('/arcus/api/bot', update);
-    app.delete('/arcus/api/bot/:botId', deleteBot);
+    app.patch('/arcus/api/bot', checkAuthenticated, update);
+    app.delete('/arcus/api/bot/:botId', checkAuthenticated, deleteBot);
+
+    function checkAuthenticated(req, res, next) {
+        if(req.isAuthenticated() && req.user) {
+            next();
+        } else {
+            res.status(401);
+        }
+    }
 
     function create(req, res) {
         var newBot = req.body;
+        newBot.owner = req.user._id;
         Bot.create(newBot).then(
             function (response) {
                 res.json(response);

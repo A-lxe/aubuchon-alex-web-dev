@@ -16,8 +16,8 @@ module.exports = function (app, models) {
 
     app.post('/arcus/api/user', createUser);
     app.get('/arcus/api/user/:userId', findUserById);
-    app.patch('/arcus/api/user', updateUser);
-    app.delete('/arcus/api/user/:userId', deleteUser);
+    app.patch('/arcus/api/user', checkAuthenticated, updateUser);
+    app.delete('/arcus/api/user/:userId', checkAuthenticated, deleteUser);
     app.post('/arcus/api/login', passport.authenticate('local'), login);
     app.post('/arcus/api/logout', logout);
     app.post('/arcus/api/register', register);
@@ -33,6 +33,14 @@ module.exports = function (app, models) {
     passport.deserializeUser(deserializeUser);
     passport.use('local', new LocalStrategy(localStrategy));
     passport.use('discord', new DiscordStrategy(discordConfig, discordStrategy));
+
+    function checkAuthenticated(req, res, next) {
+        if(req.isAuthenticated() && req.user) {
+            next();
+        } else {
+            res.status(401);
+        }
+    }
 
     function serializeUser(user, done) {
         done(null, user);
@@ -182,8 +190,15 @@ module.exports = function (app, models) {
     }
 
     function updateUser(req, res) {
+
         var user = req.body;
         var id = user._id;
+
+        if(req.user._id == id) {
+            res.status(401);
+            res.json({message: "Unauthorized."});
+            return;
+        }
 
         User.update(id, user).then(
             function (response) {
@@ -197,6 +212,12 @@ module.exports = function (app, models) {
 
     function deleteUser(req, res) {
         var id = req.params.userId;
+
+        if(req.user._id == id) {
+            res.status(401);
+            res.json({message: "Unauthorized."});
+            return;
+        }
 
         User.deleteUser(id).then(
             function (response) {
