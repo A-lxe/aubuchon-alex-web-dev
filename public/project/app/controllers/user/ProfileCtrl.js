@@ -3,17 +3,19 @@
         $rootScope.currentPageTitle = "Profile";
         var vm = this;
         vm.user = angular.copy($rootScope.currentUser);
+        vm.bots = []
         vm.botsLeft = [];
         vm.botsRight = [];
-        
-        if(!vm.user) {
+
+        if (!vm.user) {
             $location.url('/login');
         }
 
         Bot.findByUserId(vm.user._id).then(
-            function(response) {
-                for(var i in response.data) {
-                    if(i % 2 == 0) {
+            function (response) {
+                for (var i in response.data) {
+                    vm.bots.push(response.data[i]);
+                    if (i % 2 == 0) {
                         vm.botsLeft.push(response.data[i]);
                     } else {
                         vm.botsRight.push(response.data[i]);
@@ -21,18 +23,19 @@
                 }
             }
         )
-        
-        vm.update = function() {
-            if(vm.user != $rootScope.currentUser) {
+
+        vm.update = function () {
+            if (vm.changes) {
                 User.updateSingle(vm.user).then(
-                    function(response) {
+                    function (response) {
                         $mdToast.show(
                             $mdToast.simple()
                                 .textContent('Saved!')
                                 .hideDelay(3000)
                         );
+                        vm.changes = false;
                     },
-                    function(error) {
+                    function (error) {
                         $mdToast.show(
                             $mdToast.simple()
                                 .textContent('Could not update. Error: ' + error.data.message)
@@ -41,10 +44,10 @@
                     }
                 );
                 User.retrieveSingle($rootScope.currentUser._id).then(
-                    function(response) {
+                    function (response) {
                         $rootScope.currentUser = response.data;
                     },
-                    function(error) {
+                    function (error) {
                         $mdToast.show(
                             $mdToast.simple()
                                 .textContent('Could not retrieve. Error: ' + error.data.message)
@@ -55,12 +58,12 @@
             }
         }
 
-        vm.newBot = function() {
+        vm.newBot = function () {
             Bot.create({name: "My New Bot"}).then(
-                function(response) {
+                function (response) {
                     $location.url("/bot/edit/" + response.data._id);
                 },
-                function(error) {
+                function (error) {
                     $mdToast.show(
                         $mdToast.simple()
                             .textContent('Could not create. Error: ' + error.data.message)

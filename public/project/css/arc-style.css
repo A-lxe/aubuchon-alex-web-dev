@@ -80,3 +80,7 @@ md-list-item {
 .arc-circle-img {
   border-radius: 50%;
 }
+
+.arc-window-size {
+  height:100%;
+}

@@ -1,4 +1,4 @@
-<div layout-padding layout-gt-sm="row">
+<div layout-padding layout-gt-sm="row" class="arc-window-size">
     <div flex-gt-sm="50">
         <arc-bot-card bot="ctrl.bot" elevated="ctrl.elevated"></arc-bot-card>
         <md-card class="md-whiteframe-1dp arc-trix">
@@ -7,23 +7,28 @@
                     <span class="md-headline">Comment</span>
                 </md-card-title-text>
             </md-card-title>
-            <trix-editor angular-trix ng-model="ctrl.newComment.content"></trix-editor>
+            <div ng-if="ctrl.canComment">
+                <trix-editor ng-if="ctrl.canComment" angular-trix ng-model="ctrl.newComment.content"></trix-editor>
+            </div>
+            <div ng-if="!ctrl.canComment" layout="column" layout-align="center center" style="height: 100px">
+                <span>Please log in to comment :)</span>
+            </div>
             <md-card-actions layout="row" layout-align="end center">
-                <md-button>Post</md-button>
+                <md-button ng-if="ctrl.canComment" ng-click="ctrl.postComment()">Post</md-button>
             </md-card-actions>
         </md-card>
     </div>
     <div layout="column" flex>
-        <div layout="row" layout-align="start center">
-            <h2 class="md-headline">Comments</h2>
-        </div>
-        <section class="md-whiteframe-2dp" layout="column" flex="80">
+        <section class="md-whiteframe-2dp" layout="column">
+            <div layout="row" layout-align="start center">
+                <h2 class="md-headline" layout-padding>Comments</h2>
+            </div>
             <md-content hide show-gt-sm layout="row" flex="100">
 
             </md-content>
-        </section>
-        <div hide-gt-sm layout-wrap flex="noshrink">
+            <div hide-gt-sm layout-wrap flex="noshrink">
 
-        </div>
+            </div>
+        </section>
     </div>
 </div>

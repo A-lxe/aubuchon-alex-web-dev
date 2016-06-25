@@ -1,7 +1,8 @@
-<md-card>
+<md-card ng-click="null">
     <md-card-header>
         <md-card-avatar>
-            <img class="md-user-avatar" src="https://cdn.discordapp.com/app-icons/{{bot.discord.id}}/{{bot.discord.avatar}}.jpg"/>
+            <img class="md-user-avatar"
+                 src="https://cdn.discordapp.com/app-icons/{{bot.discord.id}}/{{bot.discord.avatar}}.jpg"/>
         </md-card-avatar>
         <md-card-header-text>
             <span class="md-title">{{bot.name}}</span>
@@ -12,8 +13,9 @@
     <md-card-content>
         <p ng-bind-html="bot.description"></p>
     </md-card-content>
-    <md-card-actions layout="row" layout-align="end center" ng-if="elevated">
-        <md-button ng-href="#/bot/edit/{{bot._id}}">Edit</md-button>
-        <md-button ng-click="deleteBot()">Delete</md-button>
+    <md-card-actions layout="row" layout-align="end center" >
+        <md-button ng-href="#/bot/{{bot._id}}">View</md-button>
+        <md-button ng-href="#/bot/edit/{{bot._id}}" ng-if="elevated">Edit</md-button>
+        <md-button ng-click="deleteBot()" class="ng-warn" ng-if="elevated">Delete</md-button>
     </md-card-actions>
 </md-card>

@@ -76,13 +76,13 @@
         }
     }
 
-    function logoutNow($http, $rootScope, $location) {
+    function logoutNow($http, $rootScope, $location, $window) {
         $http.post("/arcus/api/logout").then(
             function (response) {
                 console.log("jank");
                 $rootScope.currentUser = null;
                 $rootScope.initializeSidenav();
-                $location.url("/");
+                $window.history.back();
             });
     }
 })();

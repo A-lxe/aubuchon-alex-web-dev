@@ -70,6 +70,7 @@
             return $http.patch("/arcus/api/user", user).then(
                 function (response) {
                     $rootScope.currentUser = response.data;
+                    return response;
                 }
             );
         }

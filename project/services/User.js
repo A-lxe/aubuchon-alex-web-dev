@@ -194,7 +194,7 @@ module.exports = function (app, models) {
         var user = req.body;
         var id = user._id;
 
-        if(req.user._id == id) {
+        if(req.user._id != id) {
             res.status(401);
             res.json({message: "Unauthorized."});
             return;
@@ -213,7 +213,7 @@ module.exports = function (app, models) {
     function deleteUser(req, res) {
         var id = req.params.userId;
 
-        if(req.user._id == id) {
+        if(req.user._id != id) {
             res.status(401);
             res.json({message: "Unauthorized."});
             return;

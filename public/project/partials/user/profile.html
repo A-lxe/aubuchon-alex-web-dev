@@ -1,4 +1,4 @@
-<div layout-padding layout-gt-sm="row">
+<div layout-padding layout-gt-sm="row" class="arc-window-size">
     <div flex-gt-sm="30">
         <section class="md-whiteframe-2dp" layout="column" layout-padding>
             <form name="profile" ng-submit="ctrl.update()">
@@ -11,12 +11,12 @@
                     <md-input-container class="md-block">
                         <label>First Name</label>
                         <input type="text" name="firstName"
-                               ng-model="ctrl.user.firstName">
+                               ng-model="ctrl.user.firstName" ng-change="ctrl.changes=true">
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label>Last Name</label>
                         <input type="text" name="lastName"
-                               ng-model="ctrl.user.lastName">
+                               ng-model="ctrl.user.lastName" ng-change="ctrl.changes=true">
                     </md-input-container>
                 </div>
                 <h2 class="md-headline">Discord Info</h2>
@@ -43,13 +43,13 @@
         </section>
     </div>
     <div layout="column" flex>
-        <div layout="row" layout-align="start center">
-            <h2 class="md-headline">Your Amazing Bots</h2>
-            <span flex></span>
-            <md-button ng-click="ctrl.newBot()" class="md-raised md-primary" style="height:0">Make a New One
-            </md-button>
-        </div>
-        <section class="md-whiteframe-2dp" layout="column" flex="80">
+        <section class="md-whiteframe-2dp" layout="column">
+            <div layout="row" layout-align="start center">
+                <h2 class="md-headline" layout-padding>Your Amazing Bots</h2>
+                <span flex></span>
+                <md-button ng-click="ctrl.newBot()" class="md-raised md-primary" style="height:0">Make a New One
+                </md-button>
+            </div>
             <md-content hide show-gt-sm layout="row" flex="100">
                 <div flex="50">
                     <arc-bot-card  ng-repeat="bot in ctrl.botsLeft" bot="bot"
@@ -60,10 +60,10 @@
                                   elevated="true"></arc-bot-card>
                 </div>
             </md-content>
+            <div hide-gt-sm layout-wrap flex="noshrink">
+                <arc-bot-card flex-gt-sm="50" ng-repeat="bot in ctrl.bots" bot="bot"
+                              elevated="true"></arc-bot-card>
+            </div>
         </section>
-        <div hide-gt-sm layout-wrap flex="noshrink">
-            <arc-bot-card flex-gt-sm="50" ng-repeat="bot in ctrl.bots" bot="bot"
-                          elevated="true"></arc-bot-card>
-        </div>
     </div>
 </div>

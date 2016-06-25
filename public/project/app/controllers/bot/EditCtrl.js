@@ -1,6 +1,9 @@
 (function () {
     function EditCtrl(Bot, $scope, $rootScope, $location, $routeParams, $mdToast, $mdDialog) {
         var vm = this;
+        if(!$rootScope.currentUser) {
+            $location.url('/login');
+        }
         Bot.findById($routeParams["bid"]).then(
             function (response) {
                 vm.bot = response.data;
