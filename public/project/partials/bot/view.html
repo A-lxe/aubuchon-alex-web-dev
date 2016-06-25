@@ -1,0 +1,29 @@
+<div layout-padding layout-gt-sm="row">
+    <div flex-gt-sm="50">
+        <arc-bot-card bot="ctrl.bot" elevated="ctrl.elevated"></arc-bot-card>
+        <md-card class="md-whiteframe-1dp arc-trix">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Comment</span>
+                </md-card-title-text>
+            </md-card-title>
+            <trix-editor angular-trix ng-model="ctrl.newComment.content"></trix-editor>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button>Post</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+    <div layout="column" flex>
+        <div layout="row" layout-align="start center">
+            <h2 class="md-headline">Comments</h2>
+        </div>
+        <section class="md-whiteframe-2dp" layout="column" flex="80">
+            <md-content hide show-gt-sm layout="row" flex="100">
+
+            </md-content>
+        </section>
+        <div hide-gt-sm layout-wrap flex="noshrink">
+
+        </div>
+    </div>
+</div>

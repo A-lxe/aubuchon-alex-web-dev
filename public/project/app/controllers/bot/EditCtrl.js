@@ -4,7 +4,7 @@
         Bot.findById($routeParams["bid"]).then(
             function (response) {
                 vm.bot = response.data;
-                $rootScope.currentPageTitle = "Edit:" + vm.bot.name;
+                $rootScope.currentPageTitle = "Edit: " + vm.bot.name;
                 if (!vm.bot || vm.bot.owner != $rootScope.currentUser._id) {
                     $mdToast.show(
                         $mdToast.simple()

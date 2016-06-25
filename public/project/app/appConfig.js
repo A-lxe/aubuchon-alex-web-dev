@@ -34,6 +34,11 @@
                     controller: 'RegisterCtrl',
                     controllerAs: 'ctrl'
                 })
+                .when('/bot/:bid', {
+                    templateUrl: 'partials/bot/view.html',
+                    controller: 'BotViewCtrl',
+                    controllerAs: 'ctrl'
+                })
                 .when('/bot/edit/:bid', {
                     templateUrl: 'partials/bot/edit.html',
                     controller: 'EditCtrl',
