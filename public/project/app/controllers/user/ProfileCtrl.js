@@ -8,6 +8,12 @@
         if(!vm.user) {
             $location.url('/login');
         }
+
+        Bot.findByUserId(vm.user._id).then(
+            function(response) {
+                vm.bots = response.data;
+            }
+        )
         
         vm.update = function() {
             if(vm.user != $rootScope.currentUser) {

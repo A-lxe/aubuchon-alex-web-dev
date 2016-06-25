@@ -22,9 +22,10 @@
     <arc-sidenav></arc-sidenav>
     <div layout="column" flex>
         <arc-menu title="'Home'"></arc-menu>
-        <md-content layout="column" flex>
-            <div ng-view></div>
-            <arc-footing flex="noshrink" layout="column" layout-align="end center"></arc-footing>
+        <md-content layout="column" style="height:100%">
+            <div ng-view flex="noshrink"></div>
+            <div flex></div>
+            <arc-footing></arc-footing>
         </md-content>
     </div>
 </div>
@@ -62,6 +63,7 @@
 <script src="app/directives/arcMenu/arcMenu.js"></script>
 <script src="app/directives/arcSidenav/arcSidenav.js"></script>
 <script src="app/directives/arcFooting/arcFooting.js"></script>
+<script src="app/directives/arcBotCard/arcBotCard.js"></script>
 
 
 </body>

@@ -3,7 +3,7 @@ angular.module('Arcus')
         return {
             restrict: 'E',
             templateUrl: 'app/directives/arcMenu/menu.html',
-            controller: ['$scope', '$mdSidenav', ctrl]
+            controller: ['$scope', '$mdSidenav', ctrl],
         };
 
         function ctrl($scope, $mdSidenav) {
