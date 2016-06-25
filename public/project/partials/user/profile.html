@@ -43,17 +43,27 @@
         </section>
     </div>
     <div layout="column" flex>
-        <div layout="row">
+        <div layout="row" layout-align="start center">
             <h2 class="md-headline">Your Amazing Bots</h2>
             <span flex></span>
-            <md-button ng-click="ctrl.newBot()" class="md-raised md-primary">Make a New One
+            <md-button ng-click="ctrl.newBot()" class="md-raised md-primary" style="height:0">Make a New One
             </md-button>
         </div>
-        <md-content hide show-gt-sm layout-gt-sm="row" layout-wrap flex="75">
-            <arc-bot-card flex-gt-sm="50" ng-repeat="bot in ctrl.bots" bot="bot"></arc-bot-card>
-        </md-content>
+        <section class="md-whiteframe-2dp" layout="column" flex="75">
+            <md-content hide show-gt-sm layout="row" flex="100">
+                <div flex="50">
+                    <arc-bot-card  ng-repeat="bot in ctrl.botsLeft" bot="bot"
+                                  elevated="true"></arc-bot-card>
+                </div>
+                <div flex="50">
+                    <arc-bot-card  ng-repeat="bot in ctrl.botsRight" bot="bot"
+                                  elevated="true"></arc-bot-card>
+                </div>
+            </md-content>
+        </section>
         <div hide-gt-sm layout-wrap flex="noshrink">
-            <arc-bot-card flex-gt-sm="50" ng-repeat="bot in ctrl.bots" bot="bot"></arc-bot-card>
+            <arc-bot-card flex-gt-sm="50" ng-repeat="bot in ctrl.bots" bot="bot"
+                          elevated="true"></arc-bot-card>
         </div>
     </div>
 </div>

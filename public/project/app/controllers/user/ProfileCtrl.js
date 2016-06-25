@@ -3,7 +3,8 @@
         $rootScope.currentPageTitle = "Profile";
         var vm = this;
         vm.user = angular.copy($rootScope.currentUser);
-        
+        vm.botsLeft = [];
+        vm.botsRight = [];
         
         if(!vm.user) {
             $location.url('/login');
@@ -11,7 +12,13 @@
 
         Bot.findByUserId(vm.user._id).then(
             function(response) {
-                vm.bots = response.data;
+                for(var i in response.data) {
+                    if(i % 2 == 0) {
+                        vm.botsLeft.push(response.data[i]);
+                    } else {
+                        vm.botsRight.push(response.data[i]);
+                    }
+                }
             }
         )
         

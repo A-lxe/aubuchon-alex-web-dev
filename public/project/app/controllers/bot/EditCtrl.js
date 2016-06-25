@@ -1,5 +1,5 @@
 (function () {
-    function EditCtrl(Bot, $scope, $rootScope, $location, $routeParams, $mdToast) {
+    function EditCtrl(Bot, $scope, $rootScope, $location, $routeParams, $mdToast, $mdDialog) {
         var vm = this;
         Bot.findById($routeParams["bid"]).then(
             function (response) {
@@ -43,13 +43,13 @@
                 .ok('It must be done.')
                 .cancel('On second thought...');
             $mdDialog.show(confirm).then(function () {
-                Bot.delete(vm.bot._id);
+                Bot.deleteBot(vm.bot._id);
                 $location.url("/profile");
             });
         }
     }
 
     angular.module('Arcus')
-        .controller('EditCtrl', ['Bot', '$scope', '$rootScope', '$location', '$routeParams', '$mdToast', EditCtrl])
+        .controller('EditCtrl', ['Bot', '$scope', '$rootScope', '$location', '$routeParams', '$mdToast', '$mdDialog', EditCtrl])
 })
 ();
