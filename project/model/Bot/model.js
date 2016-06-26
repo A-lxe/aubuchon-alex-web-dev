@@ -22,7 +22,6 @@ module.exports = (function () {
 
     function create(bot) {
         var theBot = new Bot(bot);
-        console.log(JSON.stringify(theBot));
         return theBot.save();
     }
 
@@ -35,7 +34,7 @@ module.exports = (function () {
     }
 
     function findBest(sortBy, startIndex, number) {
-        return Bot.find({}).sort({sort: sortBy}).skip(startIndex).limit(number);
+        return Bot.find({}).sort(sortBy).skip(parseInt(startIndex)).limit(parseInt(number));
     }
 
     function searchBot(searchString) {

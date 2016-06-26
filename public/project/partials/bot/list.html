@@ -1,0 +1,35 @@
+<div layout-padding layout="column" class="arc-window-size">
+    <section class="md-whiteframe-2dp" hide show-gt-sm layout="column">
+        <div layout="row" class="arc-searchbar" layout-align="end center">
+            <span>Search </span>
+            <input type="text" name="searchBar" ng-model="ctrl.searchString"
+                   ng-keyup="$event.keyCode == 13 && ctrl.search()">
+            <md-button class="md-icon-button" ng-click="ctrl.search()">
+                <md-icon>search</md-icon>
+            </md-button>
+        </div>
+        <md-content layout="row" flex="100">
+            <div flex="50">
+                <arc-bot-card ng-repeat="bot in ctrl.botsLeft" bot="bot"></arc-bot-card>
+            </div>
+            <div flex="50">
+                <arc-bot-card ng-repeat="bot in ctrl.botsRight" bot="bot"></arc-bot-card>
+            </div>
+        </md-content>
+    </section>
+    <div layout="column" hide-gt-sm>
+        <div layout="row" class="arc-searchbar" layout-align="end center">
+            <span>Search </span>
+            <input type="text" name="searchBar" ng-model="ctrl.searchString"
+                   ng-keyup="$event.keyCode == 13 && ctrl.search()">
+            <md-button class="md-icon-button" ng-click="ctrl.search()">
+                <md-icon>search</md-icon>
+            </md-button>
+        </div>
+        <md-content layout="column" flex="100">
+            <div>
+                <arc-bot-card ng-repeat="bot in ctrl.bots" bot="bot"></arc-bot-card>
+            </div>
+        </md-content>
+    </div>
+</div>

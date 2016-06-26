@@ -7,7 +7,7 @@
             findByDiscordId: findByDiscordId,
             findByUserId: findByUserId,
             findBest: findBest,
-            searchBot: searchBot,
+            searchBots: searchBots,
             update: update,
             deleteBot: deleteBot
         }
@@ -29,11 +29,11 @@
         }
         
         function findBest(startIndex, number, sortBy) {
-            return $http.get("/arcus/api/bot/list?start=" + startIndex +"&number=" + number + "&sort=" + sortBy);
+            return $http.get("/arcus/api/bot/list/where?start=" + startIndex +"&number=" + number + "&sort=" + sortBy);
         }
         
-        function searchBot(searchString) {
-            return $http.get("/arcus/api/bot/search?search=" + searchString);
+        function searchBots(searchString) {
+            return $http.get("/arcus/api/bot/search/where?search=" + searchString);
         }
 
         function update(bot) {

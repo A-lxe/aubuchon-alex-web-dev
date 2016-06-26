@@ -15,8 +15,8 @@ module.exports = function (app, models) {
     app.get('/arcus/api/bot/:botId', findById);
     app.get('/arcus/api/bot/discord/:botId', findByDiscordId);
     app.get('/arcus/api/bot/user/:userId', findByUserId);
-    app.get('/arcus/api/bot/list', findBest);
-    app.get('/arcus/api/bot/search', searchBot);
+    app.get('/arcus/api/bot/list/where', findBest);
+    app.get('/arcus/api/bot/search/where', searchBot);
     app.patch('/arcus/api/bot', checkAuthenticated, update);
     app.delete('/arcus/api/bot/:botId', checkAuthenticated, deleteBot);
 
@@ -87,13 +87,14 @@ module.exports = function (app, models) {
     function findBest(req, res) {
         var start = req.query.start;
         var number = req.query.number;
-        var sort = {name: -1};
-
+        var sort = JSON.parse(req.query.sort);
+        
         Bot.findBest(sort, start, number).then(
             function(response) {
                 res.json(response);
             },
             function(error) {
+                console.log(JSON.stringify(error));
                 res.status(500);
                 res.json(error);
             }

@@ -49,6 +49,11 @@
                     controller: 'EditCtrl',
                     controllerAs: 'ctrl'
                 })
+                .when('/bots', {
+                    templateUrl: 'partials/bot/list.html',
+                    controller: 'BotListCtrl',
+                    controllerAs: 'ctrl'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });

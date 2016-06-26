@@ -4,16 +4,16 @@
 }
 
 arc-sidenav {
-  overflow:visible !important;
-  position:static;
-  z-index:10;
+  overflow: visible !important;
+  position: static;
+  z-index: 10;
 }
 
 arc-menu {
-  position:relative;
+  position: relative;
 }
 
-arc-footing div{
+arc-footing div {
   border-top: 1px solid #dddddd;
   width: 100%;
 }
@@ -40,32 +40,33 @@ arc-footing div{
 }
 
 .arc-discord[disabled] {
-  color : rgb(187, 187, 187);
+  color: rgb(187, 187, 187);
   background-color: rgba(230, 230, 229, 0.96);
 }
 
 md-list {
-  padding-top:0;
+  padding-top: 0;
 }
 
 md-list-item {
-  height:0 !important;
+  height: 0 !important;
 }
+
 .arc-md-list-item div {
-  height:100% !important;
+  height: 100% !important;
 }
 
 .arc-discord-profile {
-  min-height:64px !important;
+  min-height: 64px !important;
   background-color: #282b30;
   color: #FFFFFF !important;
 }
 
-.arc-discord-profile h3{
+.arc-discord-profile h3 {
   color: #FFFFFF !important;
 }
 
-.arc-discord-profile p{
+.arc-discord-profile p {
   color: #777777 !important;
 }
 
@@ -82,5 +83,13 @@ md-list-item {
 }
 
 .arc-window-size {
-  height:100%;
+  height: 100%;
+}
+
+.arc-searchbar {
+  height: 32px;
+}
+
+.arc-searchbar span {
+  margin-right: 10px;
 }
