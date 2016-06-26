@@ -1,0 +1,69 @@
+<div layout-padding layout-gt-sm="row" class="arc-window-size">
+    <div flex-gt-sm="30">
+        <section class="md-whiteframe-2dp" layout="column" layout-padding>
+            <form name="profile" ng-submit="ctrl.update()">
+                <h2 class="md-headline">User Info</h2>
+                <div layout="row" ng-if="!ctrl.user.discord.username">
+                    <span>Username: </span>
+                    <span>{{ctrl.user.username}}</span>
+                </div>
+                <div layout="row">
+                    <md-input-container class="md-block">
+                        <label>First Name</label>
+                        <input type="text" name="firstName"
+                               ng-model="ctrl.user.firstName" disabled>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Last Name</label>
+                        <input type="text" name="lastName"
+                               ng-model="ctrl.user.lastName" disabled>
+                    </md-input-container>
+                </div>
+                <h2 class="md-headline">Discord Info</h2>
+                <md-list>
+                    <md-list-item class="md-2-line arc-discord-profile">
+                        <img class="md-avatar"
+                             src="https://cdn.discordapp.com/avatars/{{currentUser.discord.id}}/{{currentUser.discord.avatar}}.jpg">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{ctrl.user.discord.username}}</h3>
+                            <p>#{{ctrl.user.discord.discriminator}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <br/>
+                <div layout="row">
+                    <md-button flex="50" type="submit" class="md-accent md-raised">
+                        Update
+                    </md-button>
+                    <md-button flex="50" class="md-warn" ng-click="logout()">
+                        Logout
+                    </md-button>
+                </div>
+            </form>
+        </section>
+    </div>
+    <div layout="column" flex>
+        <section class="md-whiteframe-2dp" layout="column">
+            <div layout="row" layout-align="start center">
+                <h2 class="md-headline" layout-padding>Their Amazing Bots</h2>
+                <span flex></span>
+                <md-button ng-click="ctrl.newBot()" class="md-raised md-primary" style="height:0">Make a New One
+                </md-button>
+            </div>
+            <md-content hide show-gt-sm layout="row" flex="100">
+                <div flex="50">
+                    <arc-bot-card  ng-repeat="bot in ctrl.botsLeft" bot="bot"
+                                   elevated="true"></arc-bot-card>
+                </div>
+                <div flex="50">
+                    <arc-bot-card  ng-repeat="bot in ctrl.botsRight" bot="bot"
+                                   elevated="true"></arc-bot-card>
+                </div>
+            </md-content>
+            <div hide-gt-sm layout-wrap flex="noshrink">
+                <arc-bot-card flex-gt-sm="50" ng-repeat="bot in ctrl.bots" bot="bot"
+                              elevated="true"></arc-bot-card>
+            </div>
+        </section>
+    </div>
+</div>

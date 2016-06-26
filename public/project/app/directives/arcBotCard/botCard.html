@@ -13,9 +13,13 @@
     <md-card-content>
         <p ng-bind-html="bot.description"></p>
     </md-card-content>
-    <md-card-actions layout="row" layout-align="end center" >
+    <md-card-actions layout="row" layout-align="end center">
+        <span class="md-caption">Brought to you by the esteemed
+            <a ng-href="#/profile/{{owner._id}}">{{owner.discord.username || owner.username}}</a>
+        </span>
+        <span flex></span>
         <md-button ng-href="#/bot/{{bot._id}}">View</md-button>
         <md-button ng-href="#/bot/edit/{{bot._id}}" ng-if="elevated">Edit</md-button>
-        <md-button ng-click="deleteBot()" class="ng-warn" ng-if="elevated">Delete</md-button>
+        <md-button ng-click="deleteBot()" class="md-warn" ng-if="elevated">Delete</md-button>
     </md-card-actions>
 </md-card>
