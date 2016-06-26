@@ -19,10 +19,16 @@ module.exports = (function () {
     }
 
     function create(user) {
+        console.log("Creating user...");
         if(!user.username) {
             user.username = "`" + user.discord.username + "#" + user.discord.discriminator + Date.now();
         }
-        return User.create(user);
+        return User.create(user).then(
+            function(response) {
+                console.log("User created!");
+                return response;
+            }
+        );
     }
 
     function findById(userId) {
