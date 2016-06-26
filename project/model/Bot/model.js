@@ -39,10 +39,9 @@ module.exports = (function () {
 
     function searchBot(searchString) {
         return Bot.find(
-            {$text: {$search: searchString}},
-            {score: {$meta: "textScore"}}
+            {$text: {$search: searchString}}
         )
-            .sort({score: {$meta: 'textScore'}});
+            .sort({name: 1});
     }
 
     function update(botId, newBot) {

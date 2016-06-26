@@ -11,6 +11,7 @@ module.exports = (function() {
             process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
             process.env.OPENSHIFT_APP_NAME;
     }
+    console.log(connectionString);
 
     mongoose.connect(connectionString);
 
