@@ -5,8 +5,8 @@ module.exports = function (app, models) {
 
     var scopes = ['identify', 'email'];
     var discordConfig = {
-        clientID: process.env.DISCORD_CLIENT_ID || "194693171354140672",
-        clientSecret: process.env.DISCORD_CLIENT_SECRET || "7iBOp_4jCHnfJGq5iOaNzfMjFGoaug5N",
+        clientID: process.env.DISCORD_CLIENT_ID,
+        clientSecret: process.env.DISCORD_CLIENT_SECRET,
         callbackURL: process.env.DISCORD_CALLBACK_URL || "http://127.0.0.1:3000/arcus/auth/discord/callback",
         scope: scopes
     };
