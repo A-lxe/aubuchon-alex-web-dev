@@ -1,7 +1,12 @@
 module.exports = (function () {
 
     var mongoose = require("mongoose");
+    var textSearch = require("mongoose-text-search");
     var BotSchema = require("./schema.js");
+
+    BotSchema.plugin(textSearch);
+    BotSchema.index({name: 'text', subtitle: 'text', description: 'text'});
+
     var Bot = mongoose.model("Bot", BotSchema);
 
     var api = {
@@ -38,10 +43,22 @@ module.exports = (function () {
     }
 
     function searchBot(searchString) {
-        return Bot.find(
-            {$text: {$search: searchString}}
-        )
-            .sort({name: 1});
+        return new Promise(function (resolve, reject) {
+            Bot.textSearch(searchString, function (err, response) {
+                    if (err) {
+                        console.log(JSON.stringify(err));
+                        reject(err);
+                    } else {
+                        console.log(JSON.stringify(response));
+                        var docArray = [];
+                        for (var i in response.results) {
+                            docArray.push(response.results[i].obj);
+                        }
+                        resolve(docArray);
+                    }
+                }
+            );
+        });
     }
 
     function update(botId, newBot) {
