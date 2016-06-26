@@ -37,12 +37,7 @@
         }
 
         function register(user) {
-            return $http.post("/arcus/api/register", user).then(
-                function(response) {
-                    response.data.password = user.password;
-                    return response;
-                }
-            )
+            return $http.post("/arcus/api/register", user);
         }
 
         function checkSession() {
