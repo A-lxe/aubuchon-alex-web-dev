@@ -131,6 +131,7 @@ module.exports = function (app, models) {
     }
 
     function register(req, res) {
+        console.log("Attempting to create user: " + JSON.stringify(req.body));
         var user = req.body;
         user.password = bcrypt.hashSync(user.password);
         User
