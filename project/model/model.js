@@ -16,10 +16,12 @@ module.exports = (function() {
 
     var userModel = require("./User/model.js");
     var botModel = require("./Bot/model.js");
+    var cbModel = require("./CommentBlock/model.js");
     
     var models = {
         userModel: userModel,
-        botModel: botModel
+        botModel: botModel,
+        cbModel: cbModel
     };
 
     return models;
