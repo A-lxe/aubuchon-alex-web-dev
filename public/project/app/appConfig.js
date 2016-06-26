@@ -29,6 +29,11 @@
                     controller: 'ProfileCtrl',
                     controllerAs: 'ctrl'
                 })
+                .when('/profile/:uid', {
+                    templateUrl: 'partials/user/view.html',
+                    controller: 'ProfileViewCtrl',
+                    controllerAs: 'ctrl'
+                })
                 .when('/register', {
                     templateUrl: 'partials/user/register.html',
                     controller: 'RegisterCtrl',
