@@ -47,11 +47,11 @@ module.exports = (function () {
     }
 
     function addComment(cbId, comment) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             CB.findById(cbId).then(
-                function(cb) {
+                function (cb) {
                     Comment.create(comment).then(
-                        function(savedComment) {
+                        function (savedComment) {
                             cb.comments.unshift(savedComment._id);
                             CB.update(
                                 {_id: cbId},
@@ -61,20 +61,20 @@ module.exports = (function () {
                                     }
                                 }
                             ).then(
-                                function(response) {
+                                function (response) {
                                     resolve(response);
                                 },
-                                function(error) {
+                                function (error) {
                                     reject(error);
                                 }
                             )
                         },
-                        function(error) {
+                        function (error) {
                             reject(error);
                         }
                     )
                 },
-                function(error) {
+                function (error) {
                     reject(error);
                 }
             )
@@ -82,14 +82,14 @@ module.exports = (function () {
     }
 
     function updateComment(cbId, comment) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             CB.findById(cbId).then(
-                function(cb) {
+                function (cb) {
                     var exists = false;
-                    for(var i in cb.comments) {
+                    for (var i in cb.comments) {
                         exists = exists || cb.comments[i] == comment._id;
                     }
-                    if(exists) {
+                    if (exists) {
                         Comment.update(
                             {_id: comment._id},
                             {
@@ -98,10 +98,10 @@ module.exports = (function () {
                                 }
                             }
                         ).then(
-                            function(response) {
+                            function (response) {
                                 resolve(response);
                             },
-                            function(error) {
+                            function (error) {
                                 reject(error);
                             }
                         )
@@ -109,27 +109,44 @@ module.exports = (function () {
                         reject({message: "CommentBlock Not Found."});
                     }
                 },
-                function(error) {
+                function (error) {
                     reject(error);
                 }
             )
         })
     }
-    
+
     function deleteComment(cbId, cmId) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             CB.findById(cbId).then(
-                function(cb) {
+                function (cb) {
                     var exists = false;
-                    for(var i in cb.comments) {
-                        exists = exists || cb.comments[i] == cmId;
-                }
-                    if(exists) {
+                    for (var i in cb.comments) {
+                        if (cb.comments[i] == cmId) {
+                            cb.comments.splice(i, 1);
+                            exists = true;
+                        }
+                        ;
+                    }
+                    if (exists) {
                         Comment.remove({_id: cmId}).then(
-                            function(response) {
-                                resolve(cb);
+                            function (response) {
+                                CB.update(
+                                    {_id: cbId},
+                                    {
+                                        $set: {
+                                            comments: cb.comments
+                                        }
+                                    }
+                                ).then(
+                                    function (reponse) {
+                                        resolve(response);
+                                    },
+                                    function (error) {
+                                        reject(response);
+                                    })
                             },
-                            function(error) {
+                            function (error) {
                                 reject(error);
                             }
                         )
@@ -137,13 +154,13 @@ module.exports = (function () {
                         reject({message: "CommentBlock Not Found."});
                     }
                 },
-                function(error) {
+                function (error) {
                     reject(error);
                 }
             )
         })
     }
-    
+
     function findCommentById(commentId) {
         return Comment.findById(commentId);
     }
