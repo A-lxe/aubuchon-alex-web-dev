@@ -6,12 +6,12 @@
     <div flex="100">
         <md-content role="navigation">
             <md-list>
-                <md-list-item class="md-2-line arc-discord-profile" ng-show="currentUser">
+                <md-list-item class="md-2-line arc-discord-profile" ng-if="currentUser">
                     <img class="md-avatar"
                          src="https://cdn.discordapp.com/avatars/{{currentUser.discord.id}}/{{currentUser.discord.avatar}}.jpg">
                     <div class="md-list-item-text" layout="column">
-                        <h3>{{currentUser.discord.username}}</h3>
-                        <p>#{{currentUser.discord.discriminator}}</p>
+                        <h3>{{currentUser.discord.username ||currentUser.username}}</h3>
+                        <p ng-if="currentUser.discord">#{{currentUser.discord.discriminator}}</p>
                     </div>
                 </md-list-item>
                 <md-list-item class="arc-md-list-item" ng-repeat="link in entries"

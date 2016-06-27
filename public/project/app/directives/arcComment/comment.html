@@ -1,0 +1,21 @@
+<md-card ng-click="null">
+    <md-card-header>
+        <md-card-avatar>
+            <img class="md-user-avatar"
+                 src="https://cdn.discordapp.com/avatars/{{owner.discord.id}}/{{owner.discord.avatar}}.jpg"/>
+        </md-card-avatar>
+        <md-card-header-text>
+            <a ng-href="#/profile/{{owner._id}}"><span class="md-title" ng-if="owner.discord">{{owner.discord.username}}</span></a>
+            <span class="md-subhead" ng-if="owner.discord">#{{owner.discord.discriminator}}</span>
+            <span class="md-title" ng-if="!owner.discord">{{owner.username}}</span>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+        <p ng-bind-html="comment.content"></p>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+        <span flex></span>
+        <!--<md-button ng-click="edit()" ng-if="elevated && !editing">Edit</md-button>-->
+        <md-button ng-click="deleteComment()" class="md-warn" ng-if="elevated">Delete</md-button>
+    </md-card-actions>
+</md-card>

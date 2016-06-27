@@ -1,7 +1,7 @@
 (function () {
-    function BotViewCtrl(Bot, $scope, $rootScope, $location, $window, $routeParams, $mdToast, $mdDialog) {
+    function BotViewCtrl(Bot, CommentBlock, $scope, $rootScope, $location, $window, $route, $routeParams, $mdToast, $mdDialog) {
         var vm = this;
-        vm.bot = {};
+        vm.commentContent = "";
         vm.canComment = $rootScope.currentUser;
         Bot.findById($routeParams["bid"]).then(
             function (response) {
@@ -18,6 +18,8 @@
                 if ($rootScope.currentUser && vm.bot.owner == $rootScope.currentUser._id) {
                     vm.elevated = true;
                 }
+                
+                loadComments();
             },
             function (error) {
                 $mdToast.show(
@@ -31,12 +33,41 @@
 
         vm.postComment = function () {
             if (vm.canComment) {
-
+                CommentBlock.addComment(vm.bot.comments,
+                    {
+                        owner: $rootScope.currentUser._id,
+                        content: vm.commentContent
+                    }).then(
+                    function(response) {
+                        $route.reload();
+                    },
+                    function(error) {
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Could not comment: ' + error.message)
+                                .hideDelay(3000)
+                        );
+                    }
+                )
             }
+        }
+        
+        function loadComments() {
+            CommentBlock.getComments(vm.bot.comments).then(
+                function (comments) {
+                    vm.comments = comments.data;
+                },
+                function (error) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Could not load comments: ' + error.message)
+                            .hideDelay(3000)
+                    );
+                })
         }
     }
 
     angular.module('Arcus')
-        .controller('BotViewCtrl', ['Bot', '$scope', '$rootScope', '$location', '$window', '$routeParams', '$mdToast', '$mdDialog', BotViewCtrl])
+        .controller('BotViewCtrl', ['Bot', 'CommentBlock', '$scope', '$rootScope', '$location', '$window', '$route', '$routeParams', '$mdToast', '$mdDialog', BotViewCtrl])
 })
 ();

@@ -1,6 +1,6 @@
 <div layout-padding layout-gt-sm="row" class="arc-window-size">
-    <div flex-gt-sm="30">
-        <section class="md-whiteframe-2dp" layout="column" layout-padding>
+    <div layout="column" flex flex-gt-sm="30">
+        <section class="md-whiteframe-2dp" layout="column" layout-padding flex="none">
             <form name="profile" ng-submit="ctrl.update()">
                 <h2 class="md-headline">User Info</h2>
                 <div layout="row" ng-if="!ctrl.user.discord.username">
@@ -32,6 +32,26 @@
                 </md-list>
             </form>
         </section>
+        <section class="md-whiteframe-2dp" flex layout="column" style="min-height:300px; margin-top: 16px">
+            <div>
+                <div ng-if="ctrl.canComment">
+                    <trix-editor ng-if="ctrl.canComment" angular-trix
+                                 ng-model="ctrl.commentContent"></trix-editor>
+                </div>
+                <div ng-if="!ctrl.canComment" layout="column" layout-align="center center"
+                     style="height: 100px">
+                    <span>Please log in to comment :)</span>
+                </div>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-if="ctrl.canComment" ng-click="ctrl.postComment()">Post
+                    </md-button>
+                </md-card-actions>
+            </div>
+            <md-content layout="column">
+                <arc-comment ng-repeat="comment in ctrl.comments" comment="comment"
+                             block="ctrl.bot.comments" ng-if="comment"></arc-comment>
+            </md-content>
+        </section>
     </div>
     <div layout="column" flex>
         <section class="md-whiteframe-2dp" layout="column">
@@ -41,10 +61,10 @@
             </div>
             <md-content hide show-gt-sm layout="row" flex="100">
                 <div flex="50">
-                    <arc-bot-card  ng-repeat="bot in ctrl.botsLeft" bot="bot"></arc-bot-card>
+                    <arc-bot-card ng-repeat="bot in ctrl.botsLeft" bot="bot"></arc-bot-card>
                 </div>
                 <div flex="50">
-                    <arc-bot-card  ng-repeat="bot in ctrl.botsRight" bot="bot"></arc-bot-card>
+                    <arc-bot-card ng-repeat="bot in ctrl.botsRight" bot="bot"></arc-bot-card>
                 </div>
             </md-content>
             <div hide-gt-sm layout-wrap flex="noshrink">

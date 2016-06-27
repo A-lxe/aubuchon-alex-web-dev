@@ -8,7 +8,7 @@
                 </md-card-title-text>
             </md-card-title>
             <div ng-if="ctrl.canComment">
-                <trix-editor ng-if="ctrl.canComment" angular-trix ng-model="ctrl.newComment.content"></trix-editor>
+                <trix-editor ng-if="ctrl.canComment" angular-trix ng-model="ctrl.commentContent"></trix-editor>
             </div>
             <div ng-if="!ctrl.canComment" layout="column" layout-align="center center" style="height: 100px">
                 <span>Please log in to comment :)</span>
@@ -23,11 +23,11 @@
             <div layout="row" layout-align="start center">
                 <h2 class="md-headline" layout-padding>Comments</h2>
             </div>
-            <md-content hide show-gt-sm layout="row" flex="100">
-
+            <md-content hide show-gt-sm layout="column" flex="100">
+                <arc-comment ng-repeat="comment in ctrl.comments" comment="comment" block="ctrl.bot.comments" ng-if="comment"></arc-comment>
             </md-content>
             <div hide-gt-sm layout-wrap flex="noshrink">
-
+                <arc-comment ng-repeat="comment in ctrl.comments" comment="comment" block="ctrl.bot.comments" ng-if="comment"></arc-comment>
             </div>
         </section>
     </div>

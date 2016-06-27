@@ -3,7 +3,7 @@ angular.module('Arcus')
         return {
             restrict: 'E',
             templateUrl: 'app/directives/arcBotCard/botCard.html',
-            controller: ['$scope', 'Bot', 'User', '$route', '$mdDialog', ctrl],
+            controller: ['$scope', 'Bot', 'User', '$route', '$routeParams', '$mdDialog', ctrl],
             scope: {
                 _id: '=_id',
                 bot: '=bot',
@@ -11,14 +11,14 @@ angular.module('Arcus')
             }
         };
 
-        function ctrl($scope, Bot, User, $route, $mdDialog) {
+        function ctrl($scope, Bot, User, $route, $routeParams, $mdDialog) {
             if(!$scope.bot) {
-                Bot.findById($scope._id).then(
+                Bot.findById($routeParams["bid"] || $scope._id).then(
                     function(response) {
                         $scope.bot = response.data;
-                        User.findById(response.data.owner).then(
+                        User.retrieveSingle(response.data.owner).then(
                             function(user) {
-                                $scope.owner = user;
+                                $scope.owner = user.data;
                             }
                         )
                     },

@@ -4,6 +4,7 @@ module.exports = function (app, models) {
     var LocalStrategy = require('passport-local').Strategy;
     var DiscordStrategy = require('passport-discord').Strategy;
     var User = models.userModel;
+    var CB = models.cbModel;
     var bcrypt = require('bcrypt-nodejs');
 
     var scopes = ['identify', 'email'];
@@ -35,7 +36,7 @@ module.exports = function (app, models) {
     passport.use('discord', new DiscordStrategy(discordConfig, discordStrategy));
 
     function checkAuthenticated(req, res, next) {
-        if(req.isAuthenticated() && req.user) {
+        if (req.isAuthenticated() && req.user) {
             next();
         } else {
             res.status(401);
@@ -87,7 +88,7 @@ module.exports = function (app, models) {
                         if (user) {
                             resolve(user);
                         } else {
-                            User.create(
+                            createUserUsing(
                                 {
                                     discord: {
                                         id: profile.id,
@@ -97,16 +98,16 @@ module.exports = function (app, models) {
                                         avatar: profile.avatar
                                     }
                                 }).then(
-                                function(user) {
+                                function (user) {
                                     resolve(user);
                                 },
-                                function(error) {
+                                function (error) {
                                     reject(error);
                                 }
                             );
                         }
                     },
-                    function(error) {
+                    function (error) {
                         reject(error);
                     }
                 )
@@ -134,8 +135,7 @@ module.exports = function (app, models) {
         console.log("Attempting to create user: " + JSON.stringify(req.body));
         var user = req.body;
         user.password = bcrypt.hashSync(user.password);
-        User
-            .create(user)
+        createUserUsing(user)
             .then(
                 function (user) {
                     if (user) {
@@ -162,15 +162,45 @@ module.exports = function (app, models) {
 
 
     function createUser(req, res) {
-        var newUser = req.body;
-        User.create(newUser).then(
-            function (response) {
-                res.json(response);
+        createUserUsing(req.body).then(
+            function(user) {
+                res.json(user);
             },
-            function (error) {
-                res.status(400).json({error: "Username " + newUser.username + " is taken."});
+            function(error) {
+                res.status(500).json(error);
             }
-        )
+        );
+    }
+
+    function createUserUsing(user) {
+        return new Promise(function (resolve, reject) {
+            var newUser = user;
+            CB.create({}).then(
+                function (cb) {
+                    newUser.comments = cb._id;
+                    User.create(newUser).then(
+                        function (user) {
+                            cb.root = user._id;
+                            cb.owner = user._id;
+                            CB.update(cb._id, cb).then(
+                                function (cb) {
+                                    resolve(user);
+                                },
+                                function (error) {
+                                    reject(error);
+                                }
+                            )
+                        },
+                        function (error) {
+                            reject(error);
+                        }
+                    )
+                },
+                function (error) {
+                    reject(error);
+                }
+            )
+        });
     }
 
     function findUserById(req, res) {
@@ -195,7 +225,7 @@ module.exports = function (app, models) {
         var user = req.body;
         var id = user._id;
 
-        if(req.user._id != id) {
+        if (req.user._id != id) {
             res.status(401);
             res.json({message: "Unauthorized."});
             return;
@@ -214,7 +244,7 @@ module.exports = function (app, models) {
     function deleteUser(req, res) {
         var id = req.params.userId;
 
-        if(req.user._id != id) {
+        if (req.user._id != id) {
             res.status(401);
             res.json({message: "Unauthorized."});
             return;

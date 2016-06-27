@@ -2,6 +2,7 @@ module.exports = function (app, models) {
 
     var passport = require('passport');
     var Bot = models.botModel;
+    var CB = models.cbModel;
 
     var scopes = ['identify', 'email'];
     var discordConfig = {
@@ -29,17 +30,42 @@ module.exports = function (app, models) {
     }
 
     function create(req, res) {
-        var newBot = req.body;
-        newBot.owner = req.user._id;
-        Bot.create(newBot).then(
-            function (response) {
-                res.json(response);
+        new Promise(function(resolve, reject) {
+            var newBot = req.body;
+            newBot.owner = req.user._id;
+            CB.create({owner: req.user._id}).then(
+                function(cb) {
+                    newBot.comments = cb._id;
+                    Bot.create(newBot).then(
+                        function (bot) {
+                            cb.root = bot._id;
+                            CB.update(cb._id, cb).then(
+                                function(cb) {
+                                    resolve(bot);
+                                },
+                                function(error) {
+                                    reject(error);
+                                }
+                            )
+                        },
+                        function (error) {
+                            reject(error);
+                        }
+                    )
+                },
+                function(error) {
+                    reject(error);
+                }
+            )  
+        }).then(
+            function(bot) {
+                res.json(bot);
             },
-            function (error) {
+            function(error) {
                 res.status(500);
                 res.json(error);
             }
-        )
+        );
     }
 
     function findById(req, res) {

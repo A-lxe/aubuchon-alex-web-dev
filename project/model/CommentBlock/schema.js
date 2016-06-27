@@ -6,7 +6,12 @@ module.exports = (function() {
         root: {type: mongoose.Schema.Types.ObjectId, unique: true},
         comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
         dateCreated: {type: Date, default: Date.now}
-    }, {collection: "project.cb"});
+    }, {collection: "project.commentblock"});
     
-    return CBSchema;
+    var CommentSchema = mongoose.Schema({
+        owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        content: String,
+    }, {collection: "project.comment"});
+    
+    return {CBSchema: CBSchema, CommentSchema: CommentSchema};
 })();
