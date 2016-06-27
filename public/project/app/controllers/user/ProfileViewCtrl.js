@@ -9,7 +9,11 @@
         User.retrieveSingle($routeParams["uid"]).then(
             function(response) {
                 vm.user = response.data;
-                $rootScope.currentPageTitle = vm.user.discord.username || vm.user.username;
+                if(vm.user.discord) {
+                    $rootScope.currentPageTitle = vm.user.discord.username || vm.user.username;
+                } else {
+                    $rootScope.currentPageTitle = vm.user.username;
+                }
                 loadComments();
             },
             function(error) {
