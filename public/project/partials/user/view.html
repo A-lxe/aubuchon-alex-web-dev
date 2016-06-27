@@ -19,20 +19,23 @@
                                ng-model="ctrl.user.lastName" disabled>
                     </md-input-container>
                 </div>
-                <h2 class="md-headline">Discord Info</h2>
-                <md-list>
-                    <md-list-item class="md-2-line arc-discord-profile">
-                        <img class="md-avatar"
-                             src="https://cdn.discordapp.com/avatars/{{ctrl.user.discord.id}}/{{ctrl.user.discord.avatar}}.jpg">
-                        <div class="md-list-item-text" layout="column">
-                            <h3>{{ctrl.user.discord.username}}</h3>
-                            <p>#{{ctrl.user.discord.discriminator}}</p>
-                        </div>
-                    </md-list-item>
-                </md-list>
+                <div ng-if="ctrl.user.discord">
+                    <h2 class="md-headline">Discord Info</h2>
+                    <md-list>
+                        <md-list-item class="md-2-line arc-discord-profile">
+                            <img class="md-avatar"
+                                 src="https://cdn.discordapp.com/avatars/{{ctrl.user.discord.id}}/{{ctrl.user.discord.avatar}}.jpg">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ctrl.user.discord.username}}</h3>
+                                <p>#{{ctrl.user.discord.discriminator}}</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
             </form>
         </section>
-        <section class="md-whiteframe-2dp" flex layout="column" style="min-height:300px; margin-top: 16px">
+        <section class="md-whiteframe-2dp" flex layout="column"
+                 style="min-height:300px; margin-top: 16px">
             <div>
                 <div ng-if="ctrl.canComment">
                     <trix-editor ng-if="ctrl.canComment" angular-trix

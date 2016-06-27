@@ -1,30 +1,132 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Web Dev Course Home Page</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Project</title>
+
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet"
+          href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/alxe-style.css">
+    <!-- Angular Trix -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.css">
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700,500' rel='stylesheet'
+          type='text/css'>
 </head>
-<body>
-    <h1>Web Dev Course Home Page</h1>
+<body ng-app="WebDev" ng-cloak>
 
-    <p>
-        Customize this home page to your linking.
-    </p>
+<div class="alxe-container" ng-controller="MainCtrl" layout="column" layout-align="start center">
+    <h1 hide show-gt-sm class="md-display-4" style="margin-bottom: 30px">CS4550</h1>
+    <h1 hide-gt-sm class="md-display-2">CS4550</h1>
+    <md-content class="md-whiteframe-2dp">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span flex></span>
+                <md-button class="md-raised" ng-click="goto('about')">About</md-button>
+                <md-button class="md-raised" ng-click="goto('project')">Project</md-button>
+                <md-button class="md-raised" ng-click="goto('assignment')">Assignment</md-button>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content>
+            <div layout-padding>
+                <div ng-if="currentNavItem == 'about'">
+                    <div layout="row" layout-align="center center">
+                        <span class="md-subhead"> Hello, I'm Alex Aubuchon</span>
+                    </div>
+                    <p>...and this is my website for CS4550/CS5610 at Northeastern University,
+                        Summer 1, 2016. If you like what you see, check out the course website <a
+                                href="http://portal-cs5610online.rhcloud.com/#/">here</a>.</p>
+                    <p>By following the nav links at the top, you can see what I've developed
+                        throughout the course of this class: The assignment was something I worked
+                        on week by week along with guided tasks assigned by the professor. The
+                        project is something I came up with and worked on independently, due at the
+                        end of the semester. I've put a lot of work into it, hope ya like it!</p>
+                    <p>Oh and, if you're interested, all of the source is <a
+                            href="https://github.com/A-lxe/aubuchon-alex-web-dev">here</a>.</p>
+                </div>
+                <div ng-if="currentNavItem == 'project'">
+                    <div layout="row" layout-align="center center">
+                        <md-button class="md-raised md-accent" ng-href="/project/index.html">
+                            Go to Arcus
+                        </md-button>
+                    </div>
+                    <p>This is my project: Arcus! It's a website intended to categorize and display
+                        each and every one of the <a href="https://discordapp.com">Discord</a> chat
+                        bots on the planet. Arcus is still in its early stages of course, but it's
+                        at a fantastic baseline for further refinement.</p>
+                    <p>For the uninformed, Discord is a voice and chat client that's been taking the
+                        gamer community by storm because it keeps doing right what every other major
+                        chat/voice client has been doing wrong for the past decade. Along with its
+                        uprisal, countless developers have designed their own chat bots that Discord
+                        users can add to their servers. These bots have all kinds of features from
+                        telling you the weather in a second, to playing music in your voice
+                        channel.</p>
+                    <p>Arcus allows developers to advertise their bots among its indices. They
+                        control the description, information, etc, and Arcus handles the rest,
+                        providing an easy "Add to Server" link, and grabbing profile images and data
+                        off the discord API.</p>
+                    <p>Arcus allows everyday discord users to browse all the bots it has to offer
+                        through the "Go to Bots" page. This includes a search utility that can help
+                        them meet their needs quicker. They can also expand the view for a
+                        particular bot to see what others have commented on it. Likewise, they can
+                        view a developers profile to see their bots, and what people think about
+                        them in comments. If a user registers/logs in, either through the classic
+                        username/password, or via Discord API authentication, they too can comment
+                        on bots and developers, as well as manage their public profile.</p>
+                    <h3>A few notes:</h3>
+                    <ul>
+                        <li>If you see an empty circle where a profile image should be, that means
+                            the user or the bot doesn't yet have one configured.
+                        </li>
+                        <li>The Add to Server button requires some specific information from the bot
+                            application on discord, and if some of the values are provided, the link
+                            won't work. This is on the developers to ensure.
+                        </li>
+                    </ul>
+                    <h3>To the graders:</h3>
+                    <p>If there's anything at all I can help with/correct/inform, please contact me!
+                        Arcus has been a blast to design, and I want it to be the best it can
+                        be.</p>
 
-    <h2>Required links</h2>
-    <ul>
-        <li>
-            <a href="project/index.html">Project</a>
-        </li>
-        <li>
-            <a href="assignment/index.html">Assignment</a>
-        </li>
-        <li>
-            <a href="test/index.html">Test MongoDB</a>
-        </li>
-        <li>
-            <a href="https://github.com/A-lxe/aubuchon-alex-web-dev">GitHub Repository</a>
-        </li>
-    </ul>
+                </div>
+                <div ng-if="currentNavItem == 'assignment'">
+                    <div layout="row" layout-align="center center">
+                        <md-button class="md-raised md-accent" ng-href="/assignment/index.html">
+                            Go to Assignment
+                        </md-button>
+                    </div>
+                    <p>This is the assignment I developed throughout the course of CS4550 along with
+                        the professor's instruction. For Arcus to live happily on here, I had to
+                        disable the server side for this, but don't let that stop you! (Though you
+                        likely won't get far without server side authentication :))</p>
+                </div>
+            </div>
+        </md-content>
+    </md-content>
+</div>
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-sanitize.js"></script>
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+<script src="app/app.js"></script>
+<script src="app/appConfig.js"></script>
+
 </body>
 </html>
